@@ -99,7 +99,7 @@
   display: none;
   position: absolute;
   top: 100%;
-  left: 30%;
+  left: 20%;
   background: white;
   backdrop-filter: blur(10px);
   min-width: 200px;
@@ -1442,8 +1442,8 @@ line-height: 32px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 
-  box-sizing: border-box;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .card-container-wrapper {
@@ -1541,29 +1541,7 @@ line-height: 32px;
   color: white;
   font-family: "Host Grotesk";
 }
-.custom-pointer {
-  position: fixed; /* Changed to fixed to prevent scrollbar issues */
-  pointer-events: none; /* Prevents the pointer from interfering with interactions */
-  z-index: 1000;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.8);
-  pointer-events: none;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(1);
-  z-index: 1000;
-  transition: opacity 0.2s, transform 0.2s ease-out, background-color 0.2s;
-}
 
-.card-container.active .custom-pointer {
-  opacity: 1;
-}
 
 .custom-pointer.dragging {
   background: rgba(0, 0, 0, 0.7);
@@ -1602,10 +1580,6 @@ line-height: 32px;
   /* font-weight: 300; */
 }
 
-.button-container1:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-}
 
 .button-arrow {
   font-size: 20px;
@@ -1624,19 +1598,22 @@ line-height: 32px;
   }
 
   .card1 {
-    width: 85vw;
+    flex: 0 0 300px;
+    width: 300px;
+    height: 300px;
     scroll-snap-align: center;
   }
 
   .card-container{
     padding-left: 50px;
+    justify-content: start;
   }
 
   .tag {
     position: absolute;
     top: 5%;
     left: 5%;
-    width: 10%;
+    width: fit-content;
     /* margin: 2%; */
     /* padding: 2% 3%; */
     background-color: rgba(125, 120, 120, 0.5);
@@ -1648,7 +1625,6 @@ line-height: 32px;
     font-size: 10px;
   }
 }
-
 
 
 /* customer */

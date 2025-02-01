@@ -97,11 +97,11 @@
   display: none;
   position: absolute;
   top: 100%;
-  left: 30%;
+  left: 20%;
   background: white;
   backdrop-filter: blur(10px);
   min-width: 200px;
-  padding: 10px 0;
+  padding: 20px 0;
 
 
   border-top-left-radius: 0;
@@ -109,7 +109,7 @@
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   z-index: 1000;
-}
+} 
 
 .dropdown a {
   display: block;
@@ -650,6 +650,7 @@
   bottom: 20px;
   left: 0;
   right: 0;
+  bottom: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -663,7 +664,7 @@
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 50%;
-  transition: background 0.3s ease;
+  /* transition: background 0.3s ease; */
 }
 
 .carousel-indicators {
@@ -860,6 +861,8 @@
   /* max-width: 1200px; */
   /* margin: 0 auto; */
   padding-top: 40px;
+
+  padding-bottom: 8%;
 }
 
 .content-section {
@@ -902,7 +905,7 @@
   padding: 15px;
   padding-left: 20px;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: bold;
   margin-bottom: 10px;
   color: #666;
@@ -943,6 +946,7 @@
 
 .text-content {
   flex: 50%;
+  font-size: 20px;
   line-height: 40px;
 }
 
@@ -959,8 +963,8 @@
 .point:before {
   content: "";
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   margin-right: 10px;
   background-image: url('../Assets/Logo/Logo-Outlined.png');
   background-size: contain;
@@ -1106,7 +1110,7 @@
   font-family: 'Cygre Medium';
   font-size: 24px;
   font-weight: 500;
-  line-height: 40px; /* 100% */
+  line-height: 30px; /* 100% */
   letter-spacing: 0.1px;
   /* padding: 3%; */
   padding-bottom: 40px;
@@ -1174,7 +1178,8 @@
   /* margin-left: 100px; */
   scrollbar-width: none;
   -ms-overflow-style: none;
-  justify-content:center ;
+
+  justify-content: center;
   box-sizing: border-box;
 }
 
@@ -1273,29 +1278,7 @@
   color: white;
   font-family: "Host Grotesk";
 }
-.custom-pointer {
-  position: fixed; /* Changed to fixed to prevent scrollbar issues */
-  pointer-events: none; /* Prevents the pointer from interfering with interactions */
-  z-index: 1000;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.8);
-  pointer-events: none;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(1);
-  z-index: 1000;
-  transition: opacity 0.2s, transform 0.2s ease-out, background-color 0.2s;
-}
 
-.card-container.active .custom-pointer {
-  opacity: 1;
-}
 
 .custom-pointer.dragging {
   background: rgba(0, 0, 0, 0.7);
@@ -1334,10 +1317,6 @@
   /* font-weight: 300; */
 }
 
-.button-container1:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-}
 
 .button-arrow {
   font-size: 20px;
@@ -1356,19 +1335,22 @@
   }
 
   .card1 {
-    width: 85vw;
+    flex: 0 0 300px;
+    width: 300px;
+    height: 300px;
     scroll-snap-align: center;
   }
 
   .card-container{
     padding-left: 50px;
+    justify-content: start;
   }
 
   .tag {
     position: absolute;
     top: 5%;
     left: 5%;
-    width: 10%;
+    width: fit-content;
     /* margin: 2%; */
     /* padding: 2% 3%; */
     background-color: rgba(125, 120, 120, 0.5);
@@ -1382,6 +1364,7 @@
 }
 
 
+
 /* customer */
 
 .customer{
@@ -1391,6 +1374,7 @@
   justify-content: space-between;
   /* width: 100%; */
   padding:6% 12%;
+  padding-bottom: 8%;
 }
 .customer-txt{
   font-family: 'Host Grotesk';

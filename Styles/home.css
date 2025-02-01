@@ -95,7 +95,7 @@
   display: none;
   position: absolute;
   top: 100%;
-  left: 30%;
+  left: 20%;
   background: white;
   backdrop-filter: blur(10px);
   min-width: 200px;
@@ -1103,14 +1103,13 @@
   align-items: center;
   background-color: #e2b745;
   border: none;
-  padding: 10px;
   font-family: "Host Grotesk";
   font-weight: bold;
   border-radius: 900px;
   font-size: 20px; /*rahul*/
   transition: background-color 0.3s ease;
   width: 100%;
-  padding: 10px;
+  padding: 16px 8px;
   gap: 40px;
 }
 
@@ -1460,7 +1459,7 @@
   display: flex;
   gap: 15px;
   padding: 20px;
-  padding-left: 200px;
+  /* padding-left: 200px; */
   position: relative;
   width: calc(100% );
   cursor: grab;
@@ -1473,6 +1472,7 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
 
+  justify-content: center;
   box-sizing: border-box;
 }
 
