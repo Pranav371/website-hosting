@@ -1130,10 +1130,12 @@
   .actionable-insights-main-title{
     text-align: center;
     color: #363cfd;
-    font-family: 'Cygre';
+    font-family: 'Cygre Medium';
     font-weight: bold;
-    font-size: 3.5vh;
+    font-size: 32px;
+    line-height: 40px;
     width: 100%;
+    padding-bottom: 20px;
   }
 
   .actionable-insights-second-title{
