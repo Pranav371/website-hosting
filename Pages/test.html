@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Business Solutions</title>
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/cygre');
+        @import url('https://fonts.cdnfonts.com/css/host-grotesk');
+
+        :root {
+            --primary: #e2b475;
+            --accent: #363cfd;
+            --heading-font: 'Cygre', sans-serif;
+            --text-font: 'Host Grotesk', sans-serif;
+            --gradient: linear-gradient(45deg, var(--primary) 0%, var(--accent) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            overflow-x: hidden;
+            font-synthesis: none;
+            text-rendering: optimizeLegibility;
+        }
+
+        .slider-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            perspective: 1000px;
+            overflow: hidden;
+        }
+
+        .slider-track {
+            display: flex;
+            height: 100%;
+            will-change: transform;
+        }
+
+        .slide {
+            min-width: 100%;
+            padding: 4rem 10%;
+            display: flex;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.9) 30%, transparent 100%);
+            z-index: 1;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .slide.active .slide-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide h2 {
+            font-family: var(--heading-font);
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            text-shadow: 0 0 30px rgba(54, 60, 253, 0.3);
+        }
+
+        .slide p {
+            font-family: var(--text-font);
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem 0;
+            position: relative;
+        }
+
+        .slide p::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .explore-btn {
+            position: relative;
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid var(--accent);
+            font-family: var(--text-font);
+            font-size: 1.1rem;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 20%;
+        }
+
+        .explore-btn svg {
+            display: flex;
+            align-items: center;
+        }
+
+        .explore-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+
+        .explore-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(54, 60, 253, 0.4);
+        }
+
+        .explore-btn:hover::before {
+            left: 0;
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1.5rem;
+            z-index: 3;
+        }
+
+        .nav-dot {
+            width: 20px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.5s ease;
+            box-shadow: 0 0 10px rgba(54, 60, 253, 0.3);
+        }
+
+        .nav-dot.active {
+            background: var(--primary);
+            transform: scale(1.5);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.5s ease;
+            display: grid;
+            place-items: center;
+            opacity: 0;
+            animation: fadeInControls 1s forwards 1s;
+        }
+
+        .arrow-btn:hover {
+            background: var(--accent);
+            transform: translateY(-50%) scale(1.2);
+            box-shadow: 0 0 30px var(--accent);
+        }
+
+        .prev-btn {
+            left: 2rem;
+        }
+
+        .next-btn {
+            right: 2rem;
+        }
+
+        @keyframes gradientFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes fadeInControls {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 2rem 1.5rem;
+                justify-content: flex-end;
+                text-align: center;
+            }
+
+            .slide h2 {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .slide p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .explore-btn {
+                width: 100%;
+                max-width: 200px;
+                padding: 0.8rem 1.5rem;
+                margin: 0 auto;
+                white-space: nowrap;
+            }
+
+            .arrow-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                top: auto;
+                bottom: 1rem;
+            }
+
+            .prev-btn {
+                left: 1rem;
+            }
+
+            .next-btn {
+                right: 1rem;
+            }
+
+            .slider-nav {
+                bottom: 5rem;
+            }
+
+            .slide-content {
+                padding-bottom: 80px;
+                /* Add space for buttons */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide h2 {
+                font-size: 2rem;
+            }
+
+            .slide p {
+                font-size: 0.9rem;
+            }
+
+            .slider-nav {
+                bottom: 4rem;
+            }
+
+            .slide-content {
+                padding-bottom: 100px;
+                /* More space for buttons */
+            }
+
+            .explore-btn {
+                font-size: 1rem;
+                padding: 0.8rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider-container">
+        <div class="slider-track">
+            <!-- Market Research -->
+            <div class="slide active"
+                style="background-image: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('./Assets/Images/Home-Service-Market.jpg')">
+                <div class="slide-content">
+                    <h2>Strategic Market Intelligence</h2>
+                    <p>Our tailored solutions uncover market potential, analyse competitive forces & identify emerging
+                        trends for strategic positioning. Transforming into actionable insights that help your business
+                        thrive.<br><br><br>We equip businesses with the knowledge needed to navigate complexities and
+                        capitalise on opportunities.</p><br>
+                    <button class="explore-btn">Explore Service <span><svg width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M15.026 7.2328L4.99465 17.2641L6.64295 18.9124L16.6743 8.88111V17.7226H19.0054V4.90172H6.18443V7.2328H15.026Z"
+                                    fill="black" />
+                            </svg></span></button>
+                </div>
+            </div>
+
+            <!-- Data Analytics -->
+            <div class="slide"
+                style="background-image: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('./Assets/Images/Home-Service-Data.jpg')">
+                <div class="slide-content">
+                    <h2>Data Analytics & AI Consulting</h2>
+                    <p>Data has become the cornerstone of business strategy, making Advanced Analytics, AI, and
+                        Generative AI essential for companies to compete effectively and drive innovation.<br><br><br>
+                        Unlock operational efficiencies, enhance predictive capabilities & achieve faster innovation
+                        cycles.</p>
+                    <button class="explore-btn">Explore Service <span><svg width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M15.026 7.2328L4.99465 17.2641L6.64295 18.9124L16.6743 8.88111V17.7226H19.0054V4.90172H6.18443V7.2328H15.026Z"
+                                    fill="black" />
+                            </svg></span></button>
+                </div>
+            </div>
+
+            <!-- AI Consulting -->
+            <div class="slide"
+                style="background-image: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('./Assets/Images/Capability-Service.jpg')">
+                <div class="slide-content">
+                    <h2>Comprehensive Capability Consulting</h2>
+                    <p>In today's fast-paced digital landscape, organisations must harness cutting-edge technology to
+                        maintain competitiveness and deliver superior customer experiences to meet with business
+                        goals.<br><br><br>
+                        Our expertise ensures your organisation develops the agility and scalability needed to thrive in
+                        an evolving marketplace.</p>
+                    <button class="explore-btn">Explore Service <span><svg width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M15.026 7.2328L4.99465 17.2641L6.64295 18.9124L16.6743 8.88111V17.7226H19.0054V4.90172H6.18443V7.2328H15.026Z"
+                                    fill="black" />
+                            </svg></span></button>
+                </div>
+            </div>
+        </div>
+
+        <button class="arrow-btn prev-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M10.78 6.21934C10.6394 6.07889 10.4488 6 10.25 6C10.0512 6 9.86063 6.07889 9.72 6.21934L4.72 11.2193C4.57955 11.36 4.50066 11.5506 4.50066 11.7493C4.50066 11.9481 4.57955 12.1387 4.72 12.2793L9.72 17.2793C9.78866 17.353 9.87146 17.4121 9.96346 17.4531C10.0555 17.4941 10.1548 17.5162 10.2555 17.5179C10.3562 17.5197 10.4562 17.5012 10.5496 17.4635C10.643 17.4257 10.7278 17.3696 10.799 17.2984C10.8703 17.2272 10.9264 17.1423 10.9641 17.0489C11.0018 16.9555 11.0204 16.8555 11.0186 16.7548C11.0168 16.6541 10.9948 16.5548 10.9538 16.4628C10.9128 16.3708 10.8537 16.288 10.78 16.2193L7.06 12.4993H17.25C17.4489 12.4993 17.6397 12.4203 17.7803 12.2797C17.921 12.139 18 11.9483 18 11.7493C18 11.5504 17.921 11.3597 17.7803 11.219C17.6397 11.0784 17.4489 10.9993 17.25 10.9993H7.06L10.78 7.27934C10.9205 7.13871 10.9993 6.94809 10.9993 6.74934C10.9993 6.55059 10.9205 6.35997 10.78 6.21934Z"
+                    fill="black" />
+            </svg></button>
+        <button class="arrow-btn next-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M12.22 6.21934C12.3606 6.07889 12.5512 6 12.75 6C12.9488 6 13.1394 6.07889 13.28 6.21934L18.28 11.2193C18.4205 11.36 18.4993 11.5506 18.4993 11.7493C18.4993 11.9481 18.4205 12.1387 18.28 12.2793L13.28 17.2793C13.2113 17.353 13.1285 17.4121 13.0365 17.4531C12.9445 17.4941 12.8452 17.5162 12.7445 17.5179C12.6438 17.5197 12.5438 17.5012 12.4504 17.4635C12.357 17.4257 12.2722 17.3696 12.201 17.2984C12.1297 17.2272 12.0736 17.1423 12.0359 17.0489C11.9982 16.9555 11.9796 16.8555 11.9814 16.7548C11.9832 16.6541 12.0052 16.5548 12.0462 16.4628C12.0872 16.3708 12.1463 16.288 12.22 16.2193L15.94 12.4993H5.75C5.55109 12.4993 5.36032 12.4203 5.21967 12.2797C5.07902 12.139 5 11.9483 5 11.7493C5 11.5504 5.07902 11.3597 5.21967 11.219C5.36032 11.0784 5.55109 10.9993 5.75 10.9993H15.94L12.22 7.27934C12.0795 7.13871 12.0007 6.94809 12.0007 6.74934C12.0007 6.55059 12.0795 6.35997 12.22 6.21934Z"
+                    fill="black" />
+            </svg>
+        </button>
+
+        <div class="slider-nav">
+            <div class="nav-dot active"></div>
+            <div class="nav-dot"></div>
+            <div class="nav-dot"></div>
+        </div>
+    </div>
+
+    <script>
+        const track = document.querySelector('.slider-track');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.nav-dot');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentIndex = 0;
+        let isAnimating = false;
+
+        function updateSlider(index) {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            track.style.transform = `translateX(-${index * 100}%)`;
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index].classList.add('active');
+
+            setTimeout(() => {
+                isAnimating = false;
+            }, 1000);
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlider(currentIndex);
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlider(currentIndex);
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                if (index === currentIndex) return;
+                currentIndex = index;
+                updateSlider(currentIndex);
+            });
+        });
+
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        // Touch support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        track.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        track.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) nextSlide();
+            if (touchEndX - touchStartX > 50) prevSlide();
+        });
+
+        // Intersection Observer for performance
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.backgroundAttachment = 'fixed';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        slides.forEach(slide => observer.observe(slide));
+    </script>
+</body>
+
+</html>
