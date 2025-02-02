@@ -196,65 +196,65 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCarousel();
   startAutoPlay();
 
-  // Touch support
-  let touchStartX = 0;
-  let touchEndX = 0;
-  let touchStartY = 0;
-  let touchEndY = 0;
+  // // Touch support
+  // let touchStartX = 0;
+  // let touchEndX = 0;
+  // let touchStartY = 0;
+  // let touchEndY = 0;
 
-  const track = document.querySelector('.carousel-track');
+  // const track = document.querySelector('.carousel-track');
 
-  track.addEventListener('touchstart', e => {
-      stopAutoPlay();
-      touchStartX = e.changedTouches[0].screenX;
-      touchStartY = e.changedTouches[0].screenY;
-  }, { passive: true });
+  // track.addEventListener('touchstart', e => {
+  //     stopAutoPlay();
+  //     touchStartX = e.changedTouches[0].screenX;
+  //     touchStartY = e.changedTouches[0].screenY;
+  // }, { passive: true });
 
-  track.addEventListener('touchend', e => {
-      touchEndX = e.changedTouches[0].screenX;
-      touchEndY = e.changedTouches[0].screenY;
+  // track.addEventListener('touchend', e => {
+  //     touchEndX = e.changedTouches[0].screenX;
+  //     touchEndY = e.changedTouches[0].screenY;
 
-      // Calculate horizontal and vertical distance
-      const deltaX = touchEndX - touchStartX;
-      const deltaY = touchEndY - touchStartY;
+  //     // Calculate horizontal and vertical distance
+  //     const deltaX = touchEndX - touchStartX;
+  //     const deltaY = touchEndY - touchStartY;
 
-      // Only handle horizontal swipes if they're more horizontal than vertical
-      if (Math.abs(deltaX) > Math.abs(deltaY)) {
-          if (deltaX > 50) {
-              prevSlide();
-          } else if (deltaX < -50) {
-              nextSlide();
-          }
-      }
+  //     // Only handle horizontal swipes if they're more horizontal than vertical
+  //     if (Math.abs(deltaX) > Math.abs(deltaY)) {
+  //         if (deltaX > 50) {
+  //             prevSlide();
+  //         } else if (deltaX < -50) {
+  //             nextSlide();
+  //         }
+  //     }
 
-      startAutoPlay();
-  }, { passive: true });
+  //     startAutoPlay();
+  // }, { passive: true });
 
-  // Mouse support
-  track.addEventListener('mouseenter', stopAutoPlay);
-  track.addEventListener('mouseleave', startAutoPlay);
+  // // Mouse support
+  // track.addEventListener('mouseenter', stopAutoPlay);
+  // track.addEventListener('mouseleave', startAutoPlay);
 
-  // Keyboard support
-  document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-          stopAutoPlay();
-          prevSlide();
-          startAutoPlay();
-      } else if (e.key === 'ArrowRight') {
-          stopAutoPlay();
-          nextSlide();
-          startAutoPlay();
-      }
-  });
+  // // Keyboard support
+  // document.addEventListener('keydown', (e) => {
+  //     if (e.key === 'ArrowLeft') {
+  //         stopAutoPlay();
+  //         prevSlide();
+  //         startAutoPlay();
+  //     } else if (e.key === 'ArrowRight') {
+  //         stopAutoPlay();
+  //         nextSlide();
+  //         startAutoPlay();
+  //     }
+  // });
 
-  // Handle visibility change
-  document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-          stopAutoPlay();
-      } else {
-          startAutoPlay();
-      }
-  });
+  // // Handle visibility change
+  // document.addEventListener('visibilitychange', () => {
+  //     if (document.hidden) {
+  //         stopAutoPlay();
+  //     } else {
+  //         startAutoPlay();
+  //     }
+  // });
 
   // Button navigation (optional - add these buttons in HTML if needed)
   
@@ -295,7 +295,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// // services animation-2
+
+
+
+
+
 // let carousel = document.querySelector('.carousel1');
 // let container = document.querySelector('.carousel-container1');
 // let items = document.querySelectorAll('.carousel-item1');
@@ -307,15 +311,23 @@ document.addEventListener('DOMContentLoaded', () => {
 // let isAtLastSlide = false;
 // let isScrollLocked = false;
 // let lastScrollTime = 0;
-// const scrollCooldown = 100; // Milliseconds to wait between scroll actions
+// const desktopScrollCooldown = 800;
+// const mobileScrollCooldown = 100; // Much shorter cooldown for mobile
 
-// // Create an Intersection Observer to monitor when carousel is fully in viewport
 // const observer = new IntersectionObserver((entries) => {
 //   entries.forEach(entry => {
+//     const isMobile = window.innerWidth <= 768;
 //     if (entry.isIntersecting && entry.intersectionRatio >= 0.95) {
 //       isScrollLocked = true;
+//       // Only lock body scroll on desktop
+//       if (!isMobile) {
+//         document.body.style.overflow = 'hidden';
+//       }
 //     } else {
 //       isScrollLocked = false;
+//       if (!isMobile) {
+//         document.body.style.overflow = '';
+//       }
 //     }
 //   });
 // }, {
@@ -323,10 +335,9 @@ document.addEventListener('DOMContentLoaded', () => {
 //   rootMargin: '0px'
 // });
 
-// // Observe the carousel container
 // observer.observe(container);
 
-// function scrollCarousel() {
+// function scrollCarousel(duration = desktopScrollCooldown) {
 //   if (isAnimating) return;
   
 //   isAnimating = true;
@@ -352,54 +363,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //   setTimeout(() => {
 //     isAnimating = false;
-//   }, scrollCooldown);
+//   }, duration);
 // }
 
-// // Handle mouse wheel scroll with debouncing
 // container.addEventListener('wheel', (e) => {
 //   const isMobile = window.innerWidth <= 768;
+//   const scrollCooldown = isMobile ? mobileScrollCooldown : desktopScrollCooldown;
   
 //   // Desktop scroll handling
 //   if (!isMobile) {
-//     // Check if we're at the first or last slide
-//     const isFirstSlideAndScrollingUp = currentIndex === 0 && e.deltaY < 0;
-//     const isLastSlideAndScrollingDown = isAtLastSlide && e.deltaY > 0;
-    
-//     // If at first or last slide, allow default scrolling
-//     if (isFirstSlideAndScrollingUp || isLastSlideAndScrollingDown) {
-
+//     if (currentIndex === 0 && e.deltaY < 0) {
+//       isScrollLocked = false;
+//       document.body.style.overflow = '';
 //       return;
 //     }
     
-//     // If not fully intersecting, allow default scroll
-//     if (!isScrollLocked) {
+//     if (isAtLastSlide && e.deltaY > 0) {
+//       isScrollLocked = false;
+//       document.body.style.overflow = '';
 //       return;
 //     }
     
-//     const now = Date.now();
-//     if (now - lastScrollTime < scrollCooldown) {
-//       e.preventDefault();
-//       return;
-//     }
-    
-//     e.preventDefault();
-//     e.stopPropagation();
-    
-//     if (!isAnimating) {
-//       lastScrollTime = now;
-//       currentIndex += e.deltaY > 0 ? 1 : -1;
-//       scrollCarousel();
-//     }
-//   } 
-//   // Mobile scroll handling (keep existing mobile logic)
-//   else {
 //     if (!isScrollLocked) return;
     
-//     if ((currentIndex === 0 && e.deltaY < 0) || (isAtLastSlide && e.deltaY > 0)) {
-//       isScrollLocked = false;
-//       return;
-//     }
-    
 //     const now = Date.now();
 //     if (now - lastScrollTime < scrollCooldown) {
 //       e.preventDefault();
@@ -411,287 +397,168 @@ document.addEventListener('DOMContentLoaded', () => {
     
 //     if (!isAnimating) {
 //       lastScrollTime = now;
-//       currentIndex += e.deltaY > 0 ? 1 : -1;
-//       scrollCarousel();
-//     }
-//   }
-// }, { passive: false });
-
-// // Enhanced touch handling (keep existing mobile touch logic)
-// let initialTouchY = null;
-// let currentTouchY = null;
-// let isTouchScrolling = false;
-// let touchStartTime = 0;
-
-// document.addEventListener('touchstart', (e) => {
-//   const isMobile = window.innerWidth <= 768;
-  
-//   if (!isMobile || !isScrollLocked) return;
-  
-//   initialTouchY = e.touches[0].clientY;
-//   currentTouchY = initialTouchY;
-//   isTouchScrolling = true;
-//   touchStartTime = Date.now();
-  
-//   if (isScrollLocked) {
-//     e.preventDefault();
-//   }
-// }, { passive: false });
-
-// document.addEventListener('touchmove', (e) => {
-//   const isMobile = window.innerWidth <= 768;
-  
-//   if (!isMobile || !isTouchScrolling || !isScrollLocked) return;
-  
-//   currentTouchY = e.touches[0].clientY;
-//   const touchDiff = initialTouchY - currentTouchY;
-  
-//   const rect = container.getBoundingClientRect();
-//   const isWithinCarousel = e.touches[0].clientY >= rect.top && e.touches[0].clientY <= rect.bottom;
-  
-//   // Allow default scroll at first and last slides
-//   if ((currentIndex === 0 && touchDiff < 0) || (isAtLastSlide && touchDiff > 0)) {
-//     isScrollLocked = false;
-//     return;
-//   }
-  
-//   if (isWithinCarousel && isScrollLocked) {
-//     e.preventDefault();
-//   }
-// }, { passive: false });
-
-// document.addEventListener('touchend', (e) => {
-//   const isMobile = window.innerWidth <= 768;
-  
-//   if (!isMobile || !isTouchScrolling || !isScrollLocked) return;
-  
-//   const touchDiff = initialTouchY - currentTouchY;
-//   const touchDuration = Date.now() - touchStartTime;
-//   const rect = container.getBoundingClientRect();
-//   const isWithinCarousel = e.changedTouches[0].clientY >= rect.top && 
-//                           e.changedTouches[0].clientY <= rect.bottom;
-  
-//   // Allow default scroll at first and last slides
-//   if ((currentIndex === 0 && touchDiff < 0) || (isAtLastSlide && touchDiff > 0)) {
-//     isScrollLocked = false;
-//     return;
-//   }
-  
-//   if (isWithinCarousel && touchDuration < 300) { // Only respond to quick swipes
-//     if (Math.abs(touchDiff) > 50 && !isAnimating) {
-//       if (touchDiff > 0) {
+//       if (e.deltaY > 0) {
 //         currentIndex = Math.min(currentIndex + 1, items.length - 1);
 //       } else {
 //         currentIndex = Math.max(currentIndex - 1, 0);
 //       }
 //       scrollCarousel();
 //     }
+//   } 
+//   // Mobile scroll handling
+//   else {
+//     const now = Date.now();
+//     // Check for rapid scrolling that indicates carousel interaction
+//     if (Math.abs(e.deltaY) > 50) {
+//       if (isScrollLocked && !isAnimating) {
+//         // Handle carousel movement
+//         if (now - lastScrollTime >= scrollCooldown &&
+//             !(currentIndex === 0 && e.deltaY < 0) && 
+//             !(isAtLastSlide && e.deltaY > 0)) {
+//           lastScrollTime = now;
+//           if (e.deltaY > 0) {
+//             currentIndex = Math.min(currentIndex + 1, items.length - 1);
+//           } else {
+//             currentIndex = Math.max(currentIndex - 1, 0);
+//           }
+//           scrollCarousel(mobileScrollCooldown);
+//         }
+//       }
+//     }
 //   }
+// }, { passive: true }); // Changed to passive: true for better mobile scrolling
+
+// let initialTouchY = null;
+// let currentTouchY = null;
+// let isTouchScrolling = false;
+// let touchStartTime = 0;
+// let lastTouchTime = 0;
+
+// document.addEventListener('touchstart', (e) => {
+//   const isMobile = window.innerWidth <= 768;
+//   if (!isMobile) return;
   
+//   initialTouchY = e.touches[0].clientY;
+//   currentTouchY = initialTouchY;
+//   isTouchScrolling = true;
+//   touchStartTime = Date.now();
+// }, { passive: true });
+
+// document.addEventListener('touchmove', (e) => {
+//   const isMobile = window.innerWidth <= 768;
+//   if (!isMobile || !isTouchScrolling) return;
+  
+//   currentTouchY = e.touches[0].clientY;
+//   const touchDiff = initialTouchY - currentTouchY;
+  
+//   const now = Date.now();
+//   // Only handle quick, intentional swipes
+//   if (now - lastTouchTime >= mobileScrollCooldown && Math.abs(touchDiff) > 30) {
+//     const rect = container.getBoundingClientRect();
+//     const isWithinCarousel = e.touches[0].clientY >= rect.top && 
+//                             e.touches[0].clientY <= rect.bottom;
+    
+//     if (isWithinCarousel && isScrollLocked) {
+//       lastTouchTime = now;
+//       // Handle carousel movement for significant swipes
+//       if (!isAnimating && 
+//           !(currentIndex === 0 && touchDiff < 0) && 
+//           !(isAtLastSlide && touchDiff > 0)) {
+//         if (touchDiff > 0) {
+//           currentIndex = Math.min(currentIndex + 1, items.length - 1);
+//         } else {
+//           currentIndex = Math.max(currentIndex - 1, 0);
+//         }
+//         scrollCarousel(mobileScrollCooldown);
+//       }
+//     }
+//   }
+// }, { passive: true });
+
+// document.addEventListener('touchend', (e) => {
 //   initialTouchY = null;
 //   currentTouchY = null;
 //   isTouchScrolling = false;
 // }, { passive: true });
 
-// // Add resize handler
 // window.addEventListener('resize', () => {
-//   scrollCarousel();
+//   const duration = window.innerWidth <= 768 ? mobileScrollCooldown : desktopScrollCooldown;
+//   scrollCarousel(duration);
 // });
 
-// // Initial setup
 // scrollCarousel();
 
 
-
-
-let carousel = document.querySelector('.carousel1');
-let container = document.querySelector('.carousel-container1');
-let items = document.querySelectorAll('.carousel-item1');
-const texts = document.querySelectorAll('.text');
+const track = document.querySelector('.slider-track');
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.nav-dot');
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
 let currentIndex = 0;
-let touchStartY = 0;
-let touchEndY = 0;
 let isAnimating = false;
-let isAtLastSlide = false;
-let isScrollLocked = false;
-let lastScrollTime = 0;
-const desktopScrollCooldown = 800;
-const mobileScrollCooldown = 100; // Much shorter cooldown for mobile
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    const isMobile = window.innerWidth <= 768;
-    if (entry.isIntersecting && entry.intersectionRatio >= 0.95) {
-      isScrollLocked = true;
-      // Only lock body scroll on desktop
-      if (!isMobile) {
-        document.body.style.overflow = 'hidden';
-      }
-    } else {
-      isScrollLocked = false;
-      if (!isMobile) {
-        document.body.style.overflow = '';
-      }
-    }
-  });
-}, {
-  threshold: [0, 0.95, 1],
-  rootMargin: '0px'
-});
+function updateSlider(index) {
+    if (isAnimating) return;
+    isAnimating = true;
 
-observer.observe(container);
+    track.style.transform = `translateX(-${index * 100}%)`;
 
-function scrollCarousel(duration = desktopScrollCooldown) {
-  if (isAnimating) return;
-  
-  isAnimating = true;
-  const offset = -currentIndex * (items[0].clientHeight);
-  
-  carousel.style.transform = `translateY(${offset}px)`;
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
 
-  items.forEach((item, index) => {
-    if (index === currentIndex) {
-      item.classList.add('visible');
-      item.classList.remove('hidden');
-      texts[index].classList.add('visible');
-      texts[index].classList.remove('hidden');
-    } else {
-      item.classList.remove('visible');
-      item.classList.add('hidden');
-      texts[index].classList.remove('visible');
-      texts[index].classList.add('hidden');
-    }
-  });
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[index].classList.add('active');
 
-  isAtLastSlide = currentIndex === items.length - 1;
-
-  setTimeout(() => {
-    isAnimating = false;
-  }, duration);
+    setTimeout(() => {
+        isAnimating = false;
+    }, 1000);
 }
 
-container.addEventListener('wheel', (e) => {
-  const isMobile = window.innerWidth <= 768;
-  const scrollCooldown = isMobile ? mobileScrollCooldown : desktopScrollCooldown;
-  
-  // Desktop scroll handling
-  if (!isMobile) {
-    if (currentIndex === 0 && e.deltaY < 0) {
-      isScrollLocked = false;
-      document.body.style.overflow = '';
-      return;
-    }
-    
-    if (isAtLastSlide && e.deltaY > 0) {
-      isScrollLocked = false;
-      document.body.style.overflow = '';
-      return;
-    }
-    
-    if (!isScrollLocked) return;
-    
-    const now = Date.now();
-    if (now - lastScrollTime < scrollCooldown) {
-      e.preventDefault();
-      return;
-    }
-    
-    e.preventDefault();
-    e.stopPropagation();
-    
-    if (!isAnimating) {
-      lastScrollTime = now;
-      if (e.deltaY > 0) {
-        currentIndex = Math.min(currentIndex + 1, items.length - 1);
-      } else {
-        currentIndex = Math.max(currentIndex - 1, 0);
-      }
-      scrollCarousel();
-    }
-  } 
-  // Mobile scroll handling
-  else {
-    const now = Date.now();
-    // Check for rapid scrolling that indicates carousel interaction
-    if (Math.abs(e.deltaY) > 50) {
-      if (isScrollLocked && !isAnimating) {
-        // Handle carousel movement
-        if (now - lastScrollTime >= scrollCooldown &&
-            !(currentIndex === 0 && e.deltaY < 0) && 
-            !(isAtLastSlide && e.deltaY > 0)) {
-          lastScrollTime = now;
-          if (e.deltaY > 0) {
-            currentIndex = Math.min(currentIndex + 1, items.length - 1);
-          } else {
-            currentIndex = Math.max(currentIndex - 1, 0);
-          }
-          scrollCarousel(mobileScrollCooldown);
-        }
-      }
-    }
-  }
-}, { passive: true }); // Changed to passive: true for better mobile scrolling
+function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateSlider(currentIndex);
+}
 
-let initialTouchY = null;
-let currentTouchY = null;
-let isTouchScrolling = false;
-let touchStartTime = 0;
-let lastTouchTime = 0;
+function prevSlide() {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateSlider(currentIndex);
+}
 
-document.addEventListener('touchstart', (e) => {
-  const isMobile = window.innerWidth <= 768;
-  if (!isMobile) return;
-  
-  initialTouchY = e.touches[0].clientY;
-  currentTouchY = initialTouchY;
-  isTouchScrolling = true;
-  touchStartTime = Date.now();
-}, { passive: true });
-
-document.addEventListener('touchmove', (e) => {
-  const isMobile = window.innerWidth <= 768;
-  if (!isMobile || !isTouchScrolling) return;
-  
-  currentTouchY = e.touches[0].clientY;
-  const touchDiff = initialTouchY - currentTouchY;
-  
-  const now = Date.now();
-  // Only handle quick, intentional swipes
-  if (now - lastTouchTime >= mobileScrollCooldown && Math.abs(touchDiff) > 30) {
-    const rect = container.getBoundingClientRect();
-    const isWithinCarousel = e.touches[0].clientY >= rect.top && 
-                            e.touches[0].clientY <= rect.bottom;
-    
-    if (isWithinCarousel && isScrollLocked) {
-      lastTouchTime = now;
-      // Handle carousel movement for significant swipes
-      if (!isAnimating && 
-          !(currentIndex === 0 && touchDiff < 0) && 
-          !(isAtLastSlide && touchDiff > 0)) {
-        if (touchDiff > 0) {
-          currentIndex = Math.min(currentIndex + 1, items.length - 1);
-        } else {
-          currentIndex = Math.max(currentIndex - 1, 0);
-        }
-        scrollCarousel(mobileScrollCooldown);
-      }
-    }
-  }
-}, { passive: true });
-
-document.addEventListener('touchend', (e) => {
-  initialTouchY = null;
-  currentTouchY = null;
-  isTouchScrolling = false;
-}, { passive: true });
-
-window.addEventListener('resize', () => {
-  const duration = window.innerWidth <= 768 ? mobileScrollCooldown : desktopScrollCooldown;
-  scrollCarousel(duration);
+dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+        if (index === currentIndex) return;
+        currentIndex = index;
+        updateSlider(currentIndex);
+    });
 });
 
-scrollCarousel();
+prevBtn.addEventListener('click', prevSlide);
+nextBtn.addEventListener('click', nextSlide);
 
+// Touch support
+let touchStartX = 0;
+let touchEndX = 0;
+
+track.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+track.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    if (touchStartX - touchEndX > 50) nextSlide();
+    if (touchEndX - touchStartX > 50) prevSlide();
+});
+
+// Intersection Observer for performance
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.backgroundAttachment = 'fixed';
+        }
+    });
+}, { threshold: 0.1 });
+
+slides.forEach(slide => observer.observe(slide));
 
 
 
@@ -738,12 +605,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // case studies animation
 
-
 document.addEventListener('DOMContentLoaded', () => {
   const cardContainer = document.getElementById('cardContainer');
-  const customPointer = document.getElementById('customPointer');
-  let isHovering = false;
-  let autoScrollInterval;
   let touchStartX = 0;
   let touchScrollLeft = 0;
   let isDragging = false;
@@ -753,101 +616,25 @@ document.addEventListener('DOMContentLoaded', () => {
     navigator.maxTouchPoints > 0 || 
     navigator.msMaxTouchPoints > 0;
 
-  // Custom pointer handling
-  function updatePointerPosition(e) {
-    if (isTouchDevice) return;
-    
-    const x = e.clientX;
-    const y = e.clientY;
-    customPointer.style.left = `${x}px`;
-    customPointer.style.top = `${y}px`;
-  }
-
-  function showPointer() {
-    if (isTouchDevice) return;
-    customPointer.style.opacity = '1';
-    cardContainer.classList.add('active');
-  }
-
-  function hidePointer() {
-    if (isTouchDevice) return;
-    customPointer.style.opacity = '0';
-    cardContainer.classList.remove('active');
-    customPointer.classList.remove('dragging');
-  }
-
-  function updatePointerState(isDragging) {
-    if (isTouchDevice) return;
-    customPointer.classList.toggle('dragging', isDragging);
-    customPointer.textContent = isDragging ? 'Release' : 'Drag';
-  }
-
-  // Mouse event handlers
-  function handleMouseEnter(e) {
-    if (isTouchDevice) return;
-    isHovering = true;
-    showPointer();
-    updatePointerPosition(e);
-  }
-
-  function handleMouseLeave() {
-    if (isTouchDevice) return;
-    isHovering = false;
-    hidePointer();
-    clearInterval(autoScrollInterval);
-  }
-
-  function handleMouseMove(e) {
-    if (isTouchDevice) return;
-    updatePointerPosition(e);
-
-    if (!isHovering) return;
-
-    const rect = cardContainer.getBoundingClientRect();
-    const containerWidth = rect.width;
-    const mouseX = e.clientX - rect.left;
-    const scrollWidth = cardContainer.scrollWidth - containerWidth;
-    
-    const deadZone = containerWidth * 0.2;
-    
-    if (mouseX < deadZone || mouseX > containerWidth - deadZone) {
-      const center = containerWidth / 2;
-      const distance = mouseX - center;
-      const maxSpeed = 16;
-      
-      const speed = (distance / center) * maxSpeed;
-      
-      clearInterval(autoScrollInterval);
-      autoScrollInterval = setInterval(() => {
-        const newScrollLeft = cardContainer.scrollLeft + speed;
-        if (newScrollLeft >= 0 && newScrollLeft <= scrollWidth) {
-          cardContainer.scrollLeft = newScrollLeft;
-        }
-      }, 16);
-    } else {
-      clearInterval(autoScrollInterval);
-    }
-  }
-
   // Mouse drag handlers
   function handleMouseDown(e) {
-    if (isTouchDevice) return;
     isDragging = true;
     touchStartX = e.clientX;
     touchScrollLeft = cardContainer.scrollLeft;
-    updatePointerState(true);
     cardContainer.style.cursor = 'grabbing';
+    
+    // Prevent text selection
+    e.preventDefault();
   }
 
   function handleMouseUp() {
-    if (isTouchDevice) return;
     isDragging = false;
-    updatePointerState(false);
-    cardContainer.style.cursor = 'none';
+    cardContainer.style.cursor = 'grab';
   }
 
   function handleDragMove(e) {
-    if (!isDragging || isTouchDevice) return;
+    if (!isDragging) return;
+    e.preventDefault();
     const dx = e.clientX - touchStartX;
     cardContainer.scrollLeft = touchScrollLeft - dx;
   }
@@ -865,34 +652,40 @@ document.addEventListener('DOMContentLoaded', () => {
     cardContainer.scrollLeft = touchScrollLeft + touchDiff;
   }
 
+  // Prevent text selection during drag
+  function preventDefault(e) {
+    if (isDragging) {
+      e.preventDefault();
+    }
+  }
+
   // Initialize
   function init() {
     if (isTouchDevice) {
       cardContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
       cardContainer.addEventListener('touchmove', handleTouchMove, { passive: true });
     } else {
-      cardContainer.addEventListener('mouseenter', handleMouseEnter);
-      cardContainer.addEventListener('mouseleave', handleMouseLeave);
-      cardContainer.addEventListener('mousemove', handleMouseMove);
       cardContainer.addEventListener('mousedown', handleMouseDown);
       document.addEventListener('mouseup', handleMouseUp);
       document.addEventListener('mousemove', handleDragMove);
+      // Add selection prevention
+      document.addEventListener('selectstart', preventDefault);
     }
+
+    // Add user-select: none when dragging starts
+    cardContainer.addEventListener('dragstart', (e) => e.preventDefault());
   }
 
   // Cleanup
   function cleanup() {
-    clearInterval(autoScrollInterval);
     if (isTouchDevice) {
       cardContainer.removeEventListener('touchstart', handleTouchStart);
       cardContainer.removeEventListener('touchmove', handleTouchMove);
     } else {
-      cardContainer.removeEventListener('mouseenter', handleMouseEnter);
-      cardContainer.removeEventListener('mouseleave', handleMouseLeave);
-      cardContainer.removeEventListener('mousemove', handleMouseMove);
       cardContainer.removeEventListener('mousedown', handleMouseDown);
       document.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('mousemove', handleDragMove);
+      document.removeEventListener('selectstart', preventDefault);
     }
   }
 
