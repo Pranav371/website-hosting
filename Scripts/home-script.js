@@ -39,20 +39,44 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-var lastScrollTop = 0;
+// var lastScrollTop = 0;
 
-navbar = document.getElementById('navbar');
-window.addEventListener('scroll',function(){
-  var scrollTop = window.pageYOffset || document.documentElement.scrollTop
+// navbar = document.getElementById('navbar');
+// window.addEventListener('scroll',function(){
+//   var scrollTop = window.pageYOffset || document.documentElement.scrollTop
 
-  if (scrollTop > lastScrollTop){
-    navbar.style.top = "-100px";
+//   if (scrollTop > lastScrollTop){
+//     navbar.style.top = "-100px";
+//   }
+
+//   else{
+//     navbar.style.top = "0";
+//   }
+//   lastScrollTop = scrollTop;
+// });
+
+
+let lastScrollTop = 0;
+const navbar = document.getElementById('navbar');
+let ticking = false; // Prevents excessive function calls
+
+window.addEventListener('scroll', function () {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      let scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+      if (scrollTop > lastScrollTop) {
+        navbar.style.top = "-100px"; // Hide navbar
+      } else {
+        navbar.style.top = "0"; // Show navbar
+      }
+
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      ticking = false;
+    });
+
+    ticking = true;
   }
-
-  else{
-    navbar.style.top = "0";
-  }
-  lastScrollTop = scrollTop;
 });
 
 
