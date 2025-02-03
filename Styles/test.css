@@ -293,6 +293,7 @@ html, body {
     bottom: 10%;
     left: 10%;
     width: 60%;
+    overflow: hidden; 
     color: white;
     z-index: 2;
   }
@@ -301,17 +302,20 @@ html, body {
     font-family: "Cygre";
     color: #939393;
     font-size: 2rem;
+    line-height: inherit; /* Ensures it respects your defined value */
   }
   
   .title {
     font-size: 4rem;
     font-family: "Cygre SemiBold";
+    line-height: inherit; /* Ensures it respects your defined value */
   }
   
   .post-title {
     font-family: "Host Grotesk";
     color: #939393;
     font-size: 1.25rem;
+    line-height: inherit; /* Ensures it respects your defined value */
   }
   
   .explore-section {
