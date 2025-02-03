@@ -2,32 +2,53 @@
 
 @font-face {
   font-family: "Host Grotesk";
-  src: url("../Fonts/Cygre-Regular.ttf");
+  src: url("../Fonts/Cygre-Regular.woff2") format('woff2'),
+        url("../Fonts/Cygre-Regular.woff") format('woff'),
+        url("../Fonts/Cygre-Regular.ttf") format('truetype');
   font-display: swap;
 }
 
 @font-face {
   font-family: "Cygre";
-  src: url("../Fonts/HostGrotesk-Regular.ttf");
+  src: url("../Fonts/HostGrotesk-Regular.woff2") format('woff2'),
+        url("../Fonts/HostGrotesk-Regular.woff") format('woff'),
+        url("../Fonts/HostGrotesk-Regular.ttf") format('truetype'); 
   font-display: swap;
 }
 
 @font-face {
   font-family: "Cygre SemiBold";
-  src: url("../Fonts/Cygre-SemiBold.ttf");
+  src: url("../Fonts/Cygre-SemiBold.woff2") format('woff2'),
+        url("../Fonts/Cygre-SemiBold.woff") format('woff'),
+        url("../Fonts/Cygre-SemiBold.ttf") format('truetype');
   font-display: swap;
 }
 
 @font-face {
   font-family: "Cygre Medium";
-  src: url("../Fonts/Cygre-Medium.ttf");
+  src: url("../Fonts/Cygre-Medium.woff2") format('woff2'),
+        url("../Fonts/Cygre-Medium.woff") format('woff'),
+        url("../Fonts/Cygre-Medium.ttf") format('truetype');
   font-display: swap;
 } 
+
+
+@media not all and (min-resolution:.001dpcm) {
+  @supports (-webkit-appearance:none) {
+      /* Safari-specific styles */
+      p, h1, h2, h3, h4, h5, h6 {
+          line-height: 1; /* Adjust this value as needed */
+      }
+  }
+}
+
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    -webkit-text-size-adjust: 100%;
 }
+
 
 html, body {
   -webkit-font-smoothing: antialiased;
