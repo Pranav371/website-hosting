@@ -25,9 +25,9 @@
 
 @font-face {
   font-family: "Cygre Medium";
-  src: url("/Fonts/Cygre-Medium.woff2") format('woff2'),
-        url("/Fonts/Cygre-Medium.woff") format('woff'),
-        url("/Fonts/Cygre-Medium.ttf") format('truetype');
+  src: url("https://github.com/Pranav371/website-hosting/blob/main/Fonts/Cygre-Medium.woff2") format('woff2'),
+        url("https://github.com/Pranav371/website-hosting/blob/main/Fonts/Cygre-Medium.woff") format('woff'),
+        url("https://github.com/Pranav371/website-hosting/blob/main/Fonts/Cygre-Medium.ttf") format('truetype');
   font-display: swap;
 } 
 
