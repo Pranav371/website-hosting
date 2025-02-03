@@ -1,33 +1,33 @@
 
 @font-face {
   font-family: "Cygre";
-  src: url("/Fonts/Cygre-Regular.woff2") format('woff2'),
-        url("/Fonts/Cygre-Regular.woff") format('woff'),
-        url("/Fonts/Cygre-Regular.ttf") format('truetype');
+  src: url("../Fonts/Cygre-Regular.woff2") format('woff2'),
+        url("../Fonts/Cygre-Regular.woff") format('woff'),
+        url("../Fonts/Cygre-Regular.ttf") format('truetype');
   font-display: swap;
 }
 
 @font-face {
   font-family: "Host Grotesk";
-  src: url("/Fonts/HostGrotesk-Regular.woff2") format('woff2'),
-        url("/Fonts/HostGrotesk-Regular.woff") format('woff'),
-        url("/Fonts/HostGrotesk-Regular.ttf") format('truetype'); 
+  src: url("../Fonts/HostGrotesk-Regular.woff2") format('woff2'),
+        url("../Fonts/HostGrotesk-Regular.woff") format('woff'),
+        url("../Fonts/HostGrotesk-Regular.ttf") format('truetype'); 
   font-display: swap;
 }
 
 @font-face {
   font-family: "Cygre SemiBold";
-  src: url("/Fonts/Cygre-SemiBold.woff2") format('woff2'),
-        url("/Fonts/Cygre-SemiBold.woff") format('woff'),
-        url("/Fonts/Cygre-SemiBold.ttf") format('truetype');
+  src: url("../Fonts/Cygre-SemiBold.woff2") format('woff2'),
+        url("../Fonts/Cygre-SemiBold.woff") format('woff'),
+        url("../Fonts/Cygre-SemiBold.ttf") format('truetype');
   font-display: swap;
 }
 
 @font-face {
   font-family: "Cygre Medium";
-  src: url("https://github.com/Pranav371/website-hosting/blob/main/Fonts/Cygre-Medium.woff2") format('woff2'),
-        url("https://github.com/Pranav371/website-hosting/blob/main/Fonts/Cygre-Medium.woff") format('woff'),
-        url("https://github.com/Pranav371/website-hosting/blob/main/Fonts/Cygre-Medium.ttf") format('truetype');
+  src: url("../Fonts/Cygre-Medium.woff2") format('woff2'),
+        url("../Fonts/Cygre-Medium.woff") format('woff'),
+        url("../Fonts/Cygre-Medium.ttf") format('truetype');
   font-display: swap;
 } 
 
