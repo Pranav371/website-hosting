@@ -296,7 +296,7 @@ html, body {
     overflow: hidden; 
     color: white;
     z-index: 2;
-    
+
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -312,14 +312,14 @@ html, body {
   .title {
     font-size: 4rem;
     font-family: "Cygre SemiBold";
-    line-height: normal;
+    line-height: 64px;
   }
   
   .post-title {
     font-family: "Host Grotesk";
     color: #939393;
     font-size: 1.25rem;
-    line-height: normal;
+    line-height: 32px;
   }
   
   .explore-section {
