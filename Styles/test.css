@@ -302,20 +302,20 @@ html, body {
     font-family: "Cygre";
     color: #939393;
     font-size: 2rem;
-    line-height: inherit; /* Ensures it respects your defined value */
+    line-height: 64px; 
   }
   
   .title {
     font-size: 4rem;
     font-family: "Cygre SemiBold";
-    line-height: inherit; /* Ensures it respects your defined value */
+    line-height: 48px;
   }
   
   .post-title {
     font-family: "Host Grotesk";
     color: #939393;
     font-size: 1.25rem;
-    line-height: inherit; /* Ensures it respects your defined value */
+    line-height: 32px;
   }
   
   .explore-section {
