@@ -18,9 +18,9 @@
 
 @font-face {
   font-family: "Cygre SemiBold";
-  src: url("../Fonts/Cygre-SemiBold.woff2") format('woff2'),
+  src: url("../Fonts/Cygre-SemiBold.ttf") format('truetype'),
         url("../Fonts/Cygre-SemiBold.woff") format('woff'),
-        url("../Fonts/Cygre-SemiBold.ttf") format('truetype');
+        url("../Fonts/Cygre-SemiBold.woff2") format('woff2');
   font-display: swap;
 }
 
@@ -832,7 +832,7 @@ html, body {
 }
 
 .slide h2 {
-  font-family: "cygre SemiBold";
+  font-family: "Cygre SemiBold";
   font-size: 4rem;
   margin-bottom: 1.5rem;
   /*background: var(--gradient);
