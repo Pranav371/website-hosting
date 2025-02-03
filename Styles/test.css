@@ -59,7 +59,7 @@ html, body {
 :root {
   --primary: #e2b745;
   --accent: #363cfd;
-  --heading-font: 'Cygre', sans-serif;
+  --heading-font: 'Cygre SemiBold';
   --text-font: 'Host Grotesk', sans-serif;
   --gradient: linear-gradient(45deg, var(--primary) 0%, var(--accent) 100%);
 }
@@ -832,7 +832,7 @@ html, body {
 }
 
 .slide h2 {
-  font-family: var(--heading-font);
+  font-family: "cygre SemiBold";
   font-size: 4rem;
   margin-bottom: 1.5rem;
   /*background: var(--gradient);
