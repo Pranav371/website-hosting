@@ -269,16 +269,16 @@ html, body {
     height: 100vh;
   }
   
-  /* .carousel-section::before {
+  .carousel-section::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     z-index: 1;
-  } */
+  }
   
   .carousel-section video {
     object-fit: cover;
@@ -296,26 +296,30 @@ html, body {
     overflow: hidden; 
     color: white;
     z-index: 2;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   
   .pre-title {
     font-family: "Cygre";
     color: #939393;
     font-size: 2rem;
-    line-height: 64px; 
+    line-height: normal; 
   }
   
   .title {
     font-size: 4rem;
     font-family: "Cygre SemiBold";
-    line-height: 48px;
+    line-height: normal;
   }
   
   .post-title {
     font-family: "Host Grotesk";
     color: #939393;
     font-size: 1.25rem;
-    line-height: 32px;
+    line-height: normal;
   }
   
   .explore-section {
