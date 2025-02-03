@@ -269,7 +269,7 @@ html, body {
     height: 100vh;
   }
   
-  .carousel-section::before {
+  /* .carousel-section::before {
     content: "";
     position: absolute;
     top: 0;
@@ -278,7 +278,7 @@ html, body {
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
-  }
+  } */
   
   .carousel-section video {
     object-fit: cover;
