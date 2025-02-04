@@ -27,8 +27,7 @@
 }
 
  /* Navigation */
- /* Navigation */
-.nav {
+ .nav {
   position: fixed;
   top: 0;
   width: 100%;
@@ -122,6 +121,13 @@
 
 .dropdown a:hover {
   background-color: rgba(21, 61, 128, 0.3);
+}
+
+.services-link{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 /* Hamburger menu */

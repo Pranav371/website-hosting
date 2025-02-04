@@ -27,196 +27,202 @@
 }
   
   /* Navigation */
- /* Navigation */
-.nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  z-index: 10;
-  display: flex;
-  height: 12vh;
-  justify-content: space-between;
-  align-items: center;
-  transition: 0.5s ease;
-}
-
-.logo {
-  width: 24%; /*rahul*/
-  display: flex;
-  align-items: center;
-  padding-left: 10%; /*rahul*/
-}
-
-.logo img {
-  height: 5%;
-  width: 40%; /*rahul*/
-}
-
-.nav-options {
-  width: 32%; /*rahul*/
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding-right: 10%;
-}
-
-.nav-options a {
-  text-decoration: none;
-  color: white;
-  font-family: "Host Grotesk";
-}
-
-.link {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-}
-
-.dot {
-  color: #153d80;
-  padding-right: 10px;
-  font-size: 20px;
-  visibility: hidden;
-  transition: visibility 0.3s ease, opacity 0.3s ease;
-  opacity: 0;
-}
-
-.link:hover .dot {
-  visibility: visible;
-  opacity: 1;
-}
-
-.arrow {
-  margin-left: 10px;
-  font-size: 16px;
-  transition: transform 0.3s ease;
-}
-
-/* Dropdown styles */
-.dropdown {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 20%;
-  background: white;
-  backdrop-filter: blur(10px);
-  min-width: 200px;
-  padding: 10px 0;
-
-
-  border-top-left-radius: 0;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  z-index: 1000;
-}
-
-.dropdown a {
-  display: block;
-  padding: 10px 20px;
-  color: #363cfd;
-  transition: background-color 0.3s ease;
-}
-
-.dropdown a:hover {
-  background-color: rgba(21, 61, 128, 0.3);
-}
-
-/* Hamburger menu */
-.hamburger {
-  display: none;
-  cursor: pointer;
-  font-size: 30px;
-  color: white;
-  z-index: 20;
-  margin-right: 25px;
-}
-
-.hamburger i {
-  font-size: 30px;
-}
-
-/* Desktop dropdown behavior */
-@media (min-width: 769px) {
-  .link:hover .dropdown {
-    display: block;
+  .nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    display: flex;
+    height: 12vh;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.5s ease;
   }
-}
-
-/* Mobile styles */
-@media (max-width: 1024px) {
+  
+  .logo {
+    width: 24%; /*rahul*/
+    display: flex;
+    align-items: center;
+    padding-left: 10%; /*rahul*/
+  }
+  
+  .logo img {
+    height: 5%;
+    width: 40%; /*rahul*/
+  }
+  
   .nav-options {
+    width: 32%; /*rahul*/
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-right: 10%;
+  }
+  
+  .nav-options a {
+    text-decoration: none;
+    color: white;
+    font-family: "Host Grotesk";
+  }
+  
+  .link {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+  }
+  
+  .dot {
+    color: #153d80;
+    padding-right: 10px;
+    font-size: 20px;
+    visibility: hidden;
+    transition: visibility 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+  }
+  
+  .link:hover .dot {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .arrow {
+    margin-left: 10px;
+    font-size: 16px;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Dropdown styles */
+  .dropdown {
     display: none;
     position: absolute;
-    top: 12vh;
-    left: 0;
-    background: rgba(0, 0, 0, 0.8);
-    width: 100%;
-    height: auto;
-    padding: 20px 0;
-    flex-direction: column;
-    align-items: center;
-    transition: all 0.3s ease-in-out;
-  }
-
-  .nav-options.show {
-    /* Changed from .active to .show */
-    display: flex;
-  }
-
-  .link {
-    margin: 15px 0;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    text-align: center;
-  }
-
-  .link a {
-    font-size: 20px;
-    text-align: center;
+    top: 100%;
+    left: 20%;
+    background: white;
+    backdrop-filter: blur(10px);
+    min-width: 200px;
     padding: 10px 0;
-    width: 100%;
+  
+  
+    border-top-left-radius: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    z-index: 1000;
   }
-
-  .hamburger {
-    display: block;
-  }
-
-  /* Mobile dropdown styles */
-  .dropdown {
-    position: static;
-    width: 100%;
-    background: transparent;
-    margin-top: 10px;
-  }
-
+  
   .dropdown a {
-    color: white;
-    text-align: center;
-    padding: 15px;
-  }
-
-  .has-dropdown.active .dropdown {
     display: block;
+    padding: 10px 20px;
+    color: #363cfd;
+    transition: background-color 0.3s ease;
   }
-
-  .has-dropdown.active .arrow {
-    transform: rotate(180deg);
+  
+  .dropdown a:hover {
+    background-color: rgba(21, 61, 128, 0.3);
   }
-
-  /* Ensure logo doesn't take too much space on mobile */
-  .logo {
-    width: auto;
+  
+  .services-link{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  
   }
-
-  .logo img {
-    width: auto;
-    height: 30px;
+  
+  /* Hamburger menu */
+  .hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 30px;
+    color: white;
+    z-index: 20;
+    margin-right: 25px;
   }
-}
+  
+  .hamburger i {
+    font-size: 30px;
+  }
+  
+  /* Desktop dropdown behavior */
+  @media (min-width: 769px) {
+    .link:hover .dropdown {
+      display: block;
+    }
+  }
+  
+  /* Mobile styles */
+  @media (max-width: 1024px) {
+    .nav-options {
+      display: none;
+      position: absolute;
+      top: 12vh;
+      left: 0;
+      background: rgba(0, 0, 0, 0.8);
+      width: 100%;
+      height: auto;
+      padding: 20px 0;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease-in-out;
+    }
+  
+    .nav-options.show {
+      /* Changed from .active to .show */
+      display: flex;
+    }
+  
+    .link {
+      margin: 15px 0;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      text-align: center;
+    }
+  
+    .link a {
+      font-size: 20px;
+      text-align: center;
+      padding: 10px 0;
+      width: 100%;
+    }
+  
+    .hamburger {
+      display: block;
+    }
+  
+    /* Mobile dropdown styles */
+    .dropdown {
+      position: static;
+      width: 100%;
+      background: transparent;
+      margin-top: 10px;
+    }
+  
+    .dropdown a {
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+  
+    .has-dropdown.active .dropdown {
+      display: block;
+    }
+  
+    .has-dropdown.active .arrow {
+      transform: rotate(180deg);
+    }
+  
+    /* Ensure logo doesn't take too much space on mobile */
+    .logo {
+      width: auto;
+    }
+  
+    .logo img {
+      width: auto;
+      height: 30px;
+    }
+  }
   
   
 
