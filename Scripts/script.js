@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-//customer insights
+//customer insights carousel 
 const sections = document.querySelectorAll(".section");
 let currentSection = 0;
 const autoPlayInterval = 5000;
