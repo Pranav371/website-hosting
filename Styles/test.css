@@ -843,6 +843,7 @@ html, body {
   line-height: 1.1;
   text-shadow: 0 0 30px rgba(54, 60, 253, 0.3);*/
   color: #363cfd;
+  line-height: 64px;
 }
 
 .slide p {
@@ -882,7 +883,7 @@ html, body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 20%;
+  gap: 10%;
 }
 
 .explore-btn svg {
@@ -1004,6 +1005,7 @@ html, body {
 
   .slide h2 {
       font-size: 2.5rem;
+      line-height: 40px;
       margin-bottom: 1rem;
   }
 
@@ -1015,7 +1017,7 @@ html, body {
   .explore-btn {
       width: 100%;
       max-width: 200px;
-      padding: 0.8rem 1.5rem;
+      padding: 1rem 1.5rem;
       margin: 0 auto;
       white-space: nowrap;
   }
@@ -1066,7 +1068,7 @@ html, body {
 
   .explore-btn {
       font-size: 1rem;
-      padding: 0.8rem 1.2rem;
+      padding: 0.8rem 2rem;
   }
 }
 
@@ -1085,7 +1087,7 @@ html, body {
   text-align: start;
   color: blue;
   margin-bottom: 3%;
-  font-family: "Cygre";
+  font-family: "Cygre Medium";
 }
 
 .heading-container1 {
@@ -1364,7 +1366,9 @@ html, body {
   left: 0;
   padding: 1.25rem; /* 20px */
 }
-
+.text1 a{
+  text-decoration: none;
+}
 .text1 p:nth-child(1) {
   color: #bebebe;
   font-family: "Cygre";
@@ -1758,7 +1762,7 @@ html, body {
 
 .animated-list a:hover {
   color: #fff;
-  transform: translateX(10px);
+  /* transform: translateX(10px); */
 }
 
 /* Contact Cards */
@@ -1777,7 +1781,7 @@ html, body {
 }
 
 .contact-card:hover {
-  transform: translateX(5px);
+  transform: translateX(3px);
   background: rgba(54, 60, 253, 0.15);
 }
 
@@ -1788,7 +1792,10 @@ html, body {
   font-family: "Host Grotesk", sans-serif;
   color: #888;
 }
-
+.card-content a{
+  text-decoration: none;
+  color: #888;
+}
 .contact-icon {
   color: #363cfd;
   flex-shrink: 0;
@@ -1896,18 +1903,18 @@ html, body {
 
 /* Hover Effects */
 @media (hover: hover) {
-  .animated-list li:hover {
+  /* .animated-list li:hover {
     transform: translateX(5px);
-  }
+  } */
 
   .social-icon:hover {
     transform: translateY(-5px) scale(1.1);
   }
 
-  .contact-card:hover {
+  /* .contact-card:hover {
     transform: translateX(5px) translateY(-2px);
     box-shadow: 0 5px 15px rgba(54, 60, 253, 0.15);
-  }
+  } */
 }
 
 /* Animations */

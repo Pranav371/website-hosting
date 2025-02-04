@@ -23,8 +23,6 @@
   margin: 0;
   padding: 0;
 }
-
-  /* Navigation */
 /* Navigation */
 .nav {
   position: fixed;
@@ -101,7 +99,7 @@
   background: white;
   backdrop-filter: blur(10px);
   min-width: 200px;
-  padding: 20px 0;
+  padding: 10px 0;
 
 
   border-top-left-radius: 0;
@@ -109,7 +107,7 @@
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   z-index: 1000;
-} 
+}
 
 .dropdown a {
   display: block;
@@ -120,6 +118,13 @@
 
 .dropdown a:hover {
   background-color: rgba(21, 61, 128, 0.3);
+}
+
+.services-link{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 /* Hamburger menu */
@@ -215,6 +220,7 @@
     height: 30px;
   }
 }
+  
   
   
 
@@ -858,10 +864,7 @@
 
 /* cusotmer insights carousel  */
 .container1 {
-  /* max-width: 1200px; */
-  /* margin: 0 auto; */
   padding-top: 40px;
-
   padding-bottom: 8%;
 }
 
@@ -928,10 +931,12 @@
   font-family: 'Host Grotesk', sans-serif;
   color: white;
   font-size: 18px;
+  overflow: hidden;
 }
 
 .section.active .section-content {
-  max-height: 1000px;
+  max-height: 800px;
+  /* Reduced from 1000px */
   opacity: 1;
   padding: 15px 20px;
 }
@@ -941,7 +946,6 @@
   gap: 40px;
   align-items: flex-start;
   justify-content: space-around;
-
 }
 
 .text-content {
@@ -956,7 +960,8 @@
 
 .point {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  /* Changed from center */
   margin-bottom: 15px;
 }
 
@@ -966,6 +971,8 @@
   width: 30px;
   height: 30px;
   margin-right: 10px;
+  flex-shrink: 0;
+  /* Added to prevent icon shrinking */
   background-image: url('../Assets/Logo/Logo-Outlined.png');
   background-size: contain;
   background-repeat: no-repeat;
@@ -974,8 +981,6 @@
 
 .section-image {
   flex: 50%;
-  /* width: 600px;
-  height: 500px; */
   width: 50%;
   object-fit: cover;
   opacity: 0;

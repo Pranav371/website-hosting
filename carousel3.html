@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Synaara Nexus - Strategic Insights</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-base: 1rem;
+            --color-void: #0a0a0f;
+            --color-stellar: #f5f5ff;
+            --color-nebula: #6A7BFF;
+            --color-pulsar: #FF6CAB;
+            --gradient-primary: linear-gradient(135deg, var(--color-nebula), var(--color-pulsar));
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition-quantum: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: var(--color-void);
+            color: var(--color-stellar);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .quantum-carousel {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .carousel-viewport {
+            position: relative;
+            border-radius: 2rem;
+            overflow: hidden;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .slide {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 70vh;
+            opacity: 0;
+            transform: translateX(5%);
+            transition: var(--transition-quantum);
+            position: absolute;
+            width: 100%;
+            padding: 4rem;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            position: relative;
+        }
+
+        .content-core {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 4rem;
+        }
+
+        .strategy-tag {
+            font-size: clamp(0.75rem, 1vw, 0.9rem);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .strategy-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, #fff, #D6D8FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .strategy-description {
+            font-size: clamp(1rem, 1.2vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            max-width: 80%;
+        }
+
+        .holo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .holo-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 2rem;
+            backdrop-filter: blur(8px);
+            transition: var(--transition-quantum);
+        }
+
+        .holo-card:hover {
+            transform: translateY(-0.5rem);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-nexus {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .dot-matrix {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .quantum-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: var(--transition-quantum);
+        }
+
+        .quantum-dot.active {
+            width: 40px;
+            background: var(--gradient-primary);
+        }
+
+        .phase-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .phase-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+            transition: var(--transition-quantum);
+            display: grid;
+            place-items: center;
+        }
+
+        .phase-btn:hover {
+            background: var(--gradient-primary);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 1200px) {
+            .slide {
+                padding: 3rem;
+                min-height: 60vh;
+            }
+            
+            .content-core {
+                padding-right: 2rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .slide {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                padding: 3rem 2rem;
+            }
+            
+            .content-core {
+                padding-right: 0;
+            }
+            
+            .strategy-description {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .quantum-carousel {
+                padding: 1rem;
+            }
+            
+            .slide {
+                padding: 2rem 1.5rem;
+                min-height: auto;
+            }
+            
+            .holo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                padding: 1.5rem 1rem;
+            }
+            
+            .nav-nexus {
+                flex-direction: column;
+                gap: 1.5rem;
+                align-items: center;
+            }
+            
+            .phase-controls {
+                order: -1;
+            }
+        }
+
+        @media (orientation: landscape) and (max-height: 500px) {
+            .slide {
+                min-height: 100vh;
+                padding: 2rem;
+            }
+            
+            .strategy-title {
+                font-size: 2rem;
+            }
+            
+            .holo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quantum-carousel">
+        <div class="carousel-viewport">
+            <!-- Slide 1 -->
+            <div class="slide active">
+                <div class="content-core">
+                    <span class="strategy-tag">Quantum Strategy</span>
+                    <h1 class="strategy-title">Next-Gen Market Dynamics</h1>
+                    <p class="strategy-description">
+                        Harness multidimensional analytics and AI-driven insights to navigate complex market ecosystems.
+                    </p>
+                    <div class="holo-grid">
+                        <div class="holo-card">
+                            <h3>Predictive Analytics</h3>
+                            <p>Anticipate market shifts with neural network forecasting</p>
+                        </div>
+                        <div class="holo-card">
+                            <h3>Risk Mitigation</h3>
+                            <p>Advanced threat modeling and scenario planning</p>
+                        </div>
+                        <div class="holo-card">
+                            <h3>Growth Engines</h3>
+                            <p>Identify and activate new revenue dimensions</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-visual">
+                    <!-- 3D Visualization Space -->
+                </div>
+            </div>
+
+            <!-- Additional slides would follow same structure -->
+        </div>
+
+        <div class="nav-nexus">
+            <div class="phase-controls">
+                <button class="phase-btn prev">←</button>
+                <button class="phase-btn next">→</button>
+            </div>
+            <div class="dot-matrix">
+                <div class="quantum-dot active"></div>
+                <div class="quantum-dot"></div>
+                <div class="quantum-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class QuantumCarousel {
+            constructor() {
+                this.carousel = document.querySelector('.quantum-carousel');
+                this.slides = Array.from(document.querySelectorAll('.slide'));
+                this.dots = Array.from(document.querySelectorAll('.quantum-dot'));
+                this.prevBtn = document.querySelector('.prev');
+                this.nextBtn = document.querySelector('.next');
+                this.currentIndex = 0;
+                
+                this.init();
+            }
+
+            init() {
+                this.prevBtn.addEventListener('click', () => this.navigate(-1));
+                this.nextBtn.addEventListener('click', () => this.navigate(1));
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => this.jumpTo(index));
+                });
+                
+                window.addEventListener('resize', this.handleResize.bind(this));
+                this.updateActiveState();
+            }
+
+            navigate(direction) {
+                this.currentIndex = (this.currentIndex + direction + this.slides.length) % this.slides.length;
+                this.updateActiveState();
+            }
+
+            jumpTo(index) {
+                this.currentIndex = index;
+                this.updateActiveState();
+            }
+
+            updateActiveState() {
+                this.slides.forEach(slide => slide.classList.remove('active'));
+                this.dots.forEach(dot => dot.classList.remove('active'));
+                
+                this.slides[this.currentIndex].classList.add('active');
+                this.dots[this.currentIndex].classList.add('active');
+            }
+
+            handleResize() {
+                // Add any responsive layout adjustments here
+            }
+        }
+
+        // Initialize carousel
+        document.addEventListener('DOMContentLoaded', () => new QuantumCarousel());
+    </script>
+</body>
+</html>
