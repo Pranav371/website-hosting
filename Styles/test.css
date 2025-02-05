@@ -315,6 +315,7 @@ html, body {
     font-size: 4rem;
     font-family: "Cygre SemiBold";
     line-height: 64px;
+    margin-bottom: 10px;
   }
   
   .post-title {
@@ -322,6 +323,7 @@ html, body {
     color: #939393;
     font-size: 1.25rem;
     line-height: 32px;
+    margin-bottom: 10px;
   }
   
   .explore-section {
@@ -600,6 +602,15 @@ html, body {
         width: 100%;
         padding: clamp(0.5rem, 3vw, 1rem);
     }
+
+    .heading-icon svg{
+      width: 8px;
+      height: 8px;
+    }
+    .heading-icon{
+      padding: 5px;
+    }
+
 
   }
   
