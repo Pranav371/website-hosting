@@ -887,6 +887,35 @@
   transition: all 0.5s ease;
   overflow: hidden;
   position: relative;
+
+}
+
+
+/* Modified CSS */
+.point {
+  display: flex;
+  align-items: center; /* Center vertically */
+  margin-bottom: 15px;
+}
+
+.point:before {
+  width: 20px; /* Smaller size */
+  height: 20px; /* Smaller size */
+  /* Keep other properties the same */
+}
+
+.section-content {
+  transition: all 0.5s ease;
+  max-height: 0;
+  opacity: 0;
+  padding: 0 20px;
+  overflow: hidden;
+}
+
+.section.active .section-content {
+  opacity: 1;
+  padding: 15px 20px;
+  max-height: 1000px; /* Fallback value */
 }
 
 .section::before {
@@ -960,16 +989,15 @@
 
 .point {
   display: flex;
-  align-items: flex-start;
-  /* Changed from center */
+  align-items: center; /* Center vertically */
   margin-bottom: 15px;
 }
 
 .point:before {
   content: "";
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: 20px; /* Smaller size */
+  height: 20px; 
   margin-right: 10px;
   flex-shrink: 0;
   /* Added to prevent icon shrinking */
@@ -1105,6 +1133,7 @@
 
 .actionable-insights-info-cards{
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
 }
 
@@ -1123,7 +1152,8 @@
   letter-spacing: 0.1px;
   /* padding: 3%; */
   padding-bottom: 40px;
-  gap:20px
+  gap:20px;
+  flex:0.3;
 }
 
 
@@ -1162,7 +1192,7 @@
     justify-content: flex-start;
     color: #363cfd;
     font-family: 'Cygre';
-    font-size: 2vh;
+    font-size: 1rem;
     /* padding: 3%; */
     padding-bottom: 40px;
     line-height: 20px;

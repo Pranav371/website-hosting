@@ -102,15 +102,29 @@ let currentSection = 0;
 const autoPlayInterval = 5000;
 
 function activateSection(index) {
-  // Calculate height before activation
-  const prevHeight = document.querySelector(".content-section").clientHeight;
+  sections.forEach((section) => {
+    const content = section.querySelector(".section-content");
+    section.classList.remove("active");
+    content.style.maxHeight = "0";
+  });
 
-  sections.forEach((section) => section.classList.remove("active"));
-  sections[index].classList.add("active");
-
-  // Smooth scroll to maintain position
-  const newHeight = document.querySelector(".content-section").clientHeight;
-  window.scrollBy(0, newHeight - prevHeight);
+  const activeSection = sections[index];
+  const content = activeSection.querySelector(".section-content");
+  activeSection.classList.add("active");
+  
+  // Calculate needed height dynamically
+  const contentHeight = content.scrollHeight + "px";
+  content.style.maxHeight = contentHeight;
+  
+  // Smooth scroll handling
+  // const containerTop = document.querySelector('.container1').offsetTop;
+  // const currentScroll = window.pageYOffset;
+  // if (currentScroll > containerTop) {
+  //   window.scrollTo({
+  //     top: containerTop,
+  //     behavior: 'smooth'
+  //   });
+  // }
 }
 
 sections.forEach((section, index) => {
@@ -123,7 +137,7 @@ setInterval(() => {
   currentSection = (currentSection + 1) % sections.length;
   activateSection(currentSection);
 }, autoPlayInterval);
-
+  
 document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowDown" || e.key === "ArrowRight") {
     currentSection = (currentSection + 1) % sections.length;
