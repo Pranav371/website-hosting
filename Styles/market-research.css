@@ -1172,7 +1172,6 @@
 
 
 /* case studies */
-
 .card-container {
   display: flex;
   gap: 15px;
@@ -1203,7 +1202,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  padding-bottom: 5%;
+  /* padding-bottom: 5%; */
 }
 
 .card-container-wrapper::-webkit-scrollbar {
@@ -1258,15 +1257,14 @@
   position: absolute;
   top: 5%;
   left: 5%;
-  margin: 2%;
-  padding: 2% 3%;
+  padding: 0.5rem 1rem;
   background-color: rgba(125, 120, 120, 0.5);
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(0.125rem); /* 2px */
   color: white;
-  border: 0.5px solid white;
-  border-radius: 50px;
+  border: 0.03125rem solid white; /* 0.5px */
+  border-radius: 3.125rem; /* 50px */
   font-family: "Host Grotesk";
-  font-size: 0.8vw;
+  font-size: clamp(0.5rem, 0.8vw, 0.75rem); /* Responsive clamp */
 }
 
 .text1 {
@@ -1373,6 +1371,7 @@
     font-size: 10px;
   }
 }
+
 
 
 /* customer */
