@@ -1488,7 +1488,24 @@ line-height: 40px;
 .responsive-button:hover .button-arrow {
   transform: translateX(5px); /* Arrow moves slightly on hover */
 }
+@media screen  and (width:1024px) and (height:600px){
+  .customer-img img{
+    width: 100%;
+  }
+  .customer-txt p{
+    font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  }
 
+  .customer-txt h1{
+  font-size: 32px;
+  line-height: 48px;
+  font-weight: 700;
+}
+
+}
 @media (max-width: 768px) {
 
   .customer{

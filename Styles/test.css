@@ -315,7 +315,7 @@ html, body {
     font-size: 4rem;
     font-family: "Cygre SemiBold";
     line-height: 64px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
   
   .post-title {
@@ -323,7 +323,7 @@ html, body {
     color: #939393;
     font-size: 1.25rem;
     line-height: 32px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
   
   .explore-section {
@@ -1005,6 +1005,12 @@ html, body {
   }
 }
 
+
+@media screen  and (width:1024px) and (height:600px){
+  .slider-container{
+    height: 120vh;
+  }
+}
 /* Responsive Fixes */
 @media (max-width: 820px) {
   .slider-container{
