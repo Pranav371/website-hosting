@@ -285,6 +285,9 @@ html, body {
     width: 100%;
     position: relative;
     z-index: 0;
+    user-select: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
   }
   
   .carousel-overlay {
