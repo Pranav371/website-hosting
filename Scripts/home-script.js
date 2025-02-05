@@ -631,86 +631,147 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const cardContainer = document.getElementById('cardContainer');
-  let touchStartX = 0;
-  let touchScrollLeft = 0;
+  let startX = 0;
+  let scrollLeft = 0;
   let isDragging = false;
+  let animationFrameId = null;
+  let prevX = 0;
+  let velocity = 0;
+  let lastTimestamp = 0;
 
-  // Check if device supports touch
-  const isTouchDevice = 'ontouchstart' in window || 
-    navigator.maxTouchPoints > 0 || 
-    navigator.msMaxTouchPoints > 0;
-
-  // Mouse drag handlers
-  function handleMouseDown(e) {
-    isDragging = true;
-    touchStartX = e.clientX;
-    touchScrollLeft = cardContainer.scrollLeft;
-    cardContainer.style.cursor = 'grabbing';
-    
-    // Prevent text selection
-    e.preventDefault();
+  // Remove default smooth scroll behavior to implement custom physics
+  cardContainer.style.scrollBehavior = 'auto';
+  
+  // Optimize performance with transform
+  cardContainer.style.willChange = 'transform';
+  
+  function lerp(start, end, factor) {
+    return start + (end - start) * factor;
   }
 
-  function handleMouseUp() {
-    isDragging = false;
-    cardContainer.style.cursor = 'grab';
+  function updateScroll(timestamp) {
+    if (!isDragging && Math.abs(velocity) > 0.1) {
+      // Apply deceleration
+      velocity *= 0.95;
+      
+      // Update scroll position with velocity
+      cardContainer.scrollLeft += velocity;
+
+      // Continue animation
+      animationFrameId = requestAnimationFrame(updateScroll);
+    } else {
+      velocity = 0;
+      cancelAnimationFrame(animationFrameId);
+    }
+  }
+
+  function handleDragStart(e) {
+    isDragging = true;
+    startX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+    scrollLeft = cardContainer.scrollLeft;
+    prevX = startX;
+    lastTimestamp = Date.now();
+    velocity = 0;
+
+    // Cancel any ongoing animation
+    cancelAnimationFrame(animationFrameId);
+
+    cardContainer.style.cursor = 'grabbing';
+    cardContainer.style.userSelect = 'none';
   }
 
   function handleDragMove(e) {
     if (!isDragging) return;
+
     e.preventDefault();
-    const dx = e.clientX - touchStartX;
-    cardContainer.scrollLeft = touchScrollLeft - dx;
+    const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+    const dx = currentX - prevX;
+    const timestamp = Date.now();
+    const dt = timestamp - lastTimestamp;
+
+    if (dt > 0) {
+      // Calculate velocity (pixels per millisecond)
+      velocity = dx / dt * 16; // Scale for 60fps
+    }
+
+    // Update scroll position with direct manipulation
+    cardContainer.scrollLeft = cardContainer.scrollLeft - dx;
+
+    prevX = currentX;
+    lastTimestamp = timestamp;
   }
 
-  // Touch handlers
-  function handleTouchStart(e) {
-    touchStartX = e.touches[0].clientX;
-    touchScrollLeft = cardContainer.scrollLeft;
-  }
+  function handleDragEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    cardContainer.style.cursor = 'grab';
+    cardContainer.style.userSelect = '';
 
-  function handleTouchMove(e) {
-    if (!isTouchDevice) return;
-    const touchX = e.touches[0].clientX;
-    const touchDiff = touchStartX - touchX;
-    cardContainer.scrollLeft = touchScrollLeft + touchDiff;
-  }
-
-  // Prevent text selection during drag
-  function preventDefault(e) {
-    if (isDragging) {
-      e.preventDefault();
+    // Start deceleration animation
+    if (Math.abs(velocity) > 0.1) {
+      animationFrameId = requestAnimationFrame(updateScroll);
     }
   }
 
-  // Initialize
+  // Intersection Observer to optimize off-screen elements
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.target.classList.contains('card')) {
+          entry.target.style.willChange = entry.isIntersecting ? 'transform' : 'auto';
+        }
+      });
+    },
+    { root: cardContainer, threshold: 0.1 }
+  );
+
+  // Observe all cards
+  document.querySelectorAll('.card').forEach(card => {
+    observer.observe(card);
+  });
+
   function init() {
-    if (isTouchDevice) {
-      cardContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
-      cardContainer.addEventListener('touchmove', handleTouchMove, { passive: true });
-    } else {
-      cardContainer.addEventListener('mousedown', handleMouseDown);
-      document.addEventListener('mouseup', handleMouseUp);
-      document.addEventListener('mousemove', handleDragMove);
-      // Add selection prevention
-      document.addEventListener('selectstart', preventDefault);
-    }
+    // Apply optimized styles
+    cardContainer.style.cssText = `
+      overflow-x: auto;
+      cursor: grab;
+      -webkit-overflow-scrolling: touch;
+      overflow-y: hidden;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      perspective: 1000px;
+    `;
 
-    // Add user-select: none when dragging starts
-    cardContainer.addEventListener('dragstart', (e) => e.preventDefault());
+    // Mouse events
+    cardContainer.addEventListener('mousedown', handleDragStart, { passive: false });
+    window.addEventListener('mousemove', handleDragMove, { passive: false });
+    window.addEventListener('mouseup', handleDragEnd);
+
+    // Touch events
+    cardContainer.addEventListener('touchstart', handleDragStart, { passive: false });
+    cardContainer.addEventListener('touchmove', handleDragMove, { passive: false });
+    cardContainer.addEventListener('touchend', handleDragEnd);
+
+    // Prevent click events during drag
+    cardContainer.addEventListener('click', (e) => {
+      if (Math.abs(velocity) > 0.1) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
   }
 
-  // Cleanup
   function cleanup() {
-    if (isTouchDevice) {
-      cardContainer.removeEventListener('touchstart', handleTouchStart);
-      cardContainer.removeEventListener('touchmove', handleTouchMove);
-    } else {
-      cardContainer.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mousemove', handleDragMove);
-      document.removeEventListener('selectstart', preventDefault);
-    }
+    cancelAnimationFrame(animationFrameId);
+    observer.disconnect();
+    
+    cardContainer.removeEventListener('mousedown', handleDragStart);
+    window.removeEventListener('mousemove', handleDragMove);
+    window.removeEventListener('mouseup', handleDragEnd);
+    
+    cardContainer.removeEventListener('touchstart', handleDragStart);
+    cardContainer.removeEventListener('touchmove', handleDragMove);
+    cardContainer.removeEventListener('touchend', handleDragEnd);
   }
 
   init();
