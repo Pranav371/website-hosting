@@ -1425,7 +1425,15 @@ line-height: 32px;
   }
 
 }
+@media screen and (max-width:1024px) and (max-height:640px) {
+  .actionable-insights-info-card p{
+    font-size: 1rem;
+  }
 
+  .actionable-insights-main-title{
+    font-size: 2rem;
+  }
+}
 
 /* case studies  */
 .card-container {
