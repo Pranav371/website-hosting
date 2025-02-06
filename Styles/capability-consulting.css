@@ -1629,6 +1629,7 @@ line-height: 32px;
   justify-content: space-between;
   /* width: 100%; */
   padding:6% 12%;
+  padding-bottom: 8%;
 }
 .customer-txt{
   font-family: 'Host Grotesk';
@@ -1708,8 +1709,7 @@ line-height: 40px;
 .responsive-button:hover .button-arrow {
   transform: translateX(5px); /* Arrow moves slightly on hover */
 }
-
-@media screen  and (width:1024px) and (height:600px){
+@media screen  and (width:1024px) and (min-height:640px){
   .customer-img img{
     width: 100%;
   }
@@ -1725,8 +1725,8 @@ line-height: 40px;
   line-height: 48px;
   font-weight: 700;
 }
-}
 
+}
 @media (max-width: 768px) {
 
   .customer{
@@ -1751,6 +1751,7 @@ line-height: 40px;
     font-size: 18px;
   }
 }
+
 
 
 
