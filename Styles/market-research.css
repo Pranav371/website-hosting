@@ -1871,7 +1871,7 @@ line-height: 40px;
 .responsive-button:hover .button-arrow {
   transform: translateX(5px); /* Arrow moves slightly on hover */
 }
-@media screen  and (width:1024px) and (height:600px){
+@media screen  and (width:1024px) and (min-height:640px){
   .customer-img img{
     width: 100%;
   }
