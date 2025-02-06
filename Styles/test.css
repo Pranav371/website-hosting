@@ -183,7 +183,7 @@ body {
 }
 
 /* Mobile styles */
-@media (max-width: 1024px) {
+@media (max-width: 1440px) {
   .nav-options {
     display: none;
     position: absolute;
