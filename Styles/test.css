@@ -408,12 +408,16 @@ html, body {
     .post-title {
       font-size: 1.125rem;
     }
+    .services-btn{
+      font-size: 1rem;
+    }
   }
   
   @media (min-width: 1025px) {
     .carousel-overlay {
       width: 50%;
     }
+    
   }
 
 
@@ -698,7 +702,7 @@ html, body {
   }
   
   .pillars-description h1 {
-    font-family: "Host Grotesk";
+    font-family: "Cygre Medium";
     font-size: 2rem; /* 32px */
   }
   

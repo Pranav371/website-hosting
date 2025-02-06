@@ -899,7 +899,7 @@ background-color: #000000;
   color: #e2b745;
   margin-bottom: 1rem;
   font-weight: 500;
-  font-family: 'Host Grotesk';
+  font-family: 'Cygre Medium';
 }
 
 .strategy-title {
@@ -989,6 +989,7 @@ background-color: #000000;
   text-align: center;
   color: #666;
   font-size: 0.75rem;
+  font-family: 'Cygre Medium';
 }
 
 .nav-indicator::after {
@@ -1114,7 +1115,7 @@ background-color: #000000;
   
 }
 
-@media screen and (height:600px) and (width:1024px){
+@media screen and (max-height:640px) and (width:1024px){
   .showcase-wrapper{
     height: 90vh;
   }
