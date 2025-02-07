@@ -1,523 +1,260 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            background-color: black;
-        }
-
-        .container1 {
-            padding-top: 40px;
-            padding-bottom: 8%;
-        }
-
-        .content-section {
-            position: relative;
-        }
-
-        .content-section::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .section {
-            margin-bottom: 20px;
-            transition: all 0.5s ease;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 2px;
-            background: #FFD700;
-            height: 0;
-            transition: height 0.5s ease;
-        }
-
-        .section.active::before {
-            height: 100%;
-        }
-
-        .section-header {
-            padding: 15px;
-            padding-left: 20px;
-            cursor: pointer;
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #666;
-            transform: scale(0.9);
-            transform-origin: left;
-            transition: all 0.5s ease;
-            font-family: 'Cygre SemiBold', sans-serif;
-        }
-
-        .section.active .section-header {
-            color: #fff;
-            transform: scale(1);
-        }
-
-        .section-content {
-            max-height: 0;
-            opacity: 0;
-            transition: all 0.5s ease;
-            padding: 0 20px;
-            font-family: 'Host Grotesk', sans-serif;
-            color: white;
-            font-size: 18px;
-            overflow: hidden;
-        }
-
-        .section.active .section-content {
-            max-height: 800px;
-            /* Reduced from 1000px */
-            opacity: 1;
-            padding: 15px 20px;
-        }
-
-        .content-wrapper {
-            display: flex;
-            gap: 40px;
-            align-items: flex-start;
-            justify-content: space-around;
-        }
-
-        .text-content {
-            flex: 50%;
-            font-size: 20px;
-            line-height: 40px;
-        }
-
-        .points {
-            margin-top: 20px;
-        }
-
-        .point {
-            display: flex;
-            align-items: flex-start;
-            /* Changed from center */
-            margin-bottom: 15px;
-        }
-
-        .point:before {
-            content: "";
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            margin-right: 10px;
-            flex-shrink: 0;
-            /* Added to prevent icon shrinking */
-            background-image: url('../Assets/Logo/Logo-Outlined.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-        .section-image {
-            flex: 50%;
-            width: 50%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            display: none;
-            border-radius: 20px;
-        }
-
-        .section.active .section-image {
-            opacity: 1;
-            display: block;
-        }
-
-        /* Media queries remain the same */
-    </style>
-
-</head>
-
-<body>
-    <div class="container1">
-        <div class="content-section">
-            <!-- Section 1: Journey Mapping -->
-            <div class="section active" data-index="0">
-                <div class="section-header">Journey Mapping</div>
-                <div class="section-content">
-                    <div class="content-wrapper">
-                        <div class="text-content">
-                            <p>At Synaara Consulting, we analyse consumer behaviours and map customer journeys to reveal
-                                how your
-                                audience interacts with your brand. By incorporating sentiment analysis, we provide
-                                actionable insights
-                                that help you refine touchpoints and enhance the overall customer experience.</p>
-                            <div class="points">
-                                <div class="point">Comprehensive insights into customer decision-making processes</div>
-                                <div class="point">Improved customer satisfaction by refining key journey interactions
-                                </div>
-                                <div class="point">Increased retention rates by addressing pain points identified in the
-                                    journey</div>
-                            </div>
-                        </div>
-                        <img src="../Assets/Images/Research-Carousel-1.jpg" class="section-image" alt="Journey Mapping">
-                    </div>
+<div class="showcase-wrapper">
+    <div class="showcase-container">
+        <!-- Slide 1 -->
+        <div class="showcase-slide active">
+            <div class="strategy-content">
+                <div class="strategy-header">
+                    <div class="strategy-number">01 / Strategy</div>
+                    <h1 class="strategy-title">Predictive Analytics for Future-Proof Decision Making</h1>
+                    <p class="strategy-description">
+                        At Synaara Consulting, we build predictive models that allow organizations to forecast trends with up
+                  to 95% accuracy. These models analyze historical and real-time data to predict customer behaviors,
+                  optimize supply chains, and minimize operational risks. Predictive analytics enables your business to
+                  make better-informed, proactive decisions.
+                    </p>
+                </div>
+                <div class="carousel-controls1">
+                    <button class="carousel-control prev">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.78 6.21934C10.6394 6.07889 10.4488 6 10.25 6C10.0512 6 9.86063 6.07889 9.72 6.21934L4.72 11.2193C4.57955 11.36 4.50066 11.5506 4.50066 11.7493C4.50066 11.9481 4.57955 12.1387 4.72 12.2793L9.72 17.2793C9.78866 17.353 9.87146 17.4121 9.96346 17.4531C10.0555 17.4941 10.1548 17.5162 10.2555 17.5179C10.3562 17.5197 10.4562 17.5012 10.5496 17.4635C10.643 17.4257 10.7278 17.3696 10.799 17.2984C10.8703 17.2272 10.9264 17.1423 10.9641 17.0489C11.0018 16.9555 11.0204 16.8555 11.0186 16.7548C11.0168 16.6541 10.9948 16.5548 10.9538 16.4628C10.9128 16.3708 10.8537 16.288 10.78 16.2193L7.06 12.4993H17.25C17.4489 12.4993 17.6397 12.4203 17.7803 12.2797C17.921 12.139 18 11.9483 18 11.7493C18 11.5504 17.921 11.3597 17.7803 11.219C17.6397 11.0784 17.4489 10.9993 17.25 10.9993H7.06L10.78 7.27934C10.9205 7.13871 10.9993 6.94809 10.9993 6.74934C10.9993 6.55059 10.9205 6.35997 10.78 6.21934Z" fill="white"/>
+                            </svg>
+                            
+                    </button>
+                    <button class="carousel-control next">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.22 6.21934C12.3606 6.07889 12.5512 6 12.75 6C12.9488 6 13.1394 6.07889 13.28 6.21934L18.28 11.2193C18.4205 11.36 18.4993 11.5506 18.4993 11.7493C18.4993 11.9481 18.4205 12.1387 18.28 12.2793L13.28 17.2793C13.2113 17.353 13.1285 17.4121 13.0365 17.4531C12.9445 17.4941 12.8452 17.5162 12.7445 17.5179C12.6438 17.5197 12.5438 17.5012 12.4504 17.4635C12.357 17.4257 12.2722 17.3696 12.201 17.2984C12.1297 17.2272 12.0736 17.1423 12.0359 17.0489C11.9982 16.9555 11.9796 16.8555 11.9814 16.7548C11.9832 16.6541 12.0052 16.5548 12.0462 16.4628C12.0872 16.3708 12.1463 16.288 12.22 16.2193L15.94 12.4993H5.75C5.55109 12.4993 5.36032 12.4203 5.21967 12.2797C5.07902 12.139 5 11.9483 5 11.7493C5 11.5504 5.07902 11.3597 5.21967 11.219C5.36032 11.0784 5.55109 10.9993 5.75 10.9993H15.94L12.22 7.27934C12.0795 7.13871 12.0007 6.94809 12.0007 6.74934C12.0007 6.55059 12.0795 6.35997 12.22 6.21934Z" fill="white"/>
+                            </svg>
+                    </button>
                 </div>
             </div>
-
-            <!-- Section 2: Voice of Customer -->
-            <div class="section" data-index="1">
-                <div class="section-header">Voice of Customer</div>
-                <div class="section-content">
-                    <div class="content-wrapper">
-                        <div class="text-content">
-                            <p>At Synaara Consulting, we harness the Voice of Customer (VoC) insights to capture genuine
-                                feedback from
-                                your target audience. This enables you to understand customer sentiments, preferences,
-                                and expectations,
-                                guiding strategic improvements.</p>
-                            <div class="points">
-                                <div class="point">Real-time feedback that informs product and service enhancements.
-                                </div>
-                                <div class="point">Increased customer loyalty through responsiveness to their needs.
-                                </div>
-                                <div class="point">Improved brand reputation by addressing concerns swiftly.</div>
-                            </div>
-                        </div>
-                        <img src="../Assets/Images/Research-Carousel-2.jpg" class="section-image"
-                            alt="Voice of Customer">
-                    </div>
+            <div class="benefits-container">
+                <div class="benefit-card">
+                    <h3 class="benefit-title">Accurate Forecasts</h3>
+                    <p class="benefit-description">
+                        95% accurate forecasts for improved decision-making.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <h3 class="benefit-title">Reduction in Operating Costs</h3>
+                    <p class="benefit-description">
+                        20% reduction in operating costs through optimized resource allocation.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <h3 class="benefit-title">Sales Growth </h3>
+                    <p class="benefit-description">
+                        15% sales growth driven by better demand forecasting and targeted
+                    marketing.
+                    </p>
                 </div>
             </div>
-
-            <!-- Section 3: Customer Segmentation -->
-            <div class="section" data-index="2">
-                <div class="section-header">Customer Segmentation</div>
-                <div class="section-content">
-                    <div class="content-wrapper">
-                        <div class="text-content">
-                            <p>At Synaara Consulting, we specialize in customer segmentation to identify distinct groups
-                                within your
-                                customer base. This enables you to tailor marketing strategies and offerings to meet the
-                                specific needs
-                                of each segment.</p>
-                            <div class="points">
-                                <div class="point">Improved marketing ROI through targeted campaigns</div>
-                                <div class="point">Enhanced customer engagement by addressing specific preferences</div>
-                                <div class="point">Streamlined product development based on segment needs.</div>
-                            </div>
-                        </div>
-                        <img src="../Assets/Images/Research-Carousel-3.jpg" class="section-image"
-                            alt="Customer Segmentation">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 4: Brand Assessment -->
-            <div class="section" data-index="3">
-                <div class="section-header">Brand Assessment</div>
-                <div class="section-content">
-                    <div class="content-wrapper">
-                        <div class="text-content">
-                            <p>At Synaara Consulting, we conduct comprehensive brand assessments to evaluate your
-                                brand's strengths,
-                                weaknesses, and market positioning. This analysis helps you understand your competitive
-                                landscape and
-                                identify opportunities for growth.</p>
-                            <div class="points">
-                                <div class="point">Clear understanding of brand perception and market standing</div>
-                                <div class="point">Identification of key differentiators that enhance competitive
-                                    advantage</div>
-                                <div class="point">Strategic recommendations for brand repositioning if necessary</div>
-                            </div>
-                        </div>
-                        <img src="../Assets/Images/Research-Carousel-4.jpg" class="section-image"
-                            alt="Brand Assessment">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 5: NPS Diagnostics And Tracking -->
-            <div class="section" data-index="4">
-                <div class="section-header">NPS Diagnostics And Tracking</div>
-                <div class="section-content">
-                    <div class="content-wrapper">
-                        <div class="text-content">
-                            <p>At Synaara Consulting, we utilize Net Promoter Score (NPS) diagnostics to measure
-                                customer loyalty and
-                                satisfaction over time. This tool provides insights into customer advocacy and areas for
-                                improvement.</p>
-                            <div class="points">
-                                <div class="point">Continuous monitoring of customer satisfaction levels</div>
-                                <div class="point">Actionable insights to enhance customer experience and loyalty</div>
-                                <div class="point">Identification of detractors and promoters to inform retention
-                                    strategies</div>
-                            </div>
-                        </div>
-                        <img src="../Assets/Images/Research-Carousel-5.jpg" class="section-image" alt="NPS Diagnostics">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 6: Product Feasibility & Opportunity Assessment -->
-            <div class="section" data-index="5">
-                <div class="section-header">Product Feasibility & Opportunity Assessment</div>
-                <div class="section-content">
-                    <div class="content-wrapper">
-                        <div class="text-content">
-                            <p>At Synaara Consulting, we assess the feasibility of new product concepts and market
-                                opportunities. This ensures that your investments align with market demand and customer
-                                needs.</p>
-                            <div class="points">
-                                <div class="point">Reduced risk in new product launches through data-driven insights.
-                                </div>
-                                <div class="point">Understanding of feasibility of new / novel product among target
-                                    audience through research studies.</div>
-                                <div class="point">Improved alignment of product features with customer expectations
-                                </div>
-                                <div class="point">Enhanced innovation by identifying viable market opportunities</div>
-                            </div>
-                        </div>
-                        <img src="../Assets/Images/Research-Carousel-6.jpg" class="section-image"
-                            alt="Product Feasibility">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 7: Pricing-Sensitivity Analysis -->
-            <div class="section" data-index="6">
-                <div class="section-header">Pricing-Sensitivity Analysis</div>
-                <div class="section-content">
-                    <div class="content-wrapper">
-                        <div class="text-content">
-                            <p>At Synaara Consulting, we conduct pricing sensitivity analyses to understand how changes
-                                in pricing affect customer demand. This helps you set optimal prices that maximize
-                                revenue while maintaining customer loyalty.</p>
-                            <div class="points">
-                                <div class="point">Data-driven pricing strategies that enhance competitiveness</div>
-                                <div class="point">Increased profitability by 30% through optimized pricing models</div>
-                                <div class="point">Improved customer perception of value</div>
-                            </div>
-                        </div>
-                        <img src="../Assets/Images/Research-Carousel-7.jpg" class="section-image"
-                            alt="Pricing-Sensitivity Analysis">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 8: Marketing Campaign Evaluation -->
-            <div class="section" data-index="7">
-                <div class="section-header">Marketing Campaign Evaluation</div>
-                <div class="section-content">
-                    <div class="content-wrapper">
-                        <div class="text-content">
-                            <p>At Synaara Consulting, we evaluate the effectiveness of your marketing campaigns to
-                                ensure optimal return on investment. Our insights help refine strategies for future
-                                campaigns based on performance data.</p>
-                            <div class="points">
-                                <div class="point">Enhanced campaign performance through data analysis and insights
-                                </div>
-                                <div class="point">Increased marketing ROI by reallocating resources to high-performing
-                                    strategies</div>
-                                <div class="point">Continuous improvement of marketing tactics based on results</div>
-                            </div>
-                        </div>
-                        <img src="../Assets/Images/Research-Carousel-8.jpg" class="section-image"
-                            alt="Marketing Campaign Evaluation">
-                    </div>
-                </div>
-            </div>
-
         </div>
+
+        <!-- Slide 2 -->
+        <div class="showcase-slide">
+            <div class="strategy-content">
+                <div class="strategy-header">
+                    <div class="strategy-number">02 / Strategy</div>
+                    <h1 class="strategy-title">Big Data Solutions for Real-Time Business Insights</h1>
+                    <p class="strategy-description">
+                        Our advanced big data analytics solutions help businesses unlock hidden patterns, optimize operations, and drive innovation. With real-time insights and high-speed processing, we empower you to make smarter, data-driven decisions.
+                    </p>
+                </div>
+                <div class="carousel-controls1">
+                    <button class="carousel-control prev">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.78 6.21934C10.6394 6.07889 10.4488 6 10.25 6C10.0512 6 9.86063 6.07889 9.72 6.21934L4.72 11.2193C4.57955 11.36 4.50066 11.5506 4.50066 11.7493C4.50066 11.9481 4.57955 12.1387 4.72 12.2793L9.72 17.2793C9.78866 17.353 9.87146 17.4121 9.96346 17.4531C10.0555 17.4941 10.1548 17.5162 10.2555 17.5179C10.3562 17.5197 10.4562 17.5012 10.5496 17.4635C10.643 17.4257 10.7278 17.3696 10.799 17.2984C10.8703 17.2272 10.9264 17.1423 10.9641 17.0489C11.0018 16.9555 11.0204 16.8555 11.0186 16.7548C11.0168 16.6541 10.9948 16.5548 10.9538 16.4628C10.9128 16.3708 10.8537 16.288 10.78 16.2193L7.06 12.4993H17.25C17.4489 12.4993 17.6397 12.4203 17.7803 12.2797C17.921 12.139 18 11.9483 18 11.7493C18 11.5504 17.921 11.3597 17.7803 11.219C17.6397 11.0784 17.4489 10.9993 17.25 10.9993H7.06L10.78 7.27934C10.9205 7.13871 10.9993 6.94809 10.9993 6.74934C10.9993 6.55059 10.9205 6.35997 10.78 6.21934Z" fill="white"/>
+                            </svg>
+                            
+                    </button>
+                    <button class="carousel-control next">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.22 6.21934C12.3606 6.07889 12.5512 6 12.75 6C12.9488 6 13.1394 6.07889 13.28 6.21934L18.28 11.2193C18.4205 11.36 18.4993 11.5506 18.4993 11.7493C18.4993 11.9481 18.4205 12.1387 18.28 12.2793L13.28 17.2793C13.2113 17.353 13.1285 17.4121 13.0365 17.4531C12.9445 17.4941 12.8452 17.5162 12.7445 17.5179C12.6438 17.5197 12.5438 17.5012 12.4504 17.4635C12.357 17.4257 12.2722 17.3696 12.201 17.2984C12.1297 17.2272 12.0736 17.1423 12.0359 17.0489C11.9982 16.9555 11.9796 16.8555 11.9814 16.7548C11.9832 16.6541 12.0052 16.5548 12.0462 16.4628C12.0872 16.3708 12.1463 16.288 12.22 16.2193L15.94 12.4993H5.75C5.55109 12.4993 5.36032 12.4203 5.21967 12.2797C5.07902 12.139 5 11.9483 5 11.7493C5 11.5504 5.07902 11.3597 5.21967 11.219C5.36032 11.0784 5.55109 10.9993 5.75 10.9993H15.94L12.22 7.27934C12.0795 7.13871 12.0007 6.94809 12.0007 6.74934C12.0007 6.55059 12.0795 6.35997 12.22 6.21934Z" fill="white"/>
+                            </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="benefits-container">
+                <div class="benefit-card">
+                    <h3 class="benefit-title">Faster Insights </h3>
+                    <p class="benefit-description">
+                        50% faster insights for real-time, responsive decision-making.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <h3 class="benefit-title">Reduction in Data Processing Costs </h3>
+                    <p class="benefit-description">
+                        30% reduction in data processing costs through cloud-based infrastructure.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <h3 class="benefit-title">Scalability</h3>
+                    <p class="benefit-description">
+                        100% scalability to accommodate growing data volumes and new data sources.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Slide-3 -->
+        <div class="showcase-slide">
+            <div class="strategy-content">
+                <div class="strategy-header">
+                    <div class="strategy-number">03 / Strategy</div>
+                    <h1 class="strategy-title">Large Language Models (LLMs) for NLP and Process Automation</h1>
+                    <p class="strategy-description">
+                        Integrating LLMs such as GPT-4 into your operations allows your organization to automate natural
+                  language tasks—like customer service, content generation, and sentiment analysis—more effectively.
+                  LLMs can process unstructured data to derive meaningful insights, improving response times and
+                  enhancing customer satisfaction.
+                    </p>
+                </div>
+                <div class="carousel-controls1">
+                    <button class="carousel-control prev">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.78 6.21934C10.6394 6.07889 10.4488 6 10.25 6C10.0512 6 9.86063 6.07889 9.72 6.21934L4.72 11.2193C4.57955 11.36 4.50066 11.5506 4.50066 11.7493C4.50066 11.9481 4.57955 12.1387 4.72 12.2793L9.72 17.2793C9.78866 17.353 9.87146 17.4121 9.96346 17.4531C10.0555 17.4941 10.1548 17.5162 10.2555 17.5179C10.3562 17.5197 10.4562 17.5012 10.5496 17.4635C10.643 17.4257 10.7278 17.3696 10.799 17.2984C10.8703 17.2272 10.9264 17.1423 10.9641 17.0489C11.0018 16.9555 11.0204 16.8555 11.0186 16.7548C11.0168 16.6541 10.9948 16.5548 10.9538 16.4628C10.9128 16.3708 10.8537 16.288 10.78 16.2193L7.06 12.4993H17.25C17.4489 12.4993 17.6397 12.4203 17.7803 12.2797C17.921 12.139 18 11.9483 18 11.7493C18 11.5504 17.921 11.3597 17.7803 11.219C17.6397 11.0784 17.4489 10.9993 17.25 10.9993H7.06L10.78 7.27934C10.9205 7.13871 10.9993 6.94809 10.9993 6.74934C10.9993 6.55059 10.9205 6.35997 10.78 6.21934Z" fill="white"/>
+                            </svg>
+                            
+                    </button>
+                    <button class="carousel-control next">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.22 6.21934C12.3606 6.07889 12.5512 6 12.75 6C12.9488 6 13.1394 6.07889 13.28 6.21934L18.28 11.2193C18.4205 11.36 18.4993 11.5506 18.4993 11.7493C18.4993 11.9481 18.4205 12.1387 18.28 12.2793L13.28 17.2793C13.2113 17.353 13.1285 17.4121 13.0365 17.4531C12.9445 17.4941 12.8452 17.5162 12.7445 17.5179C12.6438 17.5197 12.5438 17.5012 12.4504 17.4635C12.357 17.4257 12.2722 17.3696 12.201 17.2984C12.1297 17.2272 12.0736 17.1423 12.0359 17.0489C11.9982 16.9555 11.9796 16.8555 11.9814 16.7548C11.9832 16.6541 12.0052 16.5548 12.0462 16.4628C12.0872 16.3708 12.1463 16.288 12.22 16.2193L15.94 12.4993H5.75C5.55109 12.4993 5.36032 12.4203 5.21967 12.2797C5.07902 12.139 5 11.9483 5 11.7493C5 11.5504 5.07902 11.3597 5.21967 11.219C5.36032 11.0784 5.55109 10.9993 5.75 10.9993H15.94L12.22 7.27934C12.0795 7.13871 12.0007 6.94809 12.0007 6.74934C12.0007 6.55059 12.0795 6.35997 12.22 6.21934Z" fill="white"/>
+                            </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="benefits-container">
+                <div class="benefit-card">
+                    <h3 class="benefit-title">Faster Response </h3>
+                    <p class="benefit-description">
+                        70% faster customer service response times.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <h3 class="benefit-title">Customer Satisfaction</h3>
+                    <p class="benefit-description">
+                        50% improvement in customer satisfaction, thanks to personalized,
+                        NLP-powered interactions.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <h3 class="benefit-title">Content Generation Time</h3>
+                    <p class="benefit-description">
+                        80% reduction in content generation time, freeing up your resources for
+                    strategic initiatives.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide-4 -->
+
+        <div class="showcase-slide">
+            <div class="strategy-content">
+                <div class="strategy-header">
+                    <div class="strategy-number">04 / Strategy</div>
+                    <h1 class="strategy-title">Generative AI for Creative Automation and Innovation</h1>
+                    <p class="strategy-description">
+                        Our Generative AI (GenAI) services utilize advanced models such as StyleGAN and GPT-4 to automate
+                  creative tasks like content creation, product design, and marketing automation. This results in 90%
+                  faster production cycles and increased innovation, enabling businesses to remain agile in a rapidly
+                  evolving market.
+                    </p>
+                </div>
+                <div class="carousel-controls1">
+                    <button class="carousel-control prev">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.78 6.21934C10.6394 6.07889 10.4488 6 10.25 6C10.0512 6 9.86063 6.07889 9.72 6.21934L4.72 11.2193C4.57955 11.36 4.50066 11.5506 4.50066 11.7493C4.50066 11.9481 4.57955 12.1387 4.72 12.2793L9.72 17.2793C9.78866 17.353 9.87146 17.4121 9.96346 17.4531C10.0555 17.4941 10.1548 17.5162 10.2555 17.5179C10.3562 17.5197 10.4562 17.5012 10.5496 17.4635C10.643 17.4257 10.7278 17.3696 10.799 17.2984C10.8703 17.2272 10.9264 17.1423 10.9641 17.0489C11.0018 16.9555 11.0204 16.8555 11.0186 16.7548C11.0168 16.6541 10.9948 16.5548 10.9538 16.4628C10.9128 16.3708 10.8537 16.288 10.78 16.2193L7.06 12.4993H17.25C17.4489 12.4993 17.6397 12.4203 17.7803 12.2797C17.921 12.139 18 11.9483 18 11.7493C18 11.5504 17.921 11.3597 17.7803 11.219C17.6397 11.0784 17.4489 10.9993 17.25 10.9993H7.06L10.78 7.27934C10.9205 7.13871 10.9993 6.94809 10.9993 6.74934C10.9993 6.55059 10.9205 6.35997 10.78 6.21934Z" fill="white"/>
+                            </svg>
+                            
+                    </button>
+                    <button class="carousel-control next">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.22 6.21934C12.3606 6.07889 12.5512 6 12.75 6C12.9488 6 13.1394 6.07889 13.28 6.21934L18.28 11.2193C18.4205 11.36 18.4993 11.5506 18.4993 11.7493C18.4993 11.9481 18.4205 12.1387 18.28 12.2793L13.28 17.2793C13.2113 17.353 13.1285 17.4121 13.0365 17.4531C12.9445 17.4941 12.8452 17.5162 12.7445 17.5179C12.6438 17.5197 12.5438 17.5012 12.4504 17.4635C12.357 17.4257 12.2722 17.3696 12.201 17.2984C12.1297 17.2272 12.0736 17.1423 12.0359 17.0489C11.9982 16.9555 11.9796 16.8555 11.9814 16.7548C11.9832 16.6541 12.0052 16.5548 12.0462 16.4628C12.0872 16.3708 12.1463 16.288 12.22 16.2193L15.94 12.4993H5.75C5.55109 12.4993 5.36032 12.4203 5.21967 12.2797C5.07902 12.139 5 11.9483 5 11.7493C5 11.5504 5.07902 11.3597 5.21967 11.219C5.36032 11.0784 5.55109 10.9993 5.75 10.9993H15.94L12.22 7.27934C12.0795 7.13871 12.0007 6.94809 12.0007 6.74934C12.0007 6.55059 12.0795 6.35997 12.22 6.21934Z" fill="white"/>
+                            </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="benefits-container">
+                <div class="benefit-card">
+                    <h3 class="benefit-title">Faster Content Production</h3>
+                    <p class="benefit-description">
+                        90% faster content production for marketing, design, and product
+                        development.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <h3 class="benefit-title">Customer Engagement</h3>
+                    <p class="benefit-description">
+                        30% increase in customer engagement through hyper-personalized content.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <h3 class="benefit-title">Reduction in Market Costs</h3>
+                    <p class="benefit-description">
+                        40% reduction in marketing costs by automating creative processes.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide-5 -->
+        <div class="showcase-slide">
+            <div class="strategy-content">
+                <div class="strategy-header">
+                    <div class="strategy-number">05 / Strategy</div>
+                    <h1 class="strategy-title">AI-Powered Process Automation for Enhanced Efficiency</h1>
+                    <p class="strategy-description">
+                        Our AI-driven process automation solutions optimize routine tasks, improving operational efficiency
+                        by up to 60%. Using Robotic Process Automation (RPA) and AI tools, we eliminate bottlenecks, reduce
+                        errors, and ensure consistent, high-quality outcomes, all while lowering operational costs.
+                    </p>
+                </div>
+                <div class="carousel-controls1">
+                    <button class="carousel-control prev">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.78 6.21934C10.6394 6.07889 10.4488 6 10.25 6C10.0512 6 9.86063 6.07889 9.72 6.21934L4.72 11.2193C4.57955 11.36 4.50066 11.5506 4.50066 11.7493C4.50066 11.9481 4.57955 12.1387 4.72 12.2793L9.72 17.2793C9.78866 17.353 9.87146 17.4121 9.96346 17.4531C10.0555 17.4941 10.1548 17.5162 10.2555 17.5179C10.3562 17.5197 10.4562 17.5012 10.5496 17.4635C10.643 17.4257 10.7278 17.3696 10.799 17.2984C10.8703 17.2272 10.9264 17.1423 10.9641 17.0489C11.0018 16.9555 11.0204 16.8555 11.0186 16.7548C11.0168 16.6541 10.9948 16.5548 10.9538 16.4628C10.9128 16.3708 10.8537 16.288 10.78 16.2193L7.06 12.4993H17.25C17.4489 12.4993 17.6397 12.4203 17.7803 12.2797C17.921 12.139 18 11.9483 18 11.7493C18 11.5504 17.921 11.3597 17.7803 11.219C17.6397 11.0784 17.4489 10.9993 17.25 10.9993H7.06L10.78 7.27934C10.9205 7.13871 10.9993 6.94809 10.9993 6.74934C10.9993 6.55059 10.9205 6.35997 10.78 6.21934Z" fill="white"/>
+                            </svg>
+                            
+                    </button>
+                    <button class="carousel-control next">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.22 6.21934C12.3606 6.07889 12.5512 6 12.75 6C12.9488 6 13.1394 6.07889 13.28 6.21934L18.28 11.2193C18.4205 11.36 18.4993 11.5506 18.4993 11.7493C18.4993 11.9481 18.4205 12.1387 18.28 12.2793L13.28 17.2793C13.2113 17.353 13.1285 17.4121 13.0365 17.4531C12.9445 17.4941 12.8452 17.5162 12.7445 17.5179C12.6438 17.5197 12.5438 17.5012 12.4504 17.4635C12.357 17.4257 12.2722 17.3696 12.201 17.2984C12.1297 17.2272 12.0736 17.1423 12.0359 17.0489C11.9982 16.9555 11.9796 16.8555 11.9814 16.7548C11.9832 16.6541 12.0052 16.5548 12.0462 16.4628C12.0872 16.3708 12.1463 16.288 12.22 16.2193L15.94 12.4993H5.75C5.55109 12.4993 5.36032 12.4203 5.21967 12.2797C5.07902 12.139 5 11.9483 5 11.7493C5 11.5504 5.07902 11.3597 5.21967 11.219C5.36032 11.0784 5.55109 10.9993 5.75 10.9993H15.94L12.22 7.27934C12.0795 7.13871 12.0007 6.94809 12.0007 6.74934C12.0007 6.55059 12.0795 6.35997 12.22 6.21934Z" fill="white"/>
+                            </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="benefits-container">
+                <div class="benefit-card">
+                    <h3 class="benefit-title">Reduction in Manual Workload </h3>
+                    <p class="benefit-description">
+                        60% reduction in manual workload, freeing employees for strategic
+                    initiatives.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <h3 class="benefit-title">Reduction in Operational Costs</h3>
+                    <p class="benefit-description">
+                        35% reduction in operational costs through optimized, AI-driven processes.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <h3 class="benefit-title">Faster Task Processing</h3>
+                    <p class="benefit-description">
+                        50% faster task processing, from supply chain management to customer
+                    onboarding.
+                    </p>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <footer class="immersive-footer">
-        <!-- Animated Background -->
-        <div class="footer-background">
-            <div class="grid-overlay"></div>
-        </div>
-
-        <!-- Main Footer Content -->
-        <div class="footer-content">
-            <!-- Hero Section with 3D Effect -->
-            <div class="footer-hero">
-                <div class="hero-content">
-                    <h2 class="glowing-text">Let's Create Something Amazing Together</h2>
-                </div>
-            </div>
-
-            <!-- Main Footer Grid -->
-            <div class="footer-grid">
-                <!-- Company Section -->
-                <div class="footer-section company-section">
-                    <div class="logo-container">
-                        <img src="./Assets/Logo/Group 103.svg" alt="Company Logo" class="footer-logo">
-                        <div class="logo-glow"></div>
-                    </div>
-                    <p class="company-tagline">Transforming Ideas into Digital Reality</p>
-                    <div class="social-links">
-                        <a href="#" class="social-icon hover-float" aria-label="LinkedIn">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
-                                </path>
-                                <rect x="2" y="9" width="4" height="12"></rect>
-                                <circle cx="4" cy="4" r="2"></circle>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon hover-float" aria-label="Twitter">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
-                                </path>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon hover-float" aria-label="Instagram">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Services Section -->
-                <div class="footer-section services-section">
-                    <h3 class="section-title">Our Services</h3>
-                    <ul class="animated-list">
-                        <li><a href="/consulting">Market Research</a></li>
-                        <li><a href="/digital">Data Analytics & AI</a></li>
-                        <li><a href="/strategy">Capability Business Consulting</a></li>
-                    </ul>
-                </div>
-
-                <!-- Quick Links Section -->
-                <div class="footer-section quick-links-section">
-                    <h3 class="section-title">Quick Links</h3>
-                    <ul class="animated-list">
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/case-studies">Case Studies</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact Section -->
-                <div class="footer-section contact-section">
-                    <h3 class="section-title">Get in Touch</h3>
-                    <div class="contact-cards">
-                        <div class="contact-card">
-                            <div class="card-content">
-                                <svg class="contact-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2">
-                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                    <circle cx="12" cy="10" r="3"></circle>
-                                </svg>
-                                <span>No 278, Sai Pranams Building, Kogilu Main Rd, K B Sandra, Maruthi Nagar,
-                                    Yelahanka, Bengaluru, Karnataka 560064</span>
-                            </div>
-                        </div>
-                        <div class="contact-card">
-                            <div class="card-content">
-                                <svg class="contact-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2">
-                                    <path
-                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-                                    </path>
-                                </svg>
-                                <span><a href="tel:+919731554000">+91 9731554000 </a></span>
-                            </div>
-                        </div>
-                        <div class="contact-card">
-                            <div class="card-content">
-                                <svg class="contact-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2">
-                                    <path
-                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                                    </path>
-                                    <polyline points="22,6 12,13 2,6"></polyline>
-                                </svg>
-                                <span><a
-                                        href="mailto:contact@synaara.com?subject=Enquiry from Website">contact@synaara.com</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer Bottom -->
-            <div class="footer-bottom">
-                <div class="legal-links">
-                    <a href="/privacy">Privacy Policy</a>
-                    <span class="separator">•</span>
-                    <a href="/terms">Terms of Service</a>
-                    <span class="separator">•</span>
-                    <a href="/cookies">Cookie Policy</a>
-                </div>
-                <p class="copyright">© 2024 Your Company. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-
-    <script>
-        const sections = document.querySelectorAll('.section');
-        let currentSection = 0;
-        const autoPlayInterval = 5000;
-        const container = document.querySelector('.content-section');
-
-        function setContainerHeight() {
-            const heights = Array.from(sections).map(section => {
-                const content = section.querySelector('.section-content');
-                return content ? content.scrollHeight : 0;
-            });
-            const maxHeight = Math.max(...heights) + 100; // Add some padding
-            container.style.minHeight = `${maxHeight}px`;
-        }
-
-        function activateSection(index) {
-            sections.forEach(section => section.classList.remove('active'));
-            sections[index].classList.add('active');
-            currentSection = index;
-        }
-
-        // Initialize
-        window.addEventListener('load', () => {
-            setContainerHeight();
-            activateSection(0);
-        });
-        window.addEventListener('resize', setContainerHeight);
-
-        sections.forEach((section, index) => {
-            section.querySelector(".section-header").addEventListener("click", () => {
-                activateSection(index);
-            });
-        });
-
-        setInterval(() => {
-            currentSection = (currentSection + 1) % sections.length;
-            activateSection(currentSection);
-        }, autoPlayInterval);
-
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "ArrowDown" || e.key === "ArrowRight") {
-                currentSection = (currentSection + 1) % sections.length;
-                activateSection(currentSection);
-            } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
-                currentSection = (currentSection - 1 + sections.length) % sections.length;
-                activateSection(currentSection);
-            }
-        });
-
-
-    </script>
-</body>
-
-</html>
+    <!-- Navigation moved to side -->
+    <div class="navigation">
+        <div class="nav-indicator active" data-label="Market">01</div>
+        <div class="nav-indicator" data-label="GTM">02</div>
+        <div class="nav-indicator" data-label="Analysis">03</div>
+        <div class="nav-indicator" data-label="Markets">04</div>
+        <div class="nav-indicator" data-label="Markets">05</div>
+    </div>
+</div>

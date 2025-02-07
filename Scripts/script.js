@@ -55,47 +55,7 @@ window.addEventListener("scroll", function () {
   lastScrollTop = scrollTop;
 });
 
-// carousel
 
-document.addEventListener("DOMContentLoaded", function () {
-  const slides = document.querySelectorAll(".carousel-slide");
-  const indicators = document.querySelectorAll(".indicator");
-  const prevButton = document.querySelector(".prev-slide");
-  const nextButton = document.querySelector(".next-slide");
-  let currentSlide = 0;
-
-  function updateSlides() {
-    slides.forEach((slide) => slide.classList.remove("active"));
-    indicators.forEach((indicator) => indicator.classList.remove("active"));
-
-    slides[currentSlide].classList.add("active");
-    indicators[currentSlide].classList.add("active");
-  }
-
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    updateSlides();
-  }
-
-  function prevSlide() {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    updateSlides();
-  }
-
-  // Event Listeners
-  nextButton.addEventListener("click", nextSlide);
-  prevButton.addEventListener("click", prevSlide);
-
-  indicators.forEach((indicator, index) => {
-    indicator.addEventListener("click", () => {
-      currentSlide = index;
-      updateSlides();
-    });
-  });
-
-  // Optional: Auto-play
-  // setInterval(nextSlide, 5000);
-});
 
 
 // carousel example
@@ -209,6 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   });
 });
+
+
 
 //customer insights carousel 
 const sections = document.querySelectorAll(".section");

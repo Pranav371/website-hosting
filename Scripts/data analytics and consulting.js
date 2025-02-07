@@ -107,54 +107,117 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+// carousel example
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  const slides = document.querySelectorAll('.showcase-slide');
+  const indicators = document.querySelectorAll('.nav-indicator');
+  const prevBtns = document.querySelectorAll('.carousel-control.prev');
+  const nextBtns = document.querySelectorAll('.carousel-control.next');
+  let currentSlide = 0;
+  let isTransitioning = false;
+  let touchStartX = 0;
+  let touchEndX = 0;
 
+  function updateSlides(index) {
+      if (isTransitioning) return;
+      isTransitioning = true;
 
+      slides.forEach(slide => {
+          slide.style.transform = index > currentSlide ? 
+              'translateX(50px)' : 'translateX(-50px)';
+          slide.style.opacity = '0';
+          slide.classList.remove('active');
+      });
+      indicators.forEach(indicator => indicator.classList.remove('active'));
 
-//carousel
+      // Update carousel controls
+      prevBtns.forEach(btn => btn.disabled = index === 0);
+      nextBtns.forEach(btn => btn.disabled = index === slides.length - 1);
 
+      setTimeout(() => {
+          slides[index].style.transform = 'translateX(0)';
+          slides[index].style.opacity = '1';
+          slides[index].classList.add('active');
+          indicators[index].classList.add('active');
+          currentSlide = index;
+          
+          setTimeout(() => {
+              isTransitioning = false;
+          }, 600);
+      }, 300);
+  }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const slides = document.querySelectorAll('.carousel-slide');
-    const indicators = document.querySelectorAll('.indicator');
-    const prevButton = document.querySelector('.prev-slide');
-    const nextButton = document.querySelector('.next-slide');
-    let currentSlide = 0;
+  function goToNextSlide() {
+      if (currentSlide < slides.length - 1) {
+          updateSlides(currentSlide + 1);
+      }
+  }
 
-    function updateSlides() {
-        slides.forEach(slide => slide.classList.remove('active'));
-        indicators.forEach(indicator => indicator.classList.remove('active'));
-        
-        slides[currentSlide].classList.add('active');
-        indicators[currentSlide].classList.add('active');
-    }
+  function goToPrevSlide() {
+      if (currentSlide > 0) {
+          updateSlides(currentSlide - 1);
+      }
+  }
 
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        updateSlides();
-    }
+  // Indicator navigation
+  indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+          if (currentSlide !== index) {
+              updateSlides(index);
+          }
+      });
+  });
 
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        updateSlides();
-    }
+  // Carousel controls
+  prevBtns.forEach(btn => {
+      btn.addEventListener('click', goToPrevSlide);
+  });
 
-    // Event Listeners
-    nextButton.addEventListener('click', nextSlide);
-    prevButton.addEventListener('click', prevSlide);
+  nextBtns.forEach(btn => {
+      btn.addEventListener('click', goToNextSlide);
+  });
 
-    indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => {
-            currentSlide = index;
-            updateSlides();
-        });
-    });
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+          goToPrevSlide();
+      } else if (e.key === 'ArrowRight') {
+          goToNextSlide();
+      }
+  });
 
-    // Optional: Auto-play
-    // setInterval(nextSlide, 5000);
+  // Touch navigation
+  document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+  }, false);
+
+  document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+  }, false);
+
+  function handleSwipe() {
+      const swipeThreshold = 50;
+      const swipeDistance = touchEndX - touchStartX;
+      
+      if (Math.abs(swipeDistance) > swipeThreshold) {
+          if (swipeDistance > 0) {
+              goToPrevSlide();
+          } else {
+              goToNextSlide();
+          }
+      }
+  }
+
+  // Handle visibility change (tab switching)
+  document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+          isTransitioning = false;
+      }
+  });
 });
-
 
 
 // case studies animation 
