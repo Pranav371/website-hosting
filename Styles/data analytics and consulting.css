@@ -1722,53 +1722,57 @@ background-color: #000000;
 
 /* customer */
 
-.customer{
+.customer {
   background-color: #363cfd;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* width: 100%; */
-  padding:6% 12%;
+  padding: 6% 12%;
   padding-bottom: 8%;
+  min-height: 500px;
 }
-.customer-txt{
+
+.customer-txt {
   font-family: 'Host Grotesk';
   color: white;
   width: 40%;
-  /* padding: 5%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.customer-txt h1{
+.customer-txt h1 {
   font-size: 40px;
   line-height: 57px;
-  /* letter-spacing: -0.48px; */
   font-weight: 700;
 }
 
-.customer-txt hr{
+.customer-txt hr {
   background: rgba(255, 255, 255, 0.13);
   height: 2px;
   border: none;
   width: 40%;
 }
 
-.customer-txt p{
+.customer-txt p {
   font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
 }
 
-.customer-img{
+.customer-img {
   display: flex;
   justify-content: center;
   align-items: center;
-  width:50%;
+  width: 50%;
 }
-.customer-img img{
+
+.customer-img img {
   width: 70%;
 }
 
+/* Button Styles */
 .button-container {
   display: flex;
   align-items: center;
@@ -1776,7 +1780,7 @@ line-height: 40px;
   width: fit-content;
   padding: 1%;
   border-radius: 30px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s, box-shadow 0.2s;
   margin-top: 30px;
 }
@@ -1785,10 +1789,10 @@ line-height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 15px; /* Space between text and arrow */
+  gap: 15px;
   padding: 15px 30px;
   border: none;
-  border-radius: 50px; /* Rounded edges */
+  border-radius: 50px;
   background-color: #FFFFFF;
   color: #000000;
   font-size: 18px;
@@ -1797,7 +1801,7 @@ line-height: 40px;
 }
 
 .button-container:hover {
-  transform: translateY(-5px); /* Subtle lift on hover */
+  transform: translateY(-5px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -1807,40 +1811,108 @@ line-height: 40px;
 }
 
 .responsive-button:hover .button-arrow {
-  transform: translateX(5px); /* Arrow moves slightly on hover */
+  transform: translateX(5px);
 }
-@media screen  and (width:1024px) and (min-height:640px){
-  .customer-img img{
-    width: 100%;
+
+/* Landscape mode styles */
+@media screen and (orientation: landscape) {
+  .customer {
+    min-height: 450px;
+    padding: 4% 8%;
   }
-  .customer-txt p{
+
+  .customer-txt {
+    width: 45%;
+  }
+
+  .customer-txt h1 {
+    font-size: calc(20px + 0.8vw);
+    line-height: 1.3;
+    margin-bottom: 15px;
+  }
+
+  .customer-txt p {
+    font-size: calc(12px + 0.4vw);
+    line-height: 1.5;
+  }
+
+  .customer-img {
+    width: 45%;
+  }
+
+  .customer-img img {
+    width: 85%;
+    max-height: 400px;
+    object-fit: contain;
+  }
+
+  /* Button adjustments for landscape */
+  .button-container {
+    margin-top: 20px;
+  }
+
+  .responsive-button {
+    padding: 12px 25px;
     font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 32px;
+  }
+}
+
+/* Tablet landscape specific styles */
+@media screen and (width: 1024px) and (min-height: 640px) {
+  .customer {
+    min-height: 400px;
   }
 
-  .customer-txt h1{
-  font-size: 32px;
-  line-height: 48px;
-  font-weight: 700;
+  .customer-txt h1 {
+    font-size: 28px;
+    line-height: 1.3;
+  }
+
+  .customer-txt p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .customer-img img {
+    width: 85%;
+  }
+
+  .responsive-button {
+    font-size: 16px;
+    padding: 12px 25px;
+  }
 }
 
-}
+/* Mobile styles */
 @media (max-width: 768px) {
-
-  .customer{
+  .customer {
+    min-height: auto;
     padding: 8%;
   }
 
-  .customer-txt{
-    width: max-content;
+  .customer-txt {
+    width: 100%;
     line-height: 1.8;
-
   }
-  .customer-img{
+
+  .customer-txt h1 {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+
+  .customer-txt p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .customer-img {
     display: none;
   }
+
+  .button-container {
+    margin-top: 20px;
+  }
+
   .responsive-button {
     font-size: 16px;
     padding: 12px 20px;
@@ -1851,7 +1923,6 @@ line-height: 40px;
     font-size: 18px;
   }
 }
-
 
 
 /* footer */
