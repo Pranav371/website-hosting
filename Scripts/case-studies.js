@@ -39,21 +39,46 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-var lastScrollTop = 0;
+let lastScrollTop = 0;
+    let isScrolling = false;
+    const navbar = document.getElementById('navbar');
+    const hamburger = document.getElementById('hamburger');
+    const navOptions = document.getElementById('nav-options');
 
-navbar = document.getElementById('navbar');
-window.addEventListener('scroll',function(){
-  var scrollTop = window.pageYOffset || document.documentElement.scrollTop
+    function throttle(func, limit) {
+        let inThrottle;
+        return function (...args) {
+            if (!inThrottle) {
+                func.apply(this, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        }
+    }
 
-  if (scrollTop > lastScrollTop){
-    navbar.style.top = "-100px";
-  }
+    window.addEventListener('scroll', throttle(function () {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollDelta = scrollTop - lastScrollTop;
 
-  else{
-    navbar.style.top = "0";
-  }
-  lastScrollTop = scrollTop;
-});
+        if (Math.abs(scrollDelta) < 10) return;
+
+        if (isScrolling) {
+            clearTimeout(isScrolling);
+        }
+
+        if (scrollDelta > 0 && scrollTop > 80) {
+            navbar.classList.add('hidden');
+        } else {
+            navbar.classList.remove('hidden');
+        }
+
+        lastScrollTop = scrollTop;
+
+        isScrolling = setTimeout(() => {
+            isScrolling = false;
+        }, 100);
+    }, 100));
+
 
 
 

@@ -1,318 +1,329 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Studies Carousel</title>
-    <style>
-        /* Reset and base styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Card Container Wrapper */
-        .card-container-wrapper {
-            overflow: hidden;
-            width: 100%;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Card Container */
-        .card-container {
-            display: flex;
-            gap: 0.9375rem;
-            padding: 1.25rem;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            width: 100%;
-            max-width: 78.75rem;
-        }
-
-        .card-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* Individual Card */
-        .card {
-            flex: 0 0 min(25rem, 90vw);
-            height: min(21.875rem, 70vw);
-            background-color: #8e5c5c;
-            border-radius: 0.625rem;
-            box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
-            display: flex;
-            scroll-snap-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Card Overlay */
-        .card-overlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background: linear-gradient(
-                to bottom,
-                rgba(0, 0, 0, 0.2) 0%,
-                rgba(0, 0, 0, 0) 40%,
-                rgba(0, 0, 0, 0.6) 80%,
-                rgba(0, 0, 0, 0.8) 100%
-            );
-            border-radius: 0.625rem;
-        }
-
-        /* Tag Styling */
-        .tag {
-            position: absolute;
-            top: 5%;
-            left: 5%;
-            padding: 0.5rem 1rem;
-            background-color: rgba(125, 120, 120, 0.5);
-            backdrop-filter: blur(0.125rem);
-            color: white;
-            border: 0.03125rem solid white;
-            border-radius: 3.125rem;
-            font-family: "Host Grotesk", sans-serif;
-            font-size: clamp(0.5rem, 0.8vw, 0.75rem);
-        }
-
-        /* Text Styling */
-        .text1 {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            padding: 1.25rem;
-        }
-
-        .text1 a {
-            text-decoration: none;
-        }
-
-        .text1 p:nth-child(1) {
-            color: #bebebe;
-            font-family: "Cygre", sans-serif;
-            font-weight: 500;
-        }
-
-        .text1 p:nth-child(2) {
-            color: white;
-            font-family: "Host Grotesk", sans-serif;
-            font-size: clamp(1rem, 1.2vw, 1.5rem);
-        }
-
-        /* Button Styling */
-        .button-container1 {
-            display: inline-flex;
-            background-color: #7d80fc;
-            margin: 0.625rem;
-            margin-top: 1.25rem;
-            padding: 0.3125rem;
-            border-radius: 999px;
-            box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.2);
-        }
-
-        .responsive-button1 {
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.9375rem;
-            padding: 0.9375rem 1.875rem;
-            border-radius: 999px;
-            background-color: #363cfd;
-            color: white;
-            font-size: clamp(1rem, 1.25vw, 1.125rem);
-            font-family: "Cygre Medium", sans-serif;
-        }
-
-        .button-arrow {
-            font-size: 1.25rem;
-            transition: transform 0.2s;
-        }
-
-        /* Media Queries */
-        @media (min-width: 90em) {
-            .card-container {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 90em) {
-            .card-container {
-                justify-content: flex-start;
-                padding-left: 1.25rem;
-            }
-        }
-
-        @media (max-width: 48em) {
-            .card-container {
-                padding-left: 1rem;
-            }
-
-            .tag {
-                font-size: 0.75rem;
-                padding: 0.25rem 0.5rem;
-            }
-        }
-
-        @media (max-width: 30em) {
-            .responsive-button1 {
-                padding: 0.625rem 1.25rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="card-container-wrapper">
-        <div class="card-container" id="cardContainer">
-            <div class="card">
-                <img src="../Assets/Case-Study-Images/Finance-1.jpg" alt="Finance Case Study">
-                <div class="card-overlay">
-                    <div class="tag">Finance</div>
-                    <div class="text1">
-                        <a href="../Pages/Case-Study-Finance.html">
-                            <p>Leading Financial Services Firm</p>
-                            <p>Enhancing Operational Efficiency for a Financial Services Firm</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="../Assets/Case-Study-Images/Manufacturing-1.jpg" alt="Manufacturing Case Study">
-                <div class="card-overlay">
-                    <div class="tag">Manufacturing</div>
-                    <div class="text1">
-                        <a href="../Pages/Case-Study-Manufacturing.html">
-                            <p>Global Manufacturing Company</p>
-                            <p>Digital Transformation for a Manufacturing Giant</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="../Assets/Case-Study-Images/Healthcare-1.jpg" alt="Healthcare Case Study">
-                <div class="card-overlay">
-                    <div class="tag">Healthcare</div>
-                    <div class="text1">
-                        <a href="../Pages/Case-Study-Healthcare.html">
-                            <p>Regional Healthcare Provider</p>
-                            <p>Optimizing IT Infrastructure for a Healthcare Provider</p>
-                        </a>
-                    </div>
-                </div>
+<!-- HTML structure remains the same -->
+<div class="nav" id="navbar">
+    <div class="logo">
+        <a href="../Pages/home.html">
+            <img src="../Assets/Logo/Logo Mark full.png" alt="Logo">
+        </a>
+    </div>
+    <div class="nav-options" id="nav-options">
+        <div class="link has-dropdown">
+            <div class="dot">•</div>
+            <a href="#" class="services-link">
+                Services
+                <span class="arrow">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M6 9l6 6l6 -6" />
+                    </svg>
+                </span>
+            </a>
+            <div class="dropdown">
+                <a href="../Pages/market-research.html">Market Research</a>
+                <a href="../Pages/capability-consulting.html">Capability Consulting</a>
+                <a href="../Pages/data analytics and consulting.html">Advanced Analytics</a>
             </div>
         </div>
-        <div class="button-container1">
-            <button class="responsive-button1" onclick="window.location.href='../Pages/case-study.html';">
-                <span class="button-text">View all case studies</span>
-                <span class="button-arrow">→</span>
-            </button>
+        <div class="link">
+            <div class="dot">•</div>
+            <a href="../Pages/case-study.html">Case Studies</a>
+        </div>
+        <div class="link">
+            <div class="dot">•</div>
+            <a href="#footer">Contact Us</a>
         </div>
     </div>
+    <div class="hamburger" id="hamburger">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+            <line x1="21" y1="20" x2="3" y2="20" stroke="white" stroke-width="2" />
+            <line x1="21" y1="6" x2="13" y2="6" stroke="white" stroke-width="2" />
+            <line x1="21" y1="13" x2="9" y2="13" stroke="white" stroke-width="2" />
+        </svg>
+    </div>
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const cardContainer = document.getElementById('cardContainer');
-            let isMouseDown = false;
-            let startX;
-            let scrollLeft;
-            let velocity = 0;
-            let lastTimestamp;
-            let animationFrameId;
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
 
-            function startDragging(e) {
-                isMouseDown = true;
-                startX = e.type === 'mousedown' ? e.pageX : e.touches[0].pageX;
-                scrollLeft = cardContainer.scrollLeft;
-                lastTimestamp = Date.now();
-                cardContainer.style.cursor = 'grabbing';
-                
-                // Cancel any ongoing animation
-                if (animationFrameId) {
-                    cancelAnimationFrame(animationFrameId);
-                }
+    .nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        z-index: 10;
+        display: flex;
+        height: 12vh;
+        /* Restored to original 12vh */
+        justify-content: space-between;
+        align-items: center;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .nav.hidden {
+        transform: translateY(-100%);
+    }
+
+    .logo {
+        width: 30%;
+        /* Increased from 24% */
+        padding-left: 10%;
+        display: flex;
+        align-items: center;
+    }
+
+    .logo img {
+        height: auto;
+        width: 60%;
+        /* Increased from 40% */
+        object-fit: contain;
+        min-width: 180px;
+        /* Added minimum width to ensure logo doesn't get too small */
+        max-width: 250px;
+        /* Added maximum width to ensure logo doesn't get too large */
+    }
+
+    .nav-options {
+        width: 32%;
+        /* Restored original width */
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding-right: 10%;
+        /* Restored original padding */
+    }
+
+    .nav-options a {
+        text-decoration: none;
+        color: white;
+        font-family: "Host Grotesk", sans-serif;
+        font-size: 16px;
+    }
+
+    .link {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    .dot {
+        color: #153d80;
+        padding-right: 10px;
+        font-size: 20px;
+        visibility: hidden;
+        transition: visibility 0.3s ease, opacity 0.3s ease;
+        opacity: 0;
+    }
+
+    .link:hover .dot {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .services-link {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .arrow {
+        display: flex;
+        align-items: center;
+        transition: transform 0.3s ease;
+    }
+
+    .dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 20%;
+        /* Restored original left positioning */
+        background: white;
+        min-width: 200px;
+        padding: 10px 0;
+        border-radius: 0 10px 10px 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown a {
+        display: block;
+        padding: 10px 20px;
+        color: #363cfd;
+        transition: background-color 0.3s ease;
+    }
+
+    .dropdown a:hover {
+        background-color: rgba(21, 61, 128, 0.3);
+        /* Restored original hover color */
+    }
+
+    .hamburger {
+        display: none;
+        cursor: pointer;
+        margin-right: 25px;
+        /* Restored original margin */
+    }
+
+    @media (min-width: 769px) {
+        .link:hover .dropdown {
+            display: block;
+        }
+
+        .link:hover .arrow {
+            transform: rotate(180deg);
+        }
+    }
+
+    @media (max-width: 1024px) {
+
+        /* Changed breakpoint to match original */
+        .nav-options {
+            display: none;
+            position: absolute;
+            top: 12vh;
+            left: 0;
+            background: rgba(0, 0, 0, 0.8);
+            width: 100%;
+            height: auto;
+            padding: 20px 0;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-options.show {
+            display: flex;
+        }
+
+        .link {
+            margin: 15px 0;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            text-align: center;
+        }
+
+        .link a {
+            font-size: 20px;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+        }
+
+        .logo {
+            width: auto;
+            padding-left: 5%;
+        }
+
+        .logo img {
+            width: auto;
+            height: 40px;
+            /* Increased from 30px */
+            min-width: unset;
+            /* Remove min-width constraint on mobile */
+        }
+
+        .dropdown {
+            position: static;
+            width: 100%;
+            background: transparent;
+            margin-top: 10px;
+        }
+
+        .dropdown a {
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .hamburger {
+            display: block;
+        }
+
+        .has-dropdown.active .dropdown {
+            display: block;
+        }
+
+        .has-dropdown.active .arrow {
+            transform: rotate(180deg);
+        }
+    }
+</style>
+
+<!-- JavaScript remains the same -->
+<script>
+    let lastScrollTop = 0;
+    let isScrolling = false;
+    const navbar = document.getElementById('navbar');
+    const hamburger = document.getElementById('hamburger');
+    const navOptions = document.getElementById('nav-options');
+
+    function throttle(func, limit) {
+        let inThrottle;
+        return function (...args) {
+            if (!inThrottle) {
+                func.apply(this, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
             }
+        }
+    }
 
-            function stopDragging() {
-                if (!isMouseDown) return;
-                isMouseDown = false;
-                cardContainer.style.cursor = 'grab';
-                
-                // Start inertia animation
-                const currentTimestamp = Date.now();
-                const timeDelta = currentTimestamp - lastTimestamp;
-                if (timeDelta > 0) {
-                    startInertiaScroll();
-                }
-            }
+    window.addEventListener('scroll', throttle(function () {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollDelta = scrollTop - lastScrollTop;
 
-            function drag(e) {
-                if (!isMouseDown) return;
+        if (Math.abs(scrollDelta) < 10) return;
+
+        if (isScrolling) {
+            clearTimeout(isScrolling);
+        }
+
+        if (scrollDelta > 0 && scrollTop > 80) {
+            navbar.classList.add('hidden');
+        } else {
+            navbar.classList.remove('hidden');
+        }
+
+        lastScrollTop = scrollTop;
+
+        isScrolling = setTimeout(() => {
+            isScrolling = false;
+        }, 100);
+    }, 100));
+
+    hamburger.addEventListener('click', () => {
+        navOptions.classList.toggle('show');
+    });
+
+    document.querySelectorAll('.has-dropdown').forEach(dropdown => {
+        dropdown.addEventListener('click', (e) => {
+            if (window.innerWidth <= 1024) {
                 e.preventDefault();
-                const x = e.type === 'mousemove' ? e.pageX : e.touches[0].pageX;
-                const dist = x - startX;
-                
-                // Calculate velocity
-                const currentTimestamp = Date.now();
-                const timeDelta = currentTimestamp - lastTimestamp;
-                if (timeDelta > 0) {
-                    velocity = dist / timeDelta;
-                }
-                lastTimestamp = currentTimestamp;
-                
-                cardContainer.scrollLeft = scrollLeft - dist;
+                dropdown.classList.toggle('active');
             }
-
-            function startInertiaScroll() {
-                const friction = 0.95;
-                const minVelocity = 0.1;
-                let currentVelocity = velocity * 15; // Scale up for more noticeable effect
-
-                function animate() {
-                    if (Math.abs(currentVelocity) < minVelocity) {
-                        cancelAnimationFrame(animationFrameId);
-                        return;
-                    }
-
-                    cardContainer.scrollLeft -= currentVelocity;
-                    currentVelocity *= friction;
-                    animationFrameId = requestAnimationFrame(animate);
-                }
-
-                animationFrameId = requestAnimationFrame(animate);
-            }
-
-            // Mouse events
-            cardContainer.addEventListener('mousedown', startDragging);
-            document.addEventListener('mousemove', drag);
-            document.addEventListener('mouseup', stopDragging);
-            document.addEventListener('mouseleave', stopDragging);
-
-            // Touch events
-            cardContainer.addEventListener('touchstart', startDragging);
-            cardContainer.addEventListener('touchmove', drag);
-            cardContainer.addEventListener('touchend', stopDragging);
         });
-    </script>
-</body>
-</html>
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!navbar.contains(e.target)) {
+            navOptions.classList.remove('show');
+            document.querySelectorAll('.has-dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 1024) {
+            navOptions.classList.remove('show');
+            document.querySelectorAll('.has-dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+</script>
