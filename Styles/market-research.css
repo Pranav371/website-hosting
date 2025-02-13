@@ -1654,7 +1654,7 @@ background-color: #000000;
 }
 
 /* Mobile styles */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .customer {
     min-height: auto;
     padding: 8%;
