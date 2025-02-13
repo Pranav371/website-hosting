@@ -655,6 +655,8 @@ font-size: 40px;
 text-align: left;
 padding-top: 2.2%;
 line-height: 2;
+padding-bottom: 2%;
+margin-bottom: 2%;
 }
 
 .essential-text {
@@ -970,7 +972,7 @@ line-height: 32px;
   font-family: "Host Grotesk";
   padding-top: 10px;
   font-size: 20px;
-  padding-bottom: 4%;
+  padding-bottom: 1%;
 }
 
 .customer-insights-description{
