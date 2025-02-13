@@ -1,243 +1,318 @@
-<div class="showcase-wrapper">
-    <div class="showcase-container">
-        <!-- Slide 1 -->
-        <div class="showcase-slide active">
-            <div class="strategy-content">
-                <div class="strategy-header">
-                    <div class="strategy-number">01 / Strategy</div>
-                    <h1 class="strategy-title">Digital Transformation Strategy for Seamless Innovation</h1>
-                    <p class="strategy-description">
-                        We help businesses embrace innovation by integrating cutting-edge technologies, streamlining processes, and enhancing customer experiences. Our tailored strategies ensure a seamless transition to a digital-first approach.
-                    </p>
-                </div>
-                <div class="carousel-controls1">
-                    <button class="carousel-control prev">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.78 6.21934C10.6394 6.07889 10.4488 6 10.25 6C10.0512 6 9.86063 6.07889 9.72 6.21934L4.72 11.2193C4.57955 11.36 4.50066 11.5506 4.50066 11.7493C4.50066 11.9481 4.57955 12.1387 4.72 12.2793L9.72 17.2793C9.78866 17.353 9.87146 17.4121 9.96346 17.4531C10.0555 17.4941 10.1548 17.5162 10.2555 17.5179C10.3562 17.5197 10.4562 17.5012 10.5496 17.4635C10.643 17.4257 10.7278 17.3696 10.799 17.2984C10.8703 17.2272 10.9264 17.1423 10.9641 17.0489C11.0018 16.9555 11.0204 16.8555 11.0186 16.7548C11.0168 16.6541 10.9948 16.5548 10.9538 16.4628C10.9128 16.3708 10.8537 16.288 10.78 16.2193L7.06 12.4993H17.25C17.4489 12.4993 17.6397 12.4203 17.7803 12.2797C17.921 12.139 18 11.9483 18 11.7493C18 11.5504 17.921 11.3597 17.7803 11.219C17.6397 11.0784 17.4489 10.9993 17.25 10.9993H7.06L10.78 7.27934C10.9205 7.13871 10.9993 6.94809 10.9993 6.74934C10.9993 6.55059 10.9205 6.35997 10.78 6.21934Z" fill="white"/>
-                            </svg>
-                            
-                    </button>
-                    <button class="carousel-control next">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.22 6.21934C12.3606 6.07889 12.5512 6 12.75 6C12.9488 6 13.1394 6.07889 13.28 6.21934L18.28 11.2193C18.4205 11.36 18.4993 11.5506 18.4993 11.7493C18.4993 11.9481 18.4205 12.1387 18.28 12.2793L13.28 17.2793C13.2113 17.353 13.1285 17.4121 13.0365 17.4531C12.9445 17.4941 12.8452 17.5162 12.7445 17.5179C12.6438 17.5197 12.5438 17.5012 12.4504 17.4635C12.357 17.4257 12.2722 17.3696 12.201 17.2984C12.1297 17.2272 12.0736 17.1423 12.0359 17.0489C11.9982 16.9555 11.9796 16.8555 11.9814 16.7548C11.9832 16.6541 12.0052 16.5548 12.0462 16.4628C12.0872 16.3708 12.1463 16.288 12.22 16.2193L15.94 12.4993H5.75C5.55109 12.4993 5.36032 12.4203 5.21967 12.2797C5.07902 12.139 5 11.9483 5 11.7493C5 11.5504 5.07902 11.3597 5.21967 11.219C5.36032 11.0784 5.55109 10.9993 5.75 10.9993H15.94L12.22 7.27934C12.0795 7.13871 12.0007 6.94809 12.0007 6.74934C12.0007 6.55059 12.0795 6.35997 12.22 6.21934Z" fill="white"/>
-                            </svg>
-                    </button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Studies Carousel</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Card Container Wrapper */
+        .card-container-wrapper {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Card Container */
+        .card-container {
+            display: flex;
+            gap: 0.9375rem;
+            padding: 1.25rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            width: 100%;
+            max-width: 78.75rem;
+        }
+
+        .card-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Individual Card */
+        .card {
+            flex: 0 0 min(25rem, 90vw);
+            height: min(21.875rem, 70vw);
+            background-color: #8e5c5c;
+            border-radius: 0.625rem;
+            box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+            display: flex;
+            scroll-snap-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Card Overlay */
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.2) 0%,
+                rgba(0, 0, 0, 0) 40%,
+                rgba(0, 0, 0, 0.6) 80%,
+                rgba(0, 0, 0, 0.8) 100%
+            );
+            border-radius: 0.625rem;
+        }
+
+        /* Tag Styling */
+        .tag {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            padding: 0.5rem 1rem;
+            background-color: rgba(125, 120, 120, 0.5);
+            backdrop-filter: blur(0.125rem);
+            color: white;
+            border: 0.03125rem solid white;
+            border-radius: 3.125rem;
+            font-family: "Host Grotesk", sans-serif;
+            font-size: clamp(0.5rem, 0.8vw, 0.75rem);
+        }
+
+        /* Text Styling */
+        .text1 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 1.25rem;
+        }
+
+        .text1 a {
+            text-decoration: none;
+        }
+
+        .text1 p:nth-child(1) {
+            color: #bebebe;
+            font-family: "Cygre", sans-serif;
+            font-weight: 500;
+        }
+
+        .text1 p:nth-child(2) {
+            color: white;
+            font-family: "Host Grotesk", sans-serif;
+            font-size: clamp(1rem, 1.2vw, 1.5rem);
+        }
+
+        /* Button Styling */
+        .button-container1 {
+            display: inline-flex;
+            background-color: #7d80fc;
+            margin: 0.625rem;
+            margin-top: 1.25rem;
+            padding: 0.3125rem;
+            border-radius: 999px;
+            box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.2);
+        }
+
+        .responsive-button1 {
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.9375rem;
+            padding: 0.9375rem 1.875rem;
+            border-radius: 999px;
+            background-color: #363cfd;
+            color: white;
+            font-size: clamp(1rem, 1.25vw, 1.125rem);
+            font-family: "Cygre Medium", sans-serif;
+        }
+
+        .button-arrow {
+            font-size: 1.25rem;
+            transition: transform 0.2s;
+        }
+
+        /* Media Queries */
+        @media (min-width: 90em) {
+            .card-container {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 90em) {
+            .card-container {
+                justify-content: flex-start;
+                padding-left: 1.25rem;
+            }
+        }
+
+        @media (max-width: 48em) {
+            .card-container {
+                padding-left: 1rem;
+            }
+
+            .tag {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 30em) {
+            .responsive-button1 {
+                padding: 0.625rem 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container-wrapper">
+        <div class="card-container" id="cardContainer">
+            <div class="card">
+                <img src="../Assets/Case-Study-Images/Finance-1.jpg" alt="Finance Case Study">
+                <div class="card-overlay">
+                    <div class="tag">Finance</div>
+                    <div class="text1">
+                        <a href="../Pages/Case-Study-Finance.html">
+                            <p>Leading Financial Services Firm</p>
+                            <p>Enhancing Operational Efficiency for a Financial Services Firm</p>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="benefits-container">
-                <div class="benefit-card">
-                    <h3 class="benefit-title">70% Faster Transformation Cycles</h3>
-                    <p class="benefit-description">
-                        70% faster transformation cycles to quickly implement new technologies.
-                    </p>
+            <div class="card">
+                <img src="../Assets/Case-Study-Images/Manufacturing-1.jpg" alt="Manufacturing Case Study">
+                <div class="card-overlay">
+                    <div class="tag">Manufacturing</div>
+                    <div class="text1">
+                        <a href="../Pages/Case-Study-Manufacturing.html">
+                            <p>Global Manufacturing Company</p>
+                            <p>Digital Transformation for a Manufacturing Giant</p>
+                        </a>
+                    </div>
                 </div>
-                <div class="benefit-card">
-                    <h3 class="benefit-title">25-35% Reduction in IT Operational Costs</h3>
-                    <p class="benefit-description">
-                        25-35% reduction in IT operational costs through streamlined processes and automated workflows.
-                    </p>
-                </div>
-                <div class="benefit-card">
-                    <h3 class="benefit-title">Improved Agility and Innovation </h3>
-                    <p class="benefit-description">
-                        Improved agility and innovation, allowing you to stay ahead of the competition.
-                    </p>
+            </div>
+            <div class="card">
+                <img src="../Assets/Case-Study-Images/Healthcare-1.jpg" alt="Healthcare Case Study">
+                <div class="card-overlay">
+                    <div class="tag">Healthcare</div>
+                    <div class="text1">
+                        <a href="../Pages/Case-Study-Healthcare.html">
+                            <p>Regional Healthcare Provider</p>
+                            <p>Optimizing IT Infrastructure for a Healthcare Provider</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- Slide 2 -->
-        <div class="showcase-slide">
-            <div class="strategy-content">
-                <div class="strategy-header">
-                    <div class="strategy-number">02 / Strategy</div>
-                    <h1 class="strategy-title">IT Strategy and Consulting for Scalable Business Growth</h1>
-                    <p class="strategy-description">
-                        Our expert IT consulting services help businesses optimize infrastructure, enhance security, and adopt emerging technologies. We ensure seamless integration, scalability, and efficiency to keep you ahead in a competitive landscape.
-                    </p>
-                </div>
-                <div class="carousel-controls1">
-                    <button class="carousel-control prev">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.78 6.21934C10.6394 6.07889 10.4488 6 10.25 6C10.0512 6 9.86063 6.07889 9.72 6.21934L4.72 11.2193C4.57955 11.36 4.50066 11.5506 4.50066 11.7493C4.50066 11.9481 4.57955 12.1387 4.72 12.2793L9.72 17.2793C9.78866 17.353 9.87146 17.4121 9.96346 17.4531C10.0555 17.4941 10.1548 17.5162 10.2555 17.5179C10.3562 17.5197 10.4562 17.5012 10.5496 17.4635C10.643 17.4257 10.7278 17.3696 10.799 17.2984C10.8703 17.2272 10.9264 17.1423 10.9641 17.0489C11.0018 16.9555 11.0204 16.8555 11.0186 16.7548C11.0168 16.6541 10.9948 16.5548 10.9538 16.4628C10.9128 16.3708 10.8537 16.288 10.78 16.2193L7.06 12.4993H17.25C17.4489 12.4993 17.6397 12.4203 17.7803 12.2797C17.921 12.139 18 11.9483 18 11.7493C18 11.5504 17.921 11.3597 17.7803 11.219C17.6397 11.0784 17.4489 10.9993 17.25 10.9993H7.06L10.78 7.27934C10.9205 7.13871 10.9993 6.94809 10.9993 6.74934C10.9993 6.55059 10.9205 6.35997 10.78 6.21934Z" fill="white"/>
-                            </svg>
-                            
-                    </button>
-                    <button class="carousel-control next">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.22 6.21934C12.3606 6.07889 12.5512 6 12.75 6C12.9488 6 13.1394 6.07889 13.28 6.21934L18.28 11.2193C18.4205 11.36 18.4993 11.5506 18.4993 11.7493C18.4993 11.9481 18.4205 12.1387 18.28 12.2793L13.28 17.2793C13.2113 17.353 13.1285 17.4121 13.0365 17.4531C12.9445 17.4941 12.8452 17.5162 12.7445 17.5179C12.6438 17.5197 12.5438 17.5012 12.4504 17.4635C12.357 17.4257 12.2722 17.3696 12.201 17.2984C12.1297 17.2272 12.0736 17.1423 12.0359 17.0489C11.9982 16.9555 11.9796 16.8555 11.9814 16.7548C11.9832 16.6541 12.0052 16.5548 12.0462 16.4628C12.0872 16.3708 12.1463 16.288 12.22 16.2193L15.94 12.4993H5.75C5.55109 12.4993 5.36032 12.4203 5.21967 12.2797C5.07902 12.139 5 11.9483 5 11.7493C5 11.5504 5.07902 11.3597 5.21967 11.219C5.36032 11.0784 5.55109 10.9993 5.75 10.9993H15.94L12.22 7.27934C12.0795 7.13871 12.0007 6.94809 12.0007 6.74934C12.0007 6.55059 12.0795 6.35997 12.22 6.21934Z" fill="white"/>
-                            </svg>
-                    </button>
-                </div>
-            </div>
-            <div class="benefits-container">
-                <div class="benefit-card">
-                    <h3 class="benefit-title">30-40% Reduction in IT Infrastructure Costs  </h3>
-                    <p class="benefit-description">
-                        30-40% reduction in IT infrastructure costs through optimized resource allocation
-                    </p>
-                </div>
-                <div class="benefit-card">
-                    <h3 class="benefit-title">Improved Scalability and Flexibility </h3>
-                    <p class="benefit-description">
-                        Improved scalability and flexibility, enabling your business to respond quickly to market demands.
-                    </p>
-                </div>
-                <div class="benefit-card">
-                    <h3 class="benefit-title">10-15% Increase in Productivity </h3>
-                    <p class="benefit-description">
-                        10-15% increase in productivity through the deployment of cloud-based and automated IT solutions.
-                    </p>
-                </div>
-            </div>
+        <div class="button-container1">
+            <button class="responsive-button1" onclick="window.location.href='../Pages/case-study.html';">
+                <span class="button-text">View all case studies</span>
+                <span class="button-arrow">→</span>
+            </button>
         </div>
-        <!-- Slide-3 -->
-        <div class="showcase-slide">
-            <div class="strategy-content">
-                <div class="strategy-header">
-                    <div class="strategy-number">03 / Strategy</div>
-                    <h1 class="strategy-title">Cloud Solutions for Agile and Secure Business Operations</h1>
-                    <p class="strategy-description">
-                        Synaara Consulting enables businesses to leverage cloud computing for greater flexibility, security, and efficiency. Our tailored solutions ensure smooth migration, seamless integration, and optimized performance.
-                    </p>
-                </div>
-                <div class="carousel-controls1">
-                    <button class="carousel-control prev">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.78 6.21934C10.6394 6.07889 10.4488 6 10.25 6C10.0512 6 9.86063 6.07889 9.72 6.21934L4.72 11.2193C4.57955 11.36 4.50066 11.5506 4.50066 11.7493C4.50066 11.9481 4.57955 12.1387 4.72 12.2793L9.72 17.2793C9.78866 17.353 9.87146 17.4121 9.96346 17.4531C10.0555 17.4941 10.1548 17.5162 10.2555 17.5179C10.3562 17.5197 10.4562 17.5012 10.5496 17.4635C10.643 17.4257 10.7278 17.3696 10.799 17.2984C10.8703 17.2272 10.9264 17.1423 10.9641 17.0489C11.0018 16.9555 11.0204 16.8555 11.0186 16.7548C11.0168 16.6541 10.9948 16.5548 10.9538 16.4628C10.9128 16.3708 10.8537 16.288 10.78 16.2193L7.06 12.4993H17.25C17.4489 12.4993 17.6397 12.4203 17.7803 12.2797C17.921 12.139 18 11.9483 18 11.7493C18 11.5504 17.921 11.3597 17.7803 11.219C17.6397 11.0784 17.4489 10.9993 17.25 10.9993H7.06L10.78 7.27934C10.9205 7.13871 10.9993 6.94809 10.9993 6.74934C10.9993 6.55059 10.9205 6.35997 10.78 6.21934Z" fill="white"/>
-                            </svg>
-                            
-                    </button>
-                    <button class="carousel-control next">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.22 6.21934C12.3606 6.07889 12.5512 6 12.75 6C12.9488 6 13.1394 6.07889 13.28 6.21934L18.28 11.2193C18.4205 11.36 18.4993 11.5506 18.4993 11.7493C18.4993 11.9481 18.4205 12.1387 18.28 12.2793L13.28 17.2793C13.2113 17.353 13.1285 17.4121 13.0365 17.4531C12.9445 17.4941 12.8452 17.5162 12.7445 17.5179C12.6438 17.5197 12.5438 17.5012 12.4504 17.4635C12.357 17.4257 12.2722 17.3696 12.201 17.2984C12.1297 17.2272 12.0736 17.1423 12.0359 17.0489C11.9982 16.9555 11.9796 16.8555 11.9814 16.7548C11.9832 16.6541 12.0052 16.5548 12.0462 16.4628C12.0872 16.3708 12.1463 16.288 12.22 16.2193L15.94 12.4993H5.75C5.55109 12.4993 5.36032 12.4203 5.21967 12.2797C5.07902 12.139 5 11.9483 5 11.7493C5 11.5504 5.07902 11.3597 5.21967 11.219C5.36032 11.0784 5.55109 10.9993 5.75 10.9993H15.94L12.22 7.27934C12.0795 7.13871 12.0007 6.94809 12.0007 6.74934C12.0007 6.55059 12.0795 6.35997 12.22 6.21934Z" fill="white"/>
-                            </svg>
-                    </button>
-                </div>
-            </div>
-            <div class="benefits-container">
-                <div class="benefit-card">
-                    <h3 class="benefit-title">30-50% Reduction in IT Infrastructure Costs </h3>
-                    <p class="benefit-description">
-                        30-50% reduction in IT infrastructure costs due to the elimination of on-premise hardware.
-                    </p>
-                </div>
-                <div class="benefit-card">
-                    <h3 class="benefit-title">100% Scalability</h3>
-                    <p class="benefit-description">
-                        100% scalability, allowing your business to easily expand or contract resources as needed.
-                    </p>
-                </div>
-                <div class="benefit-card">
-                    <h3 class="benefit-title">Improved Data Security</h3>
-                    <p class="benefit-description">
-                        Improved data security and disaster recovery, reducing risks of downtime or data loss by 40%.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide-4 -->
-
-        <div class="showcase-slide">
-            <div class="strategy-content">
-                <div class="strategy-header">
-                    <div class="strategy-number">04 / Strategy</div>
-                    <h1 class="strategy-title">Systems Integration for Streamlined Operations</h1>
-                    <p class="strategy-description">
-                        Synaara Consulting simplifies system integration, ensuring seamless connectivity between platforms for improved efficiency, data accuracy, and streamlined operations.
-                    </p>
-                </div>
-                <div class="carousel-controls1">
-                    <button class="carousel-control prev">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.78 6.21934C10.6394 6.07889 10.4488 6 10.25 6C10.0512 6 9.86063 6.07889 9.72 6.21934L4.72 11.2193C4.57955 11.36 4.50066 11.5506 4.50066 11.7493C4.50066 11.9481 4.57955 12.1387 4.72 12.2793L9.72 17.2793C9.78866 17.353 9.87146 17.4121 9.96346 17.4531C10.0555 17.4941 10.1548 17.5162 10.2555 17.5179C10.3562 17.5197 10.4562 17.5012 10.5496 17.4635C10.643 17.4257 10.7278 17.3696 10.799 17.2984C10.8703 17.2272 10.9264 17.1423 10.9641 17.0489C11.0018 16.9555 11.0204 16.8555 11.0186 16.7548C11.0168 16.6541 10.9948 16.5548 10.9538 16.4628C10.9128 16.3708 10.8537 16.288 10.78 16.2193L7.06 12.4993H17.25C17.4489 12.4993 17.6397 12.4203 17.7803 12.2797C17.921 12.139 18 11.9483 18 11.7493C18 11.5504 17.921 11.3597 17.7803 11.219C17.6397 11.0784 17.4489 10.9993 17.25 10.9993H7.06L10.78 7.27934C10.9205 7.13871 10.9993 6.94809 10.9993 6.74934C10.9993 6.55059 10.9205 6.35997 10.78 6.21934Z" fill="white"/>
-                            </svg>
-                            
-                    </button>
-                    <button class="carousel-control next">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.22 6.21934C12.3606 6.07889 12.5512 6 12.75 6C12.9488 6 13.1394 6.07889 13.28 6.21934L18.28 11.2193C18.4205 11.36 18.4993 11.5506 18.4993 11.7493C18.4993 11.9481 18.4205 12.1387 18.28 12.2793L13.28 17.2793C13.2113 17.353 13.1285 17.4121 13.0365 17.4531C12.9445 17.4941 12.8452 17.5162 12.7445 17.5179C12.6438 17.5197 12.5438 17.5012 12.4504 17.4635C12.357 17.4257 12.2722 17.3696 12.201 17.2984C12.1297 17.2272 12.0736 17.1423 12.0359 17.0489C11.9982 16.9555 11.9796 16.8555 11.9814 16.7548C11.9832 16.6541 12.0052 16.5548 12.0462 16.4628C12.0872 16.3708 12.1463 16.288 12.22 16.2193L15.94 12.4993H5.75C5.55109 12.4993 5.36032 12.4203 5.21967 12.2797C5.07902 12.139 5 11.9483 5 11.7493C5 11.5504 5.07902 11.3597 5.21967 11.219C5.36032 11.0784 5.55109 10.9993 5.75 10.9993H15.94L12.22 7.27934C12.0795 7.13871 12.0007 6.94809 12.0007 6.74934C12.0007 6.55059 12.0795 6.35997 12.22 6.21934Z" fill="white"/>
-                            </svg>
-                    </button>
-                </div>
-            </div>
-            <div class="benefits-container">
-                <div class="benefit-card">
-                    <h3 class="benefit-title">50% Faster Data Processing </h3>
-                    <p class="benefit-description">
-                        50% faster data processing and reporting through integrated systems.
-                    </p>
-                </div>
-                <div class="benefit-card">
-                    <h3 class="benefit-title">Reduction in Manual Data Entry Errors</h3>
-                    <p class="benefit-description">
-                        25-30% reduction in manual data entry errors due to automation.
-                    </p>
-                </div>
-                <div class="benefit-card">
-                    <h3 class="benefit-title">30% Improvement in Decision-Making Speed</h3>
-                    <p class="benefit-description">
-                        30% improvement in decision-making speed thanks to integrated, real-time insights from all business units.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide-5 -->
-        <div class="showcase-slide">
-            <div class="strategy-content">
-                <div class="strategy-header">
-                    <div class="strategy-number">05 / Strategy</div>
-                    <h1 class="strategy-title">Managed IT Services for Continuous Support and Optimization</h1>
-                    <p class="strategy-description">
-                        Synaara Consulting's managed IT services offer ongoing monitoring, support, and optimization to keep your systems secure and running smoothly, enabling your teams to focus on growth and innovation.
-                    </p>
-                </div>
-                <div class="carousel-controls1">
-                    <button class="carousel-control prev">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.78 6.21934C10.6394 6.07889 10.4488 6 10.25 6C10.0512 6 9.86063 6.07889 9.72 6.21934L4.72 11.2193C4.57955 11.36 4.50066 11.5506 4.50066 11.7493C4.50066 11.9481 4.57955 12.1387 4.72 12.2793L9.72 17.2793C9.78866 17.353 9.87146 17.4121 9.96346 17.4531C10.0555 17.4941 10.1548 17.5162 10.2555 17.5179C10.3562 17.5197 10.4562 17.5012 10.5496 17.4635C10.643 17.4257 10.7278 17.3696 10.799 17.2984C10.8703 17.2272 10.9264 17.1423 10.9641 17.0489C11.0018 16.9555 11.0204 16.8555 11.0186 16.7548C11.0168 16.6541 10.9948 16.5548 10.9538 16.4628C10.9128 16.3708 10.8537 16.288 10.78 16.2193L7.06 12.4993H17.25C17.4489 12.4993 17.6397 12.4203 17.7803 12.2797C17.921 12.139 18 11.9483 18 11.7493C18 11.5504 17.921 11.3597 17.7803 11.219C17.6397 11.0784 17.4489 10.9993 17.25 10.9993H7.06L10.78 7.27934C10.9205 7.13871 10.9993 6.94809 10.9993 6.74934C10.9993 6.55059 10.9205 6.35997 10.78 6.21934Z" fill="white"/>
-                            </svg>
-                            
-                    </button>
-                    <button class="carousel-control next">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.22 6.21934C12.3606 6.07889 12.5512 6 12.75 6C12.9488 6 13.1394 6.07889 13.28 6.21934L18.28 11.2193C18.4205 11.36 18.4993 11.5506 18.4993 11.7493C18.4993 11.9481 18.4205 12.1387 18.28 12.2793L13.28 17.2793C13.2113 17.353 13.1285 17.4121 13.0365 17.4531C12.9445 17.4941 12.8452 17.5162 12.7445 17.5179C12.6438 17.5197 12.5438 17.5012 12.4504 17.4635C12.357 17.4257 12.2722 17.3696 12.201 17.2984C12.1297 17.2272 12.0736 17.1423 12.0359 17.0489C11.9982 16.9555 11.9796 16.8555 11.9814 16.7548C11.9832 16.6541 12.0052 16.5548 12.0462 16.4628C12.0872 16.3708 12.1463 16.288 12.22 16.2193L15.94 12.4993H5.75C5.55109 12.4993 5.36032 12.4203 5.21967 12.2797C5.07902 12.139 5 11.9483 5 11.7493C5 11.5504 5.07902 11.3597 5.21967 11.219C5.36032 11.0784 5.55109 10.9993 5.75 10.9993H15.94L12.22 7.27934C12.0795 7.13871 12.0007 6.94809 12.0007 6.74934C12.0007 6.55059 12.0795 6.35997 12.22 6.21934Z" fill="white"/>
-                            </svg>
-                    </button>
-                </div>
-            </div>
-            <div class="benefits-container">
-                <div class="benefit-card">
-                    <h3 class="benefit-title">24/7 Monitoring </h3>
-                    <p class="benefit-description">
-                        24/7 monitoring and support for critical systems.
-                    </p>
-                </div>
-                <div class="benefit-card">
-                    <h3 class="benefit-title">40% Reduction in Downtime</h3>
-                    <p class="benefit-description">
-                        40% reduction in downtime due to proactive maintenance and real-time monitoring.
-                    </p>
-                </div>
-                <div class="benefit-card">
-                    <h3 class="benefit-title">15% Lower IT Operational Costs </h3>
-                    <p class="benefit-description">
-                        15% lower IT operational costs through outsourced support services.
-                    </p>
-                </div>
-            </div>
-        </div>
-
     </div>
 
-    <!-- Navigation moved to side -->
-    <div class="navigation">
-        <div class="nav-indicator active" data-label="Market">01</div>
-        <div class="nav-indicator" data-label="GTM">02</div>
-        <div class="nav-indicator" data-label="Analysis">03</div>
-        <div class="nav-indicator" data-label="Markets">04</div>
-        <div class="nav-indicator" data-label="Markets">05</div>
-    </div>
-</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cardContainer = document.getElementById('cardContainer');
+            let isMouseDown = false;
+            let startX;
+            let scrollLeft;
+            let velocity = 0;
+            let lastTimestamp;
+            let animationFrameId;
+
+            function startDragging(e) {
+                isMouseDown = true;
+                startX = e.type === 'mousedown' ? e.pageX : e.touches[0].pageX;
+                scrollLeft = cardContainer.scrollLeft;
+                lastTimestamp = Date.now();
+                cardContainer.style.cursor = 'grabbing';
+                
+                // Cancel any ongoing animation
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                }
+            }
+
+            function stopDragging() {
+                if (!isMouseDown) return;
+                isMouseDown = false;
+                cardContainer.style.cursor = 'grab';
+                
+                // Start inertia animation
+                const currentTimestamp = Date.now();
+                const timeDelta = currentTimestamp - lastTimestamp;
+                if (timeDelta > 0) {
+                    startInertiaScroll();
+                }
+            }
+
+            function drag(e) {
+                if (!isMouseDown) return;
+                e.preventDefault();
+                const x = e.type === 'mousemove' ? e.pageX : e.touches[0].pageX;
+                const dist = x - startX;
+                
+                // Calculate velocity
+                const currentTimestamp = Date.now();
+                const timeDelta = currentTimestamp - lastTimestamp;
+                if (timeDelta > 0) {
+                    velocity = dist / timeDelta;
+                }
+                lastTimestamp = currentTimestamp;
+                
+                cardContainer.scrollLeft = scrollLeft - dist;
+            }
+
+            function startInertiaScroll() {
+                const friction = 0.95;
+                const minVelocity = 0.1;
+                let currentVelocity = velocity * 15; // Scale up for more noticeable effect
+
+                function animate() {
+                    if (Math.abs(currentVelocity) < minVelocity) {
+                        cancelAnimationFrame(animationFrameId);
+                        return;
+                    }
+
+                    cardContainer.scrollLeft -= currentVelocity;
+                    currentVelocity *= friction;
+                    animationFrameId = requestAnimationFrame(animate);
+                }
+
+                animationFrameId = requestAnimationFrame(animate);
+            }
+
+            // Mouse events
+            cardContainer.addEventListener('mousedown', startDragging);
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', stopDragging);
+            document.addEventListener('mouseleave', stopDragging);
+
+            // Touch events
+            cardContainer.addEventListener('touchstart', startDragging);
+            cardContainer.addEventListener('touchmove', drag);
+            cardContainer.addEventListener('touchend', stopDragging);
+        });
+    </script>
+</body>
+</html>

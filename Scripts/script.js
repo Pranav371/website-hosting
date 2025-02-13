@@ -226,164 +226,86 @@ document.addEventListener("keydown", (e) => {
 
 
 
-// case studies animation
-
+// case studies animation 
 document.addEventListener('DOMContentLoaded', () => {
   const cardContainer = document.getElementById('cardContainer');
-  let touchStartX = 0;
-  let touchStartY = 0;
-  let touchScrollLeft = 0;
-  let isDragging = false;
-  let lastDragTime = 0;
-  let dragVelocity = 0;
+  let isMouseDown = false;
+  let startX;
+  let scrollLeft;
+  let velocity = 0;
+  let lastTimestamp;
+  let animationFrameId;
 
-  // Add smooth scroll behavior to container
-  cardContainer.style.scrollBehavior = 'smooth';
-  cardContainer.style.overscrollBehavior = 'contain';
-
-  // Check if device supports touch
-  const isTouchDevice = 'ontouchstart' in window ||
-    navigator.maxTouchPoints > 0 ||
-    navigator.msMaxTouchPoints > 0;
-
-  // Mouse drag handlers with improved physics
-  function handleMouseDown(e) {
-    isDragging = true;
-    touchStartX = e.clientX;
-    touchScrollLeft = cardContainer.scrollLeft;
-    cardContainer.style.cursor = 'grabbing';
-    lastDragTime = Date.now();
-    dragVelocity = 0;
-    
-    // Stop any ongoing smooth scroll
-    cardContainer.style.scrollBehavior = 'auto';
-    e.preventDefault();
-  }
-
-  function handleMouseUp() {
-    if (!isDragging) return;
-    isDragging = false;
-    cardContainer.style.cursor = 'grab';
-    
-    // Apply momentum scrolling
-    const currentTime = Date.now();
-    const timeElapsed = currentTime - lastDragTime;
-    if (timeElapsed < 50 && Math.abs(dragVelocity) > 0.5) {
-      const momentum = dragVelocity * 50;
-      cardContainer.style.scrollBehavior = 'smooth';
-      cardContainer.scrollLeft += momentum;
-    }
-  }
-
-  function handleDragMove(e) {
-    if (!isDragging) return;
-    e.preventDefault();
-    
-    const currentX = e.clientX;
-    const dx = touchStartX - currentX;
-    const currentTime = Date.now();
-    const timeElapsed = currentTime - lastDragTime;
-    
-    if (timeElapsed > 0) {
-      dragVelocity = dx / timeElapsed;
-    }
-    
-    cardContainer.scrollLeft = touchScrollLeft + dx;
-    lastDragTime = currentTime;
-    touchStartX = currentX;
-    touchScrollLeft = cardContainer.scrollLeft;
-  }
-
-  // Enhanced touch handlers with improved sensitivity
-  function handleTouchStart(e) {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].pageY;
-    touchScrollLeft = cardContainer.scrollLeft;
-    lastDragTime = Date.now();
-    dragVelocity = 0;
-    
-    // Stop any ongoing smooth scroll
-    cardContainer.style.scrollBehavior = 'auto';
-  }
-
-  function handleTouchMove(e) {
-    if (!isTouchDevice) return;
-    
-    const touchX = e.touches[0].clientX;
-    const touchY = e.touches[0].pageY;
-    
-    // Calculate both X and Y difference
-    const dx = touchStartX - touchX;
-    const dy = Math.abs(touchStartY - touchY);
-    
-    // Only scroll horizontally if horizontal scroll is more significant
-    if (Math.abs(dx) > dy) {
-      e.preventDefault();
+  function startDragging(e) {
+      isMouseDown = true;
+      startX = e.type === 'mousedown' ? e.pageX : e.touches[0].pageX;
+      scrollLeft = cardContainer.scrollLeft;
+      lastTimestamp = Date.now();
+      cardContainer.style.cursor = 'grabbing';
       
-      const currentTime = Date.now();
-      const timeElapsed = currentTime - lastDragTime;
-      
-      if (timeElapsed > 0) {
-        dragVelocity = dx / timeElapsed;
+      // Cancel any ongoing animation
+      if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
       }
+  }
+
+  function stopDragging() {
+      if (!isMouseDown) return;
+      isMouseDown = false;
+      cardContainer.style.cursor = 'grab';
       
-      cardContainer.scrollLeft = touchScrollLeft + dx;
-      lastDragTime = currentTime;
-      touchStartX = touchX;
-      touchScrollLeft = cardContainer.scrollLeft;
-    }
+      // Start inertia animation
+      const currentTimestamp = Date.now();
+      const timeDelta = currentTimestamp - lastTimestamp;
+      if (timeDelta > 0) {
+          startInertiaScroll();
+      }
   }
 
-  function handleTouchEnd() {
-    // Apply momentum scrolling on touch end
-    const currentTime = Date.now();
-    const timeElapsed = currentTime - lastDragTime;
-    
-    if (timeElapsed < 50 && Math.abs(dragVelocity) > 0.5) {
-      const momentum = dragVelocity * 50;
-      cardContainer.style.scrollBehavior = 'smooth';
-      cardContainer.scrollLeft += momentum;
-    }
+  function drag(e) {
+      if (!isMouseDown) return;
+      e.preventDefault();
+      const x = e.type === 'mousemove' ? e.pageX : e.touches[0].pageX;
+      const dist = x - startX;
+      
+      // Calculate velocity
+      const currentTimestamp = Date.now();
+      const timeDelta = currentTimestamp - lastTimestamp;
+      if (timeDelta > 0) {
+          velocity = dist / timeDelta;
+      }
+      lastTimestamp = currentTimestamp;
+      
+      cardContainer.scrollLeft = scrollLeft - dist;
   }
 
-  // Initialize
-  function init() {
-    // Add CSS for smoother scrolling
-    cardContainer.style.cssText = `
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      overflow-x: auto;
-      cursor: grab;
-      user-select: none;
-      -webkit-user-select: none;
-    `;
+  function startInertiaScroll() {
+      const friction = 0.95;
+      const minVelocity = 0.1;
+      let currentVelocity = velocity * 15; // Scale up for more noticeable effect
 
-    if (isTouchDevice) {
-      cardContainer.addEventListener('touchstart', handleTouchStart, { passive: false });
-      cardContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
-      cardContainer.addEventListener('touchend', handleTouchEnd);
-    } else {
-      cardContainer.addEventListener('mousedown', handleMouseDown);
-      document.addEventListener('mouseup', handleMouseUp);
-      document.addEventListener('mousemove', handleDragMove);
-      document.addEventListener('selectstart', (e) => isDragging && e.preventDefault());
-    }
+      function animate() {
+          if (Math.abs(currentVelocity) < minVelocity) {
+              cancelAnimationFrame(animationFrameId);
+              return;
+          }
+
+          cardContainer.scrollLeft -= currentVelocity;
+          currentVelocity *= friction;
+          animationFrameId = requestAnimationFrame(animate);
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
   }
 
-  // Cleanup
-  function cleanup() {
-    if (isTouchDevice) {
-      cardContainer.removeEventListener('touchstart', handleTouchStart);
-      cardContainer.removeEventListener('touchmove', handleTouchMove);
-      cardContainer.removeEventListener('touchend', handleTouchEnd);
-    } else {
-      cardContainer.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mousemove', handleDragMove);
-    }
-  }
+  // Mouse events
+  cardContainer.addEventListener('mousedown', startDragging);
+  document.addEventListener('mousemove', drag);
+  document.addEventListener('mouseup', stopDragging);
+  document.addEventListener('mouseleave', stopDragging);
 
-  init();
-  window.addEventListener('unload', cleanup);
+  // Touch events
+  cardContainer.addEventListener('touchstart', startDragging);
+  cardContainer.addEventListener('touchmove', drag);
+  cardContainer.addEventListener('touchend', stopDragging);
 });
