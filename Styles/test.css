@@ -73,6 +73,7 @@ body {
   justify-content: space-between;
   align-items: center;
   transition: transform 0.3s ease-in-out;
+  box-sizing: border-box;
 }
 
 .nav.hidden {
@@ -80,8 +81,8 @@ body {
 }
 
 .logo {
-  width: 20%; /* Reduced from 30% to prevent pushing nav items */
-  padding-left: 5%; /* Reduced padding to save space */
+  width: 20%;
+  margin-left: 120px; /* Added inward spacing from left */
   display: flex;
   align-items: center;
 }
@@ -95,12 +96,12 @@ body {
 }
 
 .nav-options {
-  width: 50%; /* Increased from 32% to give more space for links */
+  width: 50%;
   display: flex;
-  justify-content: flex-end; /* Changed to flex-end to prevent wrapping */
+  justify-content: flex-end;
   align-items: center;
-  padding-right: 5%;
-  gap: 40px; /* Added gap for consistent spacing */
+  gap: 40px;
+  margin-right: 120px; /* Added inward spacing from right */
 }
 
 .nav-options a {
@@ -108,7 +109,7 @@ body {
   color: white;
   font-family: "Host Grotesk", sans-serif;
   font-size: 16px;
-  white-space: nowrap; /* Prevent text wrapping */
+  white-space: nowrap;
 }
 
 .link {
@@ -182,8 +183,24 @@ body {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1440px) {
+  .logo {
+    margin-left: 60px; /* Reduced inward spacing for smaller screens */
+  }
+
   .nav-options {
+    margin-right: 60px; /* Reduced inward spacing for smaller screens */
+  }
+}
+
+@media (max-width: 1024px) {
+  .logo {
+    margin-left: 20px; /* Minimal spacing for mobile */
+    width: auto;
+  }
+
+  .nav-options {
+    margin-right: 0; /* Remove margin for mobile menu */
     display: none;
     position: absolute;
     top: 12vh;
@@ -213,11 +230,6 @@ body {
     text-align: center;
     padding: 10px 0;
     width: 100%;
-  }
-
-  .logo {
-    width: auto;
-    padding-left: 5%;
   }
 
   .logo img {
@@ -251,7 +263,6 @@ body {
     transform: rotate(180deg);
   }
 
-  /* Fix for services link alignment in mobile menu */
   .services-link {
     justify-content: center;
     width: 100%;

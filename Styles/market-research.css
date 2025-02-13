@@ -33,10 +33,10 @@
   z-index: 10;
   display: flex;
   height: 12vh;
-  /* Restored to original 12vh */
   justify-content: space-between;
   align-items: center;
   transition: transform 0.3s ease-in-out;
+  box-sizing: border-box;
 }
 
 .nav.hidden {
@@ -44,32 +44,27 @@
 }
 
 .logo {
-  width: 30%;
-  /* Increased from 24% */
-  padding-left: 10%;
+  width: 20%;
+  margin-left: 120px; /* Added inward spacing from left */
   display: flex;
   align-items: center;
 }
 
 .logo img {
   height: auto;
-  width: 60%;
-  /* Increased from 40% */
+  width: 100%;
   object-fit: contain;
-  min-width: 180px;
-  /* Added minimum width to ensure logo doesn't get too small */
-  max-width: 250px;
-  /* Added maximum width to ensure logo doesn't get too large */
+  min-width: 150px;
+  max-width: 200px;
 }
 
 .nav-options {
-  width: 32%;
-  /* Restored original width */
+  width: 50%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
-  padding-right: 10%;
-  /* Restored original padding */
+  gap: 40px;
+  margin-right: 120px; /* Added inward spacing from right */
 }
 
 .nav-options a {
@@ -77,6 +72,7 @@
   color: white;
   font-family: "Host Grotesk", sans-serif;
   font-size: 16px;
+  white-space: nowrap;
 }
 
 .link {
@@ -115,8 +111,7 @@
   display: none;
   position: absolute;
   top: 100%;
-  left: 20%;
-  /* Restored original left positioning */
+  left: 20px;
   background: white;
   min-width: 200px;
   padding: 10px 0;
@@ -133,97 +128,107 @@
 
 .dropdown a:hover {
   background-color: rgba(21, 61, 128, 0.3);
-  /* Restored original hover color */
 }
 
 .hamburger {
   display: none;
   cursor: pointer;
   margin-right: 25px;
-  /* Restored original margin */
 }
 
 @media (min-width: 769px) {
   .link:hover .dropdown {
-      display: block;
+    display: block;
   }
 
   .link:hover .arrow {
-      transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+}
+
+@media (max-width: 1440px) {
+  .logo {
+    margin-left: 60px; /* Reduced inward spacing for smaller screens */
+  }
+
+  .nav-options {
+    margin-right: 60px; /* Reduced inward spacing for smaller screens */
   }
 }
 
 @media (max-width: 1024px) {
+  .logo {
+    margin-left: 20px; /* Minimal spacing for mobile */
+    width: auto;
+  }
 
-  /* Changed breakpoint to match original */
   .nav-options {
-      display: none;
-      position: absolute;
-      top: 12vh;
-      left: 0;
-      background: rgba(0, 0, 0, 0.8);
-      width: 100%;
-      height: auto;
-      padding: 20px 0;
-      flex-direction: column;
-      align-items: center;
+    margin-right: 0; /* Remove margin for mobile menu */
+    display: none;
+    position: absolute;
+    top: 12vh;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: auto;
+    padding: 20px 0;
+    flex-direction: column;
+    align-items: center;
   }
 
   .nav-options.show {
-      display: flex;
+    display: flex;
   }
 
   .link {
-      margin: 15px 0;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      text-align: center;
+    margin: 15px 0;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
   }
 
   .link a {
-      font-size: 20px;
-      text-align: center;
-      padding: 10px 0;
-      width: 100%;
-  }
-
-  .logo {
-      width: auto;
-      padding-left: 5%;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
   }
 
   .logo img {
-      width: auto;
-      height: 40px;
-      /* Increased from 30px */
-      min-width: unset;
-      /* Remove min-width constraint on mobile */
+    width: auto;
+    height: 40px;
+    min-width: unset;
   }
 
   .dropdown {
-      position: static;
-      width: 100%;
-      background: transparent;
-      margin-top: 10px;
+    position: static;
+    width: 100%;
+    background: transparent;
+    margin-top: 10px;
   }
 
   .dropdown a {
-      color: white;
-      text-align: center;
-      padding: 15px;
+    color: white;
+    text-align: center;
+    padding: 15px;
   }
 
   .hamburger {
-      display: block;
+    display: block;
   }
 
   .has-dropdown.active .dropdown {
-      display: block;
+    display: block;
   }
 
   .has-dropdown.active .arrow {
-      transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  .services-link {
+    justify-content: center;
+    width: 100%;
   }
 }
   
