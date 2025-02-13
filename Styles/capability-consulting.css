@@ -799,7 +799,7 @@ line-height: 32px;
 }
 
 .radio-container-info {
-  padding: 15px;
+  /* padding: 15px; */
   /* border-top: 1px solid #1E3155; */
   display: flex;
   justify-content: start;
