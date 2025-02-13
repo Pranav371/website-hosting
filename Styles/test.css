@@ -83,7 +83,7 @@ body {
 
 .logo img {
   height: 5%;
-  width: 40%; /*rahul*/
+  width: 60%; /*rahul*/
 }
 
 .nav-options {
@@ -137,6 +137,7 @@ body {
   min-width: 200px;
   padding: 10px 0;
 
+
   border-top-left-radius: 0;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -155,10 +156,11 @@ body {
   background-color: rgba(21, 61, 128, 0.3);
 }
 
-.services-link {
+.services-link{
   display: inline-flex;
   justify-content: center;
   align-items: center;
+
 }
 
 /* Hamburger menu */
@@ -183,7 +185,7 @@ body {
 }
 
 /* Mobile styles */
-@media (max-width: 1440px) {
+@media (max-width: 1024px) {
   .nav-options {
     display: none;
     position: absolute;
