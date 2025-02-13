@@ -574,10 +574,10 @@
   /* backdrop-filter: blur(10px); */
   /* border-top: 2px solid rgba(255, 255, 255, 0.5); */
   padding: 8%;
-  height: 30%;
+  height: 40%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .card-overlay h1 {
@@ -610,7 +610,7 @@
   text-decoration: none;
   line-height: 1.5;
   display: block;
-  margin-top: auto;
+  /* margin-top: auto; */
 }
 
 .card-overlay a:hover {
