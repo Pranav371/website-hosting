@@ -14,314 +14,304 @@
         body {
             font-family: 'Arial', sans-serif;
         }
+/* Showcase Wrapper */
+.showcase-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #000;
+  }
 
-        .showcase-wrapper {
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-            background-color: #000000;
-        }
+  /* Showcase Container */
+  .showcase-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
 
-        .showcase-container {
-            flex: 1;
-            display: flex;
-            overflow: hidden;
-        }
+  /* Navigation */
+  .navigation {
+    width: 100%;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    order: -1;
+  }
 
-        .showcase-slide {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateX(50px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+  .nav-indicator {
+    padding: 0.75rem;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    text-align: center;
+    color: #666;
+    font-size: 0.75rem;
+    font-family: 'Cygre Medium';
+  }
 
-        .showcase-slide.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(0);
-        }
+  .nav-indicator::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
 
-        .strategy-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 4rem;
-            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
-            min-height: 0;
-        }
+  .nav-indicator.active {
+    color: #e2b745;
+  }
 
-        .strategy-header {
-            margin-bottom: 2rem;
-        }
+  .nav-indicator.active::after {
+    background: #e2b745;
+    height: 48px;
+  }
 
-        .strategy-number {
-            font-size: 1rem;
-            color: #e2b745;
-            margin-bottom: 1rem;
-            font-weight: 500;
-            font-family: 'Arial', sans-serif;
-        }
+  /* Showcase Slide */
+  .showcase-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(50px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-        .strategy-title {
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, #fff, #888);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-family: 'Arial', sans-serif;
-        }
+  .showcase-slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
 
-        .strategy-description {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #aaa;
-            max-width: 90%;
-            font-family: 'Arial', sans-serif;
-        }
+  /* Strategy Content */
+  .strategy-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    position: relative;
+    overflow-y: auto;
+  }
 
-        .carousel-controls1 {
-            position: relative;
-            margin-top: auto;
-            display: flex;
-            gap: 1rem;
-        }
+  .strategy-header {
+    margin-bottom: 2rem;
+  }
 
-        .benefits-container {
-            padding: 4rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            background: #111;
-            overflow-y: auto;
-            max-height: 100%;
-            position: relative;
-        }
+  .strategy-number {
+    font-size: 1rem;
+    color: #e2b745;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-family: 'Cygre Medium';
+  }
 
-        .benefits-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at top right, rgba(226,183,69,0.1), transparent 60%);
-            pointer-events: none;
-        }
+  .strategy-title {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(to right, #fff, #888);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-family: 'Cygre SemiBold';
+  }
 
-        .benefit-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-        }
+  .strategy-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #aaa;
+    max-width: 100%;
+    font-family: 'Host Grotesk';
+  }
 
-        .benefit-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateX(10px);
-        }
+  /* Carousel Controls */
+  .carousel-controls1 {
+    position: sticky;
+    bottom: 1rem;
+    left: 0;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: auto;
+    padding: 1rem 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  }
 
-        .benefit-title {
-            color: #e2b745;
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'Arial', sans-serif;
-        }
+  .carousel-control {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
 
-        .benefit-description {
-            color: #ddd;
-            font-size: 1rem;
-            line-height: 1.5;
-            font-family: 'Arial', sans-serif;
-        }
+  .carousel-control:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
 
-        .navigation {
-            width: 80px;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 1rem;
-            padding: 1rem 0;
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-        }
+  .carousel-control:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
 
-        .nav-indicator {
-            width: 100%;
-            padding: 1rem;
-            background: transparent;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            text-align: center;
-            color: #666;
-            font-size: 0.75rem;
-            font-family: 'Arial', sans-serif;
-        }
+  /* Benefits Container */
+  .benefits-container {
+    padding: 2rem;
+    background: #111;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+  }
 
-        .nav-indicator::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 3px;
-            height: 24px;
-            background: rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
+  .benefit-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+  }
 
-        .nav-indicator.active {
-            color: #e2b745;
-        }
+  .benefit-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(10px);
+  }
 
-        .nav-indicator.active::after {
-            background: #e2b745;
-            height: 48px;
-        }
+  .benefit-title {
+    color: #e2b745;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Cygre SemiBold';
+  }
 
-        .carousel-control {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            border: none;
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
+  .benefit-description {
+    color: #ddd;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-family: 'Host Grotesk';
+  }
 
-        .carousel-control:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
+  /* Desktop Styles */
+  @media (min-width: 1024px) {
+    .showcase-wrapper {
+      flex-direction: row;
+      height: 80vh;
+    }
 
-        .carousel-control:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
+    .navigation {
+      width: 80px;
+      height: auto;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: none;
+      order: 0;
+    }
 
-        @media (max-width: 1024px) {
-            .showcase-wrapper {
-                height: 100vh;
-            }
-            
-            .showcase-slide {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto 1fr;
-            }
-            
-            .strategy-content {
-                padding: 2rem;
-                gap: 2rem;
-            }
-            
-            .strategy-title {
-                font-size: 2rem;
-            }
-            
-            .benefits-container {
-                padding: 2rem;
-                gap: 1rem;
-            }
-        }
+    .showcase-slide {
+      grid-template-columns: 1fr 1.5fr;
+      grid-template-rows: 1fr;
+    }
 
-        @media (max-width: 820px) {
-            .showcase-wrapper {
-                height: auto;
-                min-height: 100vh;
-                flex-direction: column-reverse;
-            }
-            
-            .showcase-slide {
-                grid-template-rows: auto minmax(300px, 1fr);
-            }
-            
-            .strategy-content {
-                padding: 1.5rem;
-                gap: 1.5rem;
-            }
-            
-            .carousel-controls1 {
-                position: relative;
-                margin-top: 1rem;
-            }
-            
-            .strategy-description {
-                margin-bottom: 1rem;
-            }
-            
-            .benefits-container {
-                padding: 1.5rem;
-                max-height: none;
-            }
-            
-            .navigation {
-                width: 100%;
-                height: 60px;
-                flex-direction: row;
-                padding: 0.5rem;
-                justify-content: space-around;
-            }
+    .strategy-content {
+      padding: 4rem;
+    }
 
-            .nav-indicator::after {
-                left: 50%;
-                top: 0;
-                transform: translateX(-50%);
-                width: 24px;
-                height: 3px;
-            }
+    .carousel-controls1 {
+      position: absolute;
+      justify-content: flex-start;
+      background: transparent;
+      margin-top: 0;
+      padding: 0;
+    }
 
-            .nav-indicator.active::after {
-                width: 48px;
-                height: 3px;
-            }
-        }
+    .strategy-title {
+      font-size: 3.5rem;
+    }
 
-        @media (min-width: 768px) and (min-height: 1024px) {
-            .showcase-slide {
-                grid-template-columns: 1fr;
-                grid-template-rows: minmax(400px, auto) 1fr;
-            }
-            
-            .strategy-content {
-                gap: 2rem;
-                justify-content: flex-start;
-            }
-            
-            .carousel-controls1 {
-                margin-top: 2rem;
-            }
-        }
+    .benefits-container {
+      padding: 4rem;
+    }
+  }
 
-        @media (max-height: 700px) {
-            .strategy-content {
-                padding: 1.5rem;
-                gap: 1rem;
-            }
-            
-            .strategy-title {
-                font-size: 1.75rem;
-                margin-bottom: 1rem;
-            }
-            
-            .strategy-description {
-                font-size: 0.9rem;
-                line-height: 1.4;
-            }
-        }
+  /* Tablet Landscape Fix */
+  @media (max-height: 1000px) and (min-width: 1024px) {
+    .strategy-title {
+      font-size: 2.5rem;
+    }
+
+    .strategy-description {
+      font-size: 1rem;
+    }
+  }
+
+  /* Mobile Optimization */
+  @media (max-width: 768px) {
+    .showcase-wrapper {
+      min-height: 100vh;
+    }
+
+    .strategy-content {
+      padding: 1.5rem;
+    }
+
+    .strategy-title {
+      font-size: 1.75rem;
+    }
+
+    .strategy-description {
+      font-size: 0.9rem;
+      max-width: 100%;
+    }
+
+    .benefits-container {
+      padding: 1.5rem;
+    }
+
+    .benefit-card {
+      padding: 1rem;
+    }
+
+    .nav-indicator {
+      font-size: 0.65rem;
+      padding: 0.75rem;
+    }
+  }
+
+  /* Tall Mobile Screens */
+  @media (min-height: 700px) and (max-width: 768px) {
+    .strategy-content {
+      padding-top: 3rem;
+    }
+
+    .benefits-container {
+      padding-bottom: 4rem;
+    }
+  }
     </style>
 </head>
 <body>
