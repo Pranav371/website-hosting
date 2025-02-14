@@ -240,78 +240,70 @@
 
   
   .title-image {
-    background: black;
     position: relative;
     width: 100%;
     height: 100vh;
     overflow: hidden;
   }
   
-  .title-image img:nth-child(1){
+  .title-image img {
     object-fit: cover;
     height: 100%;
     width: 100%;
   }
   
-  .background-image {
-    position: relative; /* Default stacking context */
-    z-index: 1; /* Lower z-index */
-  }
-  
-  .flower {
-    position: absolute; /* Position relative to the .title-image container */
-    top: 0%; /* Adjust position as needed */
-    left: 0%; /* Adjust position as needed */
-    z-index: 2; /* Higher z-index to appear above the background image */
-  }  
-
-
-  .title-image img:nth-child(2){
-    width: 50%;
-    height: 50%;
-  }
   .title-image-overlay {
     position: absolute;
-    bottom: 10%;
-    left: 16%;
-    right: 16%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
     color: white;
-    z-index: 3;
-    /* height: 100vh; */
+    width: 80%;
+    height: 100vh;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 6% 12%;
+  
   }
   
-  .title-image-overlay img{
-    /* position: relative; */
-    width: 50%;
-    height: 50%;
-    left: 0;
-    top: 0;
-  }
   .title-image-overlay h1 {
-
-    color: white;
-    font-family: "Cygre";
-    font-size: 72px;
-    /* width: 80%; */
+    font-family: "Cygre SemiBold";
+    font-size: 56px;
+    line-height: 90px;
+    
   }
-
-
-
+  
+  .title-image-overlay p {
+    font-family: "Host Grotesk";
+    color: #929292;
+    font-size: 20px;
+    line-height: 30px;
+    word-wrap: break-word; /* Prevent text from spilling out */
+    max-width: 90%; /* Optional: Limit the text width for better readability */
+  }
+  
+  
   @media (max-width:768px){
+  
     .title-image-overlay{
-      left: 10%;
+      bottom: 0%;
     }
-    .title-image img:nth-child(2){
-      width: 100%;
-    }
-    .title-image-overlay h1 {
-
-      color: white;
-      font-family: "Cygre";
+    .title-image-overlay h1{
       font-size: 32px;
+      line-height: 40px;
     }
-
-  }
+  
+    .title-image-overlay p{
+      font-size: 16px;
+      line-height: 20px;
+    }
+  
+  
+  } 
 
 
 
