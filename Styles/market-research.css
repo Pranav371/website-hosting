@@ -1186,123 +1186,129 @@ background-color: #000000;
 
 
 
-/* actionable insights  */
+  /* actionable insights  */
 
-.actionable-insights{
-  padding:5% 16%;
-}
-
-.actionable-insights-title{
-  display: flex;
-  text-align: center;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.actionable-insights-main-title{
-  text-align: center;
-  color: #363cfd;
-  font-family: 'Cygre SemiBold';
-  font-weight: bold;
-  font-size: 40px;
-  line-height: 57px;
-  width: 90%;
-}
-
-.actionable-insights-second-title{
-  font-family: 'Host Grotesk';
-  font-size: 20px;
-  padding-top: 0%;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.64);
-}
-
-.actionable-insights-info{
-  padding-top: 80px;
-  font-family: 'Host Grotesk';
-  font-size: 18px;
-  line-height: 32px;
-}
-
-.actionable-insights-info-cards{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.actionable-insights-info-card svg{
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-}
-.actionable-insights-info-card{
-  display: inline-flex;
-  color: #363cfd;
-  font-family: 'Cygre Medium';
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 30px; /* 100% */
-  letter-spacing: 0.1px;
-  /* padding: 3%; */
-  padding-bottom: 40px;
-  gap:20px;
-  flex:0.3;
-}
-
-
-@media (max-width:768px){
   .actionable-insights{
-    padding: 8%;
+    padding:5% 16%;
+  }
+
+  .actionable-insights-title{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .actionable-insights-main-title{
     text-align: center;
     color: #363cfd;
-    font-family: 'Cygre Medium';
+    font-family: 'Cygre SemiBold';
     font-weight: bold;
-    font-size: 32px;
-    line-height: 40px;
-    width: 100%;
-    padding-bottom: 20px;
+    font-size: 40px;
+    line-height: 57px;
+    width: 90%;
   }
 
   .actionable-insights-second-title{
     font-family: 'Host Grotesk';
-    font-size: 2vh;
-    padding-top: 1%;
-    color: #929292;
+    font-size: 20px;
+    padding-top: 0%;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.64);
   }
 
   .actionable-insights-info{
     padding-top: 80px;
     font-family: 'Host Grotesk';
-    font-size: 2vh;
-    line-height: 1.8;
+    font-size: 18px;
+    line-height: 32px;
   }
-  .actionable-insights-info-card{
+
+  .actionable-insights-info-cards{
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .actionable-insights-info-card {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
     color: #363cfd;
-    font-family: 'Cygre';
-    font-size: 1rem;
-    /* padding: 3%; */
+    font-family: 'Cygre Medium';
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.25; /* Tighter line height for better control */
+    letter-spacing: 0.1px;
     padding-bottom: 40px;
-    line-height: 20px;
+    gap: 20px;
+    flex: 0.3;
+  }
+  
+  .actionable-insights-info-card p {
+    margin: 0; /* Remove default margins */
+    min-height: 60px; /* Ensure consistent height for two lines */
+  }
+  
+  .actionable-insights-info-card svg {
+    width: 50px;
+    height: 60px; /* Match the minimum height of the text */
+    flex-shrink: 0; /* Prevent icon from shrinking */
   }
 
-}
 
-@media screen and (max-width:1024px) and (max-height:640px) {
-  .actionable-insights-info-card p{
-    font-size: 1rem;
+  @media (max-width:768px){
+    .actionable-insights{
+      padding: 8%;
+    }
+
+    .actionable-insights-main-title{
+      text-align: center;
+      color: #363cfd;
+      font-family: 'Cygre Medium';
+      font-weight: bold;
+      font-size: 32px;
+      line-height: 40px;
+      width: 100%;
+      padding-bottom: 20px;
+    }
+
+    .actionable-insights-second-title{
+      font-family: 'Host Grotesk';
+      font-size: 2vh;
+      padding-top: 1%;
+      color: #929292;
+    }
+
+    .actionable-insights-info{
+      padding-top: 80px;
+      font-family: 'Host Grotesk';
+      font-size: 2vh;
+      line-height: 1.8;
+    }
+    .actionable-insights-info-card{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      color: #363cfd;
+      font-family: 'Cygre';
+      font-size: 1rem;
+      /* padding: 3%; */
+      padding-bottom: 40px;
+      line-height: 20px;
+    }
+
   }
 
-  .actionable-insights-main-title{
-    font-size: 2rem;
+  @media screen and (max-width:1024px) and (max-height:640px) {
+    .actionable-insights-info-card p{
+      font-size: 1rem;
+    }
+
+    .actionable-insights-main-title{
+      font-size: 2rem;
+    }
   }
-}
 
 
 /* Card Container Wrapper */
