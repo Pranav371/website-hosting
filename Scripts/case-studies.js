@@ -90,10 +90,10 @@ let hoverCardEl = document.getElementById('hoverCard');
 
 const hoverContent = {
     marketSizing: "Estimated market size for the D2C apparel market and online apparel segment, with a focus on casual wear penetration using a top-down approach by categories.",
-    expertInsights: "In-depth insights derived from market experts to validate trends and highlight actionable opportunities.",
-    customerFeed: "Customer surveys and interviews conducted to understand preferences and key factors influencing purchase behavior.",
-    competitorIdentificarion: "Detailed analysis and benchmarking of competitors across multiple performance metrics.",
-    marketPenetration: "Calculation of market penetration levels and potential growth opportunities in the target segments."
+    expertInsights: "Assessed customer, non-customer, expert, and vendor feedback to understand differentiation, strengths, and weaknesses for target competitors.",
+    customerFeed: "Conducted a customer survey (N = 2,025) and in-depth customer interviews to understand the value proposition of various expressive brands.",
+    competitorIdentification: "Identified target competitors based on SKU collection, brand positioning, and popularity through keyword analysis.",
+    marketPenetration: "Calculated casual wear market penetration based on expert interviews and market share of top players using revenue-based estimations."
 };
 
 function showHoverCard(sectionId) {
