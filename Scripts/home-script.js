@@ -810,76 +810,72 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  const cardContainer = document.getElementById('cardContainer');
-  let isDragging = false;
-  let startX = 0;
-  let startScrollLeft = 0;
-  let lastX = 0;
-  let lastTime = 0;
-  let velocity = 0;
-  let animationFrameId = null;
-
-  // Configuration – adjust these values as needed
-  const sensitivity = 1.5;   // Multiplier: higher value means cards follow your drag more directly
-  const friction = 0.95;     // Inertia friction: closer to 1 means slower deceleration
-  const minVelocity = 0.1;   // Threshold below which inertia stops
-
-  // Pointer down: start tracking
-  function onPointerDown(e) {
-    isDragging = true;
-    startX = e.clientX;
-    startScrollLeft = cardContainer.scrollLeft;
-    lastX = e.clientX;
-    lastTime = performance.now();
-    cardContainer.style.cursor = 'grabbing';
-    cancelAnimationFrame(animationFrameId);
-    cardContainer.setPointerCapture(e.pointerId);
-  }
-
-  // Pointer move: update scroll position and record velocity
-  function onPointerMove(e) {
-    if (!isDragging) return;
-    const currentX = e.clientX;
-    const dx = currentX - startX;
-    // Use a positive multiplier so that the cards move in the same direction as your drag
-    cardContainer.scrollLeft = startScrollLeft + dx * sensitivity;
-    
-    // Calculate velocity (in pixels per millisecond)
-    const now = performance.now();
-    const dt = now - lastTime;
-    if (dt > 0) {
-      velocity = (currentX - lastX) / dt;
+    const cardContainer = document.getElementById('cardContainer');
+    let isDragging = false;
+    let startX;
+    let scrollLeft;
+  
+    // Mouse handlers for desktop drag-to-scroll
+    function handleMouseDown(e) {
+      isDragging = true;
+      startX = e.pageX - cardContainer.offsetLeft;
+      scrollLeft = cardContainer.scrollLeft;
+      cardContainer.style.cursor = 'grabbing';
     }
-    lastX = currentX;
-    lastTime = now;
-  }
-
-  // Pointer up: release and start inertia
-  function onPointerUp(e) {
-    isDragging = false;
-    cardContainer.style.cursor = 'grab';
-    cardContainer.releasePointerCapture(e.pointerId);
-    startInertia();
-  }
-
-  // Apply inertia after release until the velocity is minimal
-  function startInertia() {
-    function inertia() {
-      if (Math.abs(velocity) < minVelocity) return;
-      // Move the container based on velocity (assuming ~16ms per frame)
-      cardContainer.scrollLeft += velocity * 16;
-      velocity *= friction;
-      animationFrameId = requestAnimationFrame(inertia);
+  
+    function handleMouseMove(e) {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - cardContainer.offsetLeft;
+      const walk = (x - startX) * 2;
+      cardContainer.scrollLeft = scrollLeft - walk;
     }
-    inertia();
-  }
-
-  // Attach pointer events (works for both mouse and touch)
-  cardContainer.addEventListener('pointerdown', onPointerDown);
-  cardContainer.addEventListener('pointermove', onPointerMove);
-  cardContainer.addEventListener('pointerup', onPointerUp);
-  cardContainer.addEventListener('pointercancel', onPointerUp);
-});
+  
+    function handleMouseUp() {
+      if (!isDragging) return;
+      isDragging = false;
+      cardContainer.style.cursor = 'grab';
+      snapToNearestCard();
+    }
+  
+    // Snap to nearest card function
+    function snapToNearestCard() {
+      const cards = Array.from(cardContainer.querySelectorAll('.card'));
+      const containerCenter = cardContainer.scrollLeft + (cardContainer.offsetWidth / 2);
+      
+      let closestCard = null;
+      let minDistance = Infinity;
+  
+      cards.forEach(card => {
+        const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+        const distance = Math.abs(cardCenter - containerCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestCard = card;
+        }
+      });
+  
+      if (closestCard) {
+        closestCard.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'nearest'
+        });
+      }
+    }
+  
+    // Event listeners for mouse drag
+    cardContainer.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  
+    // Cleanup
+    window.addEventListener('beforeunload', () => {
+      cardContainer.removeEventListener('mousedown', handleMouseDown);
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    });
+  });
 
 
 
