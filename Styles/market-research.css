@@ -620,7 +620,7 @@ background-color: #000000;
 
 .strategy-title {
   font-size: 3rem;
-  line-height: 1.1;
+  /* line-height: 1.1; */
   margin-bottom: 1.5rem;
   background: linear-gradient(to right, #fff, #888);
   -webkit-background-clip: text;
