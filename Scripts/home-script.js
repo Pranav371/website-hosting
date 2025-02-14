@@ -820,12 +820,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const samples = [];
   const maxSamples = 3;
 
-  // Configuration
-  const scrollSensitivity = 2; // Increase this value to make swipes cover more distance
-  const friction = 0.98; // A slightly lower friction gives a longer, smoother glide
+  // Configuration: Increase sensitivity and use higher friction for smoother, longer glides
+  const scrollSensitivity = 3; // Higher multiplier: small swipes move the container more
+  const friction = 0.99; // Closer to 1 for a slower deceleration
   const minVelocity = 0.01;
 
-  // Ensure optimized scrolling styles are set
+  // Set optimized scrolling styles
   cardContainer.style.cssText = `
     overflow-x: auto;
     cursor: grab;
@@ -850,7 +850,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (Math.abs(dx) > dy) {
       e.preventDefault();
-      // Multiply dx by the sensitivity factor
+      // Multiply dx by sensitivity to move further
       cardContainer.scrollLeft = touchScrollLeft - dx * scrollSensitivity;
       updateVelocity(-dx * scrollSensitivity, Date.now());
     }
@@ -884,7 +884,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startInertia();
   }
 
-  // Physics-based inertia
+  // Record movement samples to calculate velocity
   function updateVelocity(dx, timestamp) {
     samples.push({ dx, timestamp });
     if (samples.length > maxSamples) samples.shift();
@@ -897,6 +897,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Apply inertia scrolling
   function startInertia() {
     cancelAnimation();
     let currentVelocity = velocity;
@@ -934,7 +935,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('mousemove', handleMouseMove);
   document.addEventListener('mouseup', handleMouseUp);
 
-  // Cleanup on unload
+  // Cleanup event listeners on unload
   window.addEventListener('beforeunload', () => {
     cardContainer.removeEventListener('touchstart', handleTouchStart);
     cardContainer.removeEventListener('touchmove', handleTouchMove);

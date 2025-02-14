@@ -1,294 +1,258 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-  .customer {
-    display: flex;
-    min-height: 500px;
-    background: #363cfd;
-    color: white;
-    gap: 2rem;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.customer::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 40%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(to right, 
-        #363cfd 0%,
-        #363cfd 10%,
-        rgba(54, 60, 253, 0.99) 20%,
-        rgba(54, 60, 253, 0.98) 30%,
-        transparent 100%
-    );
-    pointer-events: none;
-    z-index: 1;
-}
-
-.customer-txt {
-    flex: 1;
-    padding: 5rem;
-    z-index: 2;
-}
-.customer-txt hr {
-  background: rgba(255, 255, 255, 0.13);
-  height: 2px;
-  border: none;
-  width: 40%;
-  margin: 0;
-}
-
-.customer-img {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 500px;
-    overflow: hidden;
-}
-
-.customer-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    opacity: 0.9;
-}
-
-/* Rest of the styles remain the same */
-.customer-txt h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-    line-height: 1.2;
-    font-family: 'Cygre';
-}
-
-.customer-txt p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-    font-family: 'Host Grotesk';
-}
-
-/* Button Styles */
-.button-container {
-  display: flex;
-  align-items: center;
-  background-color: #b2b9fe;
-  width: fit-content;
-  padding: 1%;
-  border-radius: 30px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
-  margin-top: 30px;
-}
-
-.responsive-button {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 50px;
-  background-color: #FFFFFF;
-  color: #000000;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.button-container:hover {
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-}
-
-.button-arrow {
-  font-size: 20px;
-  transition: transform 0.2s;
-}
-
-
-
-/* Media Queries */
-@media (max-width: 768px) {
+  <!-- Ensure proper scaling on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
     .customer {
-        flex-direction: column;
-        padding: 1.5rem;
+      display: flex;
+      min-height: 500px;
+      background: #363cfd;
+      color: white;
+      gap: 2rem;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
     }
 
     .customer::after {
-        display: none;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 40%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(to right, 
+          #363cfd 0%,
+          #363cfd 10%,
+          rgba(54, 60, 253, 0.99) 20%,
+          rgba(54, 60, 253, 0.98) 30%,
+          transparent 100%
+      );
+      pointer-events: none;
+      z-index: 1;
     }
 
     .customer-txt {
-        padding: 1rem;
+      flex: 1;
+      padding: 5rem;
+      z-index: 2;
+    }
+    .customer-txt hr {
+      background: rgba(255, 255, 255, 0.13);
+      height: 2px;
+      border: none;
+      width: 40%;
+      margin: 0;
     }
 
     .customer-img {
-        display: none;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      height: 500px;
+      overflow: hidden;
     }
 
-    h1 {
-        font-size: 2rem;
-    }
-
-    p {
-        font-size: 1rem;
-    }
-}
-@media (max-width: 900px) {
-  .button-container {
-    margin-top: 20px;
-  }
-
-  .responsive-button {
-    font-size: 16px;
-    padding: 12px 20px;
-    gap: 10px;
-  }
-
-  .button-arrow {
-    font-size: 18px;
-  }
-}
-/* Landscape mode styles */
-@media screen and (orientation: landscape) {
-
-  /* Button adjustments for landscape */
-  .button-container {
-    margin-top: 20px;
-  }
-
-  .responsive-button {
-    padding: 12px 25px;
-    font-size: 16px;
-  }
-}
-@media screen and (width: 1024px) and (min-height: 640px) {
-
-  .responsive-button {
-    font-size: 16px;
-    padding: 12px 25px;
-  }
-}
-
-
-@media (max-width: 768px) {
-  .customer {
-      flex-direction: column;
-      padding: 2rem;
-      min-height: auto;
-  }
-
-  .customer-txt {
-      padding: 1rem;
-      text-align: center;
-  }
-
-  .customer-txt hr {
+    .customer-img img {
       width: 100%;
-      margin: 1rem auto;
-  }
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      opacity: 0.9;
+    }
 
-  .customer-img{
-      display: none;
-  }
+    /* Additional Text Styles */
+    .customer-txt h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      font-family: 'Cygre';
+    }
 
-  .customer::after {
-      display: none;
-  }
-}
+    .customer-txt p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      font-family: 'Host Grotesk';
+    }
 
-/* Landscape Optimization */
-@media (orientation: landscape) {
-  .customer-img {
-      display: flex !important; /* Force show image in landscape */
-      height: 400px;
-  }
+    /* Button Styles */
+    .button-container {
+      display: flex;
+      align-items: center;
+      background-color: #b2b9fe;
+      width: fit-content;
+      padding: 1%;
+      border-radius: 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 30px;
+    }
 
-  .customer {
-      gap: 1.5rem;
-      padding: 2rem;
-  }
+    .responsive-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 50px;
+      background-color: #FFFFFF;
+      color: #000000;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-  .customer-txt {
-      padding: 2rem;
-      text-align: left;
-  }
+    .button-container:hover {
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
 
-  .customer-txt hr {
-      width: 40%;
-      margin: 1rem 0;
-  }
-}
+    .button-arrow {
+      font-size: 20px;
+      transition: transform 0.2s;
+    }
 
-/* Small Landscape Screens */
-@media (orientation: landscape) and (max-width: 900px) {
-  .customer {
-      flex-direction: row;
-      min-height: 350px;
-  }
+    /* Media Queries */
 
-  .customer-txt h1 {
-      font-size: 2rem !important;
-  }
+    /* Hide image and adjust layout for smaller screens (up to 768px) */
+    @media (max-width: 768px) {
+      .customer {
+        flex-direction: column;
+        padding: 1.5rem;
+        min-height: auto;
+      }
 
-  .customer-txt p {
-      font-size: 0.9rem !important;
-  }
+      .customer::after {
+        display: none;
+      }
 
-  .customer-img {
-      height: 300px;
-  }
+      .customer-txt {
+        padding: 1rem;
+        text-align: center;
+      }
 
-  .button-container {
-      margin-top: 1rem;
-  }
-}
+      .customer-txt hr {
+        width: 100%;
+        margin: 1rem auto;
+      }
 
-/* Tablet Landscape */
-@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
-  .customer-txt {
-      padding: 3rem;
-  }
+      .customer-img {
+        display: none;
+      }
 
-  .customer-img {
-      height: 450px;
-  }
-}
+      .customer-txt h1 {
+        font-size: 2rem;
+      }
 
-</style>
+      .customer-txt p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .button-container {
+        margin-top: 20px;
+      }
+
+      .responsive-button {
+        font-size: 16px;
+        padding: 12px 20px;
+        gap: 10px;
+      }
+
+      .button-arrow {
+        font-size: 18px;
+      }
+    }
+
+    /* Landscape mode for larger screens only (min-width: 769px) */
+    @media screen and (orientation: landscape) and (min-width: 769px) {
+      .customer-img {
+        display: flex;
+        height: 500px;
+      }
+
+      .customer {
+        gap: 1.5rem;
+      }
+
+      .customer-txt {
+        padding: 5rem;
+        text-align: left;
+      }
+
+      .customer-txt hr {
+        width: 40%;
+        margin: 1rem 0;
+      }
+    }
+
+    /* Adjustments for small landscape screens between 769px and 900px */
+    @media (orientation: landscape) and (min-width: 769px) and (max-width: 900px) {
+      .customer {
+        flex-direction: row;
+        min-height: 350px;
+      }
+
+      .customer-txt h1 {
+        font-size: 2rem !important;
+      }
+
+      .customer-txt p {
+        font-size: 0.9rem !important;
+      }
+
+      .customer-img {
+        height: 300px;
+      }
+
+      .button-container {
+        margin-top: 1rem;
+      }
+    }
+
+    /* Tablet Landscape */
+    @media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+      .customer-txt {
+        padding: 3rem;
+      }
+
+      .customer-img {
+        height: 450px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="customer">
-        <div class="customer-txt">
-            <h1>The Power of Knowing your Customer</h1>
-            <hr>
-            <p>Our tailored solutions help businesses achieve significant growth, efficiency, and market insights. Our
-                market analysis, competitor benchmarking, and customer surveys empower clients to make informed decisions.
-                From D2C apparel to neuro solutions and premium home improvement, strategic guidance for successful market
-                entry.</p>
-                <div class="button-container">
-                  <button class="responsive-button" onclick="window.location.href='mailto:contact@synaara.com?subject=Enquiry from Website';">
-                    <span class="button-text">Get In Touch</span>
-                    <span class="button-arrow">→</span>
-                  </button>
-                </div>
-        </div>
-        <div class="customer-img">
-            <img src="./Assets/Images/Capability-1.jpg" alt="Business professional working">
-        </div>
+  <div class="customer">
+    <div class="customer-txt">
+      <h1>The Power of Knowing your Customer</h1>
+      <hr>
+      <p>
+        Our tailored solutions help businesses achieve significant growth, efficiency, and market insights.
+        Our market analysis, competitor benchmarking, and customer surveys empower clients to make informed
+        decisions. From D2C apparel to neuro solutions and premium home improvement, strategic guidance for
+        successful market entry.
+      </p>
+      <div class="button-container">
+        <button class="responsive-button" onclick="window.location.href='mailto:contact@synaara.com?subject=Enquiry from Website';">
+          <span class="button-text">Get In Touch</span>
+          <span class="button-arrow">→</span>
+        </button>
+      </div>
     </div>
+    <div class="customer-img">
+      <!-- Ensure the image path is correct -->
+      <img src="./Assets/Images/Capability-1.jpg" alt="Business professional working">
+    </div>
+  </div>
 </body>
 </html>
