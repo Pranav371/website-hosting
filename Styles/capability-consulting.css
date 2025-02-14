@@ -1746,53 +1746,82 @@ background-color: #000000;
 /* customer */
 
 .customer {
-  background-color: #363cfd;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 6% 12%;
-  padding-bottom: 8%;
   min-height: 500px;
+  background: #363cfd;
+  color: white;
+  gap: 2rem;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.customer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 40%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(to right, 
+      #363cfd 0%,
+      #363cfd 10%,
+      rgba(54, 60, 253, 0.99) 20%,
+      rgba(54, 60, 253, 0.98) 30%,
+      transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
 }
 
 .customer-txt {
-  font-family: 'Host Grotesk';
-  color: white;
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex: 1;
+  padding: 5rem;
+  z-index: 2;
 }
-
-.customer-txt h1 {
-  font-size: 40px;
-  line-height: 57px;
-  font-weight: 700;
-}
-
 .customer-txt hr {
   background: rgba(255, 255, 255, 0.13);
   height: 2px;
   border: none;
   width: 40%;
-}
-
-.customer-txt p {
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 40px;
+  margin: 0;
 }
 
 .customer-img {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  position: relative;
+  height: 500px;
+  overflow: hidden;
 }
 
 .customer-img img {
-  width: 70%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 0.9;
+}
+
+/* Additional Text Styles */
+.customer-txt h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  font-family: 'Cygre';
+}
+
+.customer-txt p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  font-family: 'Host Grotesk';
 }
 
 /* Button Styles */
@@ -1824,7 +1853,6 @@ background-color: #000000;
 }
 
 .button-container:hover {
-  transform: translateY(-5px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -1833,105 +1861,44 @@ background-color: #000000;
   transition: transform 0.2s;
 }
 
-.responsive-button:hover .button-arrow {
-  transform: translateX(5px);
-}
+/* Media Queries */
 
-/* Landscape mode styles */
-@media screen and (orientation: landscape) {
+/* Hide image and adjust layout for smaller screens (up to 768px) */
+@media (max-width: 768px) {
   .customer {
-    min-height: 450px;
-    padding: 4% 8%;
-  }
-
-  .customer-txt {
-    width: 45%;
-  }
-
-  .customer-txt h1 {
-    font-size: calc(20px + 0.8vw);
-    line-height: 1.3;
-    margin-bottom: 15px;
-  }
-
-  .customer-txt p {
-    font-size: calc(12px + 0.4vw);
-    line-height: 1.5;
-  }
-
-  .customer-img {
-    width: 45%;
-  }
-
-  .customer-img img {
-    width: 85%;
-    max-height: 400px;
-    object-fit: contain;
-  }
-
-  /* Button adjustments for landscape */
-  .button-container {
-    margin-top: 20px;
-  }
-
-  .responsive-button {
-    padding: 12px 25px;
-    font-size: 16px;
-  }
-}
-
-/* Tablet landscape specific styles */
-@media screen and (width: 1024px) and (min-height: 640px) {
-  .customer {
-    min-height: 400px;
-  }
-
-  .customer-txt h1 {
-    font-size: 28px;
-    line-height: 1.3;
-  }
-
-  .customer-txt p {
-    font-size: 14px;
-    line-height: 1.5;
-  }
-
-  .customer-img img {
-    width: 85%;
-  }
-
-  .responsive-button {
-    font-size: 16px;
-    padding: 12px 25px;
-  }
-}
-
-/* Mobile styles */
-@media (max-width: 900px) {
-  .customer {
+    flex-direction: column;
+    padding: 1.5rem;
     min-height: auto;
-    padding: 8%;
+  }
+
+  .customer::after {
+    display: none;
   }
 
   .customer-txt {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .customer-txt hr {
     width: 100%;
-    line-height: 1.8;
-  }
-
-  .customer-txt h1 {
-    font-size: 24px;
-    line-height: 1.3;
-  }
-
-  .customer-txt p {
-    font-size: 14px;
-    line-height: 1.5;
+    margin: 1rem auto;
   }
 
   .customer-img {
     display: none;
   }
 
+  .customer-txt h1 {
+    font-size: 2rem;
+  }
+
+  .customer-txt p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 900px) {
   .button-container {
     margin-top: 20px;
   }
@@ -1944,6 +1911,63 @@ background-color: #000000;
 
   .button-arrow {
     font-size: 18px;
+  }
+}
+
+/* Landscape mode for larger screens only (min-width: 769px) */
+@media screen and (orientation: landscape) and (min-width: 769px) {
+  .customer-img {
+    display: flex;
+    height: 500px;
+  }
+
+  .customer {
+    gap: 1.5rem;
+  }
+
+  .customer-txt {
+    padding: 5rem;
+    text-align: left;
+  }
+
+  .customer-txt hr {
+    width: 40%;
+    margin: 1rem 0;
+  }
+}
+
+/* Adjustments for small landscape screens between 769px and 900px */
+@media (orientation: landscape) and (min-width: 769px) and (max-width: 900px) {
+  .customer {
+    flex-direction: row;
+    min-height: 350px;
+  }
+
+  .customer-txt h1 {
+    font-size: 2rem !important;
+  }
+
+  .customer-txt p {
+    font-size: 0.9rem !important;
+  }
+
+  .customer-img {
+    height: 300px;
+  }
+
+  .button-container {
+    margin-top: 1rem;
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+  .customer-txt {
+    padding: 3rem;
+  }
+
+  .customer-img {
+    height: 450px;
   }
 }
 
