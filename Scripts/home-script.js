@@ -811,112 +811,77 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const cardContainer = document.getElementById('cardContainer');
-  let touchStartX = 0;
-  let touchStartY = 0;
-  let touchScrollLeft = 0;
+  let startX = 0;
+  let startScrollLeft = 0;
   let isDragging = false;
+  let velocity = 0;         // pixels per ms
+  let lastPos = 0;
+  let lastTime = 0;
   let animationFrameId = null;
-  let velocity = 0;
-  const samples = [];
-  const maxSamples = 3;
+  
+  // Configuration – adjust these values to get your desired feel:
+  const scrollSensitivity = 3;  // higher value = more movement per pixel dragged
+  const friction = 0.95;          // lower friction makes inertia decay faster
+  const minVelocity = 0.1;        // threshold below which inertia stops
 
-  // Configuration: Increase sensitivity and use higher friction for smoother, longer glides
-  const scrollSensitivity = 3; // Higher multiplier: small swipes move the container more
-  const friction = 0.99; // Closer to 1 for a slower deceleration
-  const minVelocity = 0.01;
-
-  // Set optimized scrolling styles
-  cardContainer.style.cssText = `
-    overflow-x: auto;
-    cursor: grab;
-    user-select: none;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  `;
-
-  // Touch handlers
-  function handleTouchStart(e) {
+  // --- Pointer event handlers ---
+  function onPointerDown(e) {
+    // Stop any ongoing inertia animation
     cancelAnimation();
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-    touchScrollLeft = cardContainer.scrollLeft;
-    samples.length = 0;
-  }
-
-  function handleTouchMove(e) {
-    const touch = e.touches[0];
-    const dx = touch.clientX - touchStartX;
-    const dy = Math.abs(touch.clientY - touchStartY);
-
-    if (Math.abs(dx) > dy) {
-      e.preventDefault();
-      // Multiply dx by sensitivity to move further
-      cardContainer.scrollLeft = touchScrollLeft - dx * scrollSensitivity;
-      updateVelocity(-dx * scrollSensitivity, Date.now());
-    }
-  }
-
-  function handleTouchEnd() {
-    startInertia();
-  }
-
-  // Mouse handlers
-  function handleMouseDown(e) {
-    cancelAnimation();
+    
     isDragging = true;
-    touchStartX = e.clientX;
-    touchScrollLeft = cardContainer.scrollLeft;
+    startX = e.clientX;
+    startScrollLeft = cardContainer.scrollLeft;
+    lastPos = e.clientX;
+    lastTime = Date.now();
     cardContainer.style.cursor = 'grabbing';
-    samples.length = 0;
+    
+    // Capture the pointer so we receive all events (even if the pointer leaves the container)
+    cardContainer.setPointerCapture(e.pointerId);
   }
 
-  function handleMouseMove(e) {
+  function onPointerMove(e) {
     if (!isDragging) return;
-    const dx = e.clientX - touchStartX;
-    cardContainer.scrollLeft = touchScrollLeft - dx * scrollSensitivity;
-    updateVelocity(-dx * scrollSensitivity, Date.now());
+    const currentX = e.clientX;
+    const dx = currentX - startX;
+    
+    // For a "grab-and-drag" effect (cards follow your finger), we subtract dx.
+    // If you drag to the right (dx positive), scrollLeft decreases (content shifts right).
+    // If you drag to the left (dx negative), scrollLeft increases (content shifts left).
+    cardContainer.scrollLeft = startScrollLeft - dx * scrollSensitivity;
+    
+    // Calculate instantaneous velocity (pixels per ms)
+    const now = Date.now();
+    const dt = now - lastTime;
+    if (dt > 0) {
+      velocity = ((currentX - lastPos) / dt) * scrollSensitivity;
+    }
+    lastPos = currentX;
+    lastTime = now;
   }
 
-  function handleMouseUp() {
-    if (!isDragging) return;
+  function onPointerUp(e) {
     isDragging = false;
     cardContainer.style.cursor = 'grab';
+    cardContainer.releasePointerCapture(e.pointerId);
     startInertia();
   }
 
-  // Record movement samples to calculate velocity
-  function updateVelocity(dx, timestamp) {
-    samples.push({ dx, timestamp });
-    if (samples.length > maxSamples) samples.shift();
-    
-    if (samples.length > 1) {
-      const oldest = samples[0];
-      const newest = samples[samples.length - 1];
-      const timeDiff = newest.timestamp - oldest.timestamp;
-      velocity = (newest.dx - oldest.dx) / timeDiff;
-    }
-  }
-
-  // Apply inertia scrolling
+  // --- Inertia and Snap ---
   function startInertia() {
     cancelAnimation();
     let currentVelocity = velocity;
-    let lastTime = Date.now();
-
     function animate() {
-      if (Math.abs(currentVelocity) < minVelocity) return;
-
-      const now = Date.now();
-      const deltaTime = now - lastTime;
-      lastTime = now;
-
-      const deltaScroll = currentVelocity * deltaTime;
-      cardContainer.scrollLeft += deltaScroll;
-      
+      // If the velocity is very low, stop the animation and snap to the nearest card
+      if (Math.abs(currentVelocity) < minVelocity) {
+        snapToCard();
+        return;
+      }
+      // Here we assume roughly 16ms per frame (60fps)
+      cardContainer.scrollLeft -= currentVelocity * 16;
       currentVelocity *= friction;
       animationFrameId = requestAnimationFrame(animate);
     }
-
     animationFrameId = requestAnimationFrame(animate);
   }
 
@@ -927,23 +892,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Event listeners
-  cardContainer.addEventListener('touchstart', handleTouchStart, { passive: false });
-  cardContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
-  cardContainer.addEventListener('touchend', handleTouchEnd);
-  cardContainer.addEventListener('mousedown', handleMouseDown);
-  document.addEventListener('mousemove', handleMouseMove);
-  document.addEventListener('mouseup', handleMouseUp);
+  // After inertia stops, snap to the card closest to the center of the container.
+  function snapToCard() {
+    const containerRect = cardContainer.getBoundingClientRect();
+    const containerCenter = containerRect.left + containerRect.width / 2;
+    const cards = Array.from(cardContainer.querySelectorAll('.card'));
+    let closestCard = null;
+    let closestDistance = Infinity;
+    cards.forEach(card => {
+      const cardRect = card.getBoundingClientRect();
+      const cardCenter = cardRect.left + cardRect.width / 2;
+      const distance = Math.abs(containerCenter - cardCenter);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestCard = card;
+      }
+    });
+    if (closestCard) {
+      // Calculate how much we need to scroll so that the card is centered
+      const cardRect = closestCard.getBoundingClientRect();
+      const cardCenter = cardRect.left + cardRect.width / 2;
+      const diff = cardCenter - containerCenter;
+      // Use native smooth scrolling (make sure your CSS enables smooth scrolling, e.g., scroll-behavior: smooth)
+      cardContainer.scrollBy({
+        left: diff,
+        behavior: 'smooth'
+      });
+    }
+  }
 
-  // Cleanup event listeners on unload
-  window.addEventListener('beforeunload', () => {
-    cardContainer.removeEventListener('touchstart', handleTouchStart);
-    cardContainer.removeEventListener('touchmove', handleTouchMove);
-    cardContainer.removeEventListener('touchend', handleTouchEnd);
-    cardContainer.removeEventListener('mousedown', handleMouseDown);
-    document.removeEventListener('mousemove', handleMouseMove);
-    document.removeEventListener('mouseup', handleMouseUp);
-  });
+  // --- Event Listeners ---
+  cardContainer.addEventListener('pointerdown', onPointerDown);
+  cardContainer.addEventListener('pointermove', onPointerMove);
+  cardContainer.addEventListener('pointerup', onPointerUp);
+  cardContainer.addEventListener('pointercancel', onPointerUp);
 });
 
 
