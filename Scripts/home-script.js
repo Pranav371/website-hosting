@@ -821,11 +821,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const maxSamples = 3;
 
   // Configuration
-  const friction = 0.96;
+  const scrollSensitivity = 2; // Increase this value to make swipes cover more distance
+  const friction = 0.98; // A slightly lower friction gives a longer, smoother glide
   const minVelocity = 0.01;
-  const snapThreshold = 15;
 
-  // Add CSS for optimized scrolling
+  // Ensure optimized scrolling styles are set
   cardContainer.style.cssText = `
     overflow-x: auto;
     cursor: grab;
@@ -833,9 +833,6 @@ document.addEventListener('DOMContentLoaded', () => {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   `;
-
-
-
 
   // Touch handlers
   function handleTouchStart(e) {
@@ -853,8 +850,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (Math.abs(dx) > dy) {
       e.preventDefault();
-      cardContainer.scrollLeft = touchScrollLeft - dx;
-      updateVelocity(-dx, Date.now());
+      // Multiply dx by the sensitivity factor
+      cardContainer.scrollLeft = touchScrollLeft - dx * scrollSensitivity;
+      updateVelocity(-dx * scrollSensitivity, Date.now());
     }
   }
 
@@ -875,8 +873,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function handleMouseMove(e) {
     if (!isDragging) return;
     const dx = e.clientX - touchStartX;
-    cardContainer.scrollLeft = touchScrollLeft - dx;
-    updateVelocity(-dx, Date.now());
+    cardContainer.scrollLeft = touchScrollLeft - dx * scrollSensitivity;
+    updateVelocity(-dx * scrollSensitivity, Date.now());
   }
 
   function handleMouseUp() {
@@ -935,7 +933,8 @@ document.addEventListener('DOMContentLoaded', () => {
   cardContainer.addEventListener('mousedown', handleMouseDown);
   document.addEventListener('mousemove', handleMouseMove);
   document.addEventListener('mouseup', handleMouseUp);
-  // Cleanup
+
+  // Cleanup on unload
   window.addEventListener('beforeunload', () => {
     cardContainer.removeEventListener('touchstart', handleTouchStart);
     cardContainer.removeEventListener('touchmove', handleTouchMove);
@@ -945,6 +944,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.removeEventListener('mouseup', handleMouseUp);
   });
 });
+
 
 
 

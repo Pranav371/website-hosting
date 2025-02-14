@@ -1,355 +1,294 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimized Carousel</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-        }
-/* Showcase Wrapper */
-.showcase-wrapper {
+<style>
+  .customer {
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #000;
-  }
-
-  /* Showcase Container */
-  .showcase-container {
-    flex: 1;
+    min-height: 500px;
+    background: #363cfd;
+    color: white;
+    gap: 2rem;
+    align-items: center;
     position: relative;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
+}
 
-  /* Navigation */
-  .navigation {
-    width: 100%;
-    height: 60px;
-    background: rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    order: -1;
-  }
-
-  .nav-indicator {
-    padding: 0.75rem;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    text-align: center;
-    color: #666;
-    font-size: 0.75rem;
-    font-family: 'Cygre Medium';
-  }
-
-  .nav-indicator::after {
+.customer::after {
     content: '';
     position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3px;
-    height: 24px;
-    background: rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-  }
+    top: 0;
+    left: 40%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(to right, 
+        #363cfd 0%,
+        #363cfd 10%,
+        rgba(54, 60, 253, 0.99) 20%,
+        rgba(54, 60, 253, 0.98) 30%,
+        transparent 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
 
-  .nav-indicator.active {
-    color: #e2b745;
-  }
+.customer-txt {
+    flex: 1;
+    padding: 5rem;
+    z-index: 2;
+}
+.customer-txt hr {
+  background: rgba(255, 255, 255, 0.13);
+  height: 2px;
+  border: none;
+  width: 40%;
+  margin: 0;
+}
 
-  .nav-indicator.active::after {
-    background: #e2b745;
-    height: 48px;
-  }
+.customer-img {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
 
-  /* Showcase Slide */
-  .showcase-slide {
-    position: absolute;
+.customer-img img {
     width: 100%;
     height: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(50px);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+    object-fit: cover;
+    object-position: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0.9;
+}
 
-  .showcase-slide.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-  }
-
-  /* Strategy Content */
-  .strategy-content {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
-    position: relative;
-    overflow-y: auto;
-  }
-
-  .strategy-header {
-    margin-bottom: 2rem;
-  }
-
-  .strategy-number {
-    font-size: 1rem;
-    color: #e2b745;
-    margin-bottom: 1rem;
-    font-weight: 500;
-    font-family: 'Cygre Medium';
-  }
-
-  .strategy-title {
-    font-size: 2rem;
-    line-height: 1.2;
+/* Rest of the styles remain the same */
+.customer-txt h1 {
+    font-size: 2.5rem;
     margin-bottom: 1.5rem;
-    background: linear-gradient(to right, #fff, #888);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-family: 'Cygre SemiBold';
-  }
+    font-weight: 700;
+    line-height: 1.2;
+    font-family: 'Cygre';
+}
 
-  .strategy-description {
-    font-size: 1rem;
+.customer-txt p {
+    font-size: 1.1rem;
     line-height: 1.6;
-    color: #aaa;
-    max-width: 100%;
+    margin-bottom: 2rem;
+    opacity: 0.9;
     font-family: 'Host Grotesk';
-  }
+}
 
-  /* Carousel Controls */
-  .carousel-controls1 {
-    position: sticky;
-    bottom: 1rem;
-    left: 0;
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: auto;
-    padding: 1rem 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-  }
+/* Button Styles */
+.button-container {
+  display: flex;
+  align-items: center;
+  background-color: #b2b9fe;
+  width: fit-content;
+  padding: 1%;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 30px;
+}
 
-  .carousel-control {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    border: none;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  }
+.responsive-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 50px;
+  background-color: #FFFFFF;
+  color: #000000;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-  .carousel-control:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
+.button-container:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
 
-  .carousel-control:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
+.button-arrow {
+  font-size: 20px;
+  transition: transform 0.2s;
+}
 
-  /* Benefits Container */
-  .benefits-container {
-    padding: 2rem;
-    background: #111;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    overflow-y: auto;
-  }
 
-  .benefit-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    transition: all 0.3s ease;
-  }
 
-  .benefit-card:hover {
-    background: rgba(255, 255, 255, 0.05);
-    transform: translateX(10px);
-  }
-
-  .benefit-title {
-    color: #e2b745;
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Cygre SemiBold';
-  }
-
-  .benefit-description {
-    color: #ddd;
-    font-size: 1rem;
-    line-height: 1.5;
-    font-family: 'Host Grotesk';
-  }
-
-  /* Desktop Styles */
-  @media (min-width: 1024px) {
-    .showcase-wrapper {
-      flex-direction: row;
-      height: 80vh;
+/* Media Queries */
+@media (max-width: 768px) {
+    .customer {
+        flex-direction: column;
+        padding: 1.5rem;
     }
 
-    .navigation {
-      width: 80px;
-      height: auto;
+    .customer::after {
+        display: none;
+    }
+
+    .customer-txt {
+        padding: 1rem;
+    }
+
+    .customer-img {
+        display: none;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+}
+@media (max-width: 900px) {
+  .button-container {
+    margin-top: 20px;
+  }
+
+  .responsive-button {
+    font-size: 16px;
+    padding: 12px 20px;
+    gap: 10px;
+  }
+
+  .button-arrow {
+    font-size: 18px;
+  }
+}
+/* Landscape mode styles */
+@media screen and (orientation: landscape) {
+
+  /* Button adjustments for landscape */
+  .button-container {
+    margin-top: 20px;
+  }
+
+  .responsive-button {
+    padding: 12px 25px;
+    font-size: 16px;
+  }
+}
+@media screen and (width: 1024px) and (min-height: 640px) {
+
+  .responsive-button {
+    font-size: 16px;
+    padding: 12px 25px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .customer {
       flex-direction: column;
-      justify-content: center;
-      border-left: 1px solid rgba(255, 255, 255, 0.1);
-      border-top: none;
-      order: 0;
-    }
-
-    .showcase-slide {
-      grid-template-columns: 1fr 1.5fr;
-      grid-template-rows: 1fr;
-    }
-
-    .strategy-content {
-      padding: 4rem;
-    }
-
-    .carousel-controls1 {
-      position: absolute;
-      justify-content: flex-start;
-      background: transparent;
-      margin-top: 0;
-      padding: 0;
-    }
-
-    .strategy-title {
-      font-size: 3.5rem;
-    }
-
-    .benefits-container {
-      padding: 4rem;
-    }
+      padding: 2rem;
+      min-height: auto;
   }
 
-  /* Tablet Landscape Fix */
-  @media (max-height: 1000px) and (min-width: 1024px) {
-    .strategy-title {
-      font-size: 2.5rem;
-    }
-
-    .strategy-description {
-      font-size: 1rem;
-    }
-  }
-
-  /* Mobile Optimization */
-  @media (max-width: 768px) {
-    .showcase-wrapper {
-      min-height: 100vh;
-    }
-
-    .strategy-content {
-      padding: 1.5rem;
-    }
-
-    .strategy-title {
-      font-size: 1.75rem;
-    }
-
-    .strategy-description {
-      font-size: 0.9rem;
-      max-width: 100%;
-    }
-
-    .benefits-container {
-      padding: 1.5rem;
-    }
-
-    .benefit-card {
+  .customer-txt {
       padding: 1rem;
-    }
-
-    .nav-indicator {
-      font-size: 0.65rem;
-      padding: 0.75rem;
-    }
+      text-align: center;
   }
 
-  /* Tall Mobile Screens */
-  @media (min-height: 700px) and (max-width: 768px) {
-    .strategy-content {
-      padding-top: 3rem;
-    }
-
-    .benefits-container {
-      padding-bottom: 4rem;
-    }
+  .customer-txt hr {
+      width: 100%;
+      margin: 1rem auto;
   }
-    </style>
+
+  .customer-img{
+      display: none;
+  }
+
+  .customer::after {
+      display: none;
+  }
+}
+
+/* Landscape Optimization */
+@media (orientation: landscape) {
+  .customer-img {
+      display: flex !important; /* Force show image in landscape */
+      height: 400px;
+  }
+
+  .customer {
+      gap: 1.5rem;
+      padding: 2rem;
+  }
+
+  .customer-txt {
+      padding: 2rem;
+      text-align: left;
+  }
+
+  .customer-txt hr {
+      width: 40%;
+      margin: 1rem 0;
+  }
+}
+
+/* Small Landscape Screens */
+@media (orientation: landscape) and (max-width: 900px) {
+  .customer {
+      flex-direction: row;
+      min-height: 350px;
+  }
+
+  .customer-txt h1 {
+      font-size: 2rem !important;
+  }
+
+  .customer-txt p {
+      font-size: 0.9rem !important;
+  }
+
+  .customer-img {
+      height: 300px;
+  }
+
+  .button-container {
+      margin-top: 1rem;
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+  .customer-txt {
+      padding: 3rem;
+  }
+
+  .customer-img {
+      height: 450px;
+  }
+}
+
+</style>
 </head>
 <body>
-    <div class="showcase-wrapper">
-        <div class="showcase-container">
-            <!-- Slide 1 -->
-            <div class="showcase-slide active">
-                <div class="strategy-content">
-                    <div class="strategy-header">
-                        <div class="strategy-number">01 / Strategy</div>
-                        <h1 class="strategy-title">Predictive Analytics for Future-Proof Decision Making</h1>
-                        <p class="strategy-description">
-                            At Synaara Consulting, we build predictive models that allow organizations to forecast trends with up
-                            to 95% accuracy. These models analyze historical and real-time data to predict customer behaviors,
-                            optimize supply chains, and minimize operational risks.
-                        </p>
-                    </div>
-                    <div class="carousel-controls1">
-                        <button class="carousel-control prev">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10.78 6.21934C10.6394 6.07889 10.4488 6 10.25 6C10.0512 6 9.86063 6.07889 9.72 6.21934L4.72 11.2193C4.57955 11.36 4.50066 11.5506 4.50066 11.7493C4.50066 11.9481 4.57955 12.1387 4.72 12.2793L9.72 17.2793C9.78866 17.353 9.87146 17.4121 9.96346 17.4531C10.0555 17.4941 10.1548 17.5162 10.2555 17.5179C10.3562 17.5197 10.4562 17.5012 10.5496 17.4635C10.643 17.4257 10.7278 17.3696 10.799 17.2984C10.8703 17.2272 10.9264 17.1423 10.9641 17.0489C11.0018 16.9555 11.0204 16.8555 11.0186 16.7548C11.0168 16.6541 10.9948 16.5548 10.9538 16.4628C10.9128 16.3708 10.8537 16.288 10.78 16.2193L7.06 12.4993H17.25C17.4489 12.4993 17.6397 12.4203 17.7803 12.2797C17.921 12.139 18 11.9483 18 11.7493C18 11.5504 17.921 11.3597 17.7803 11.219C17.6397 11.0784 17.4489 10.9993 17.25 10.9993H7.06L10.78 7.27934C10.9205 7.13871 10.9993 6.94809 10.9993 6.74934C10.9993 6.55059 10.9205 6.35997 10.78 6.21934Z" fill="white"/>
-                            </svg>
-                        </button>
-                        <button class="carousel-control next">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12.22 6.21934C12.3606 6.07889 12.5512 6 12.75 6C12.9488 6 13.1394 6.07889 13.28 6.21934L18.28 11.2193C18.4205 11.36 18.4993 11.5506 18.4993 11.7493C18.4993 11.9481 18.4205 12.1387 18.28 12.2793L13.28 17.2793C13.2113 17.353 13.1285 17.4121 13.0365 17.4531C12.9445 17.4941 12.8452 17.5162 12.7445 17.5179C12.6438 17.5197 12.5438 17.5012 12.4504 17.4635C12.357 17.4257 12.2722 17.3696 12.201 17.2984C12.1297 17.2272 12.0736 17.1423 12.0359 17.0489C11.9982 16.9555 11.9796 16.8555 11.9814 16.7548C11.9832 16.6541 12.0052 16.5548 12.0462 16.4628C12.0872 16.3708 12.1463 16.288 12.22 16.2193L15.94 12.4993H5.75C5.55109 12.4993 5.36032 12.4203 5.21967 12.2797C5.07902 12.139 5 11.9483 5 11.7493C5 11.5504 5.07902 11.3597 5.21967 11.219C5.36032 11.0784 5.55109 10.9993 5.75 10.9993H15.94L12.22 7.27934C12.0795 7.13871 12.0007 6.94809 12.0007 6.74934C12.0007 6.55059 12.0795 6.35997 12.22 6.21934Z" fill="white"/>
-                            </svg>
-                        </button>
-                    </div>
+    <div class="customer">
+        <div class="customer-txt">
+            <h1>The Power of Knowing your Customer</h1>
+            <hr>
+            <p>Our tailored solutions help businesses achieve significant growth, efficiency, and market insights. Our
+                market analysis, competitor benchmarking, and customer surveys empower clients to make informed decisions.
+                From D2C apparel to neuro solutions and premium home improvement, strategic guidance for successful market
+                entry.</p>
+                <div class="button-container">
+                  <button class="responsive-button" onclick="window.location.href='mailto:contact@synaara.com?subject=Enquiry from Website';">
+                    <span class="button-text">Get In Touch</span>
+                    <span class="button-arrow">→</span>
+                  </button>
                 </div>
-                <div class="benefits-container">
-                    <div class="benefit-card">
-                        <h3 class="benefit-title">Accurate Forecasts</h3>
-                        <p class="benefit-description">
-                            95% accurate forecasts for improved decision-making.
-                        </p>
-                    </div>
-                    <div class="benefit-card">
-                        <h3 class="benefit-title">Reduction in Operating Costs</h3>
-                        <p class="benefit-description">
-                            20% reduction in operating costs through optimized resource allocation.
+        </div>
+        <div class="customer-img">
+            <img src="./Assets/Images/Capability-1.jpg" alt="Business professional working">
+        </div>
+    </div>
+</body>
+</html>
