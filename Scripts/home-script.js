@@ -811,55 +811,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const cardContainer = document.getElementById('cardContainer');
+  let isDragging = false;
   let startX = 0;
   let startScrollLeft = 0;
-  let isDragging = false;
-  let velocity = 0;         // pixels per ms
-  let lastPos = 0;
+  let lastX = 0;
   let lastTime = 0;
+  let velocity = 0;
   let animationFrameId = null;
-  
-  // Configuration – adjust these values to get your desired feel:
-  const scrollSensitivity = 3;  // higher value = more movement per pixel dragged
-  const friction = 0.95;          // lower friction makes inertia decay faster
-  const minVelocity = 0.1;        // threshold below which inertia stops
 
-  // --- Pointer event handlers ---
+  // Configuration – adjust these values as needed
+  const sensitivity = 1.5;   // Multiplier: higher value means cards follow your drag more directly
+  const friction = 0.95;     // Inertia friction: closer to 1 means slower deceleration
+  const minVelocity = 0.1;   // Threshold below which inertia stops
+
+  // Pointer down: start tracking
   function onPointerDown(e) {
-    // Stop any ongoing inertia animation
-    cancelAnimation();
-    
     isDragging = true;
     startX = e.clientX;
     startScrollLeft = cardContainer.scrollLeft;
-    lastPos = e.clientX;
-    lastTime = Date.now();
+    lastX = e.clientX;
+    lastTime = performance.now();
     cardContainer.style.cursor = 'grabbing';
-    
-    // Capture the pointer so we receive all events (even if the pointer leaves the container)
+    cancelAnimationFrame(animationFrameId);
     cardContainer.setPointerCapture(e.pointerId);
   }
 
+  // Pointer move: update scroll position and record velocity
   function onPointerMove(e) {
     if (!isDragging) return;
     const currentX = e.clientX;
     const dx = currentX - startX;
+    // Use a positive multiplier so that the cards move in the same direction as your drag
+    cardContainer.scrollLeft = startScrollLeft + dx * sensitivity;
     
-    // For a "grab-and-drag" effect (cards follow your finger), we subtract dx.
-    // If you drag to the right (dx positive), scrollLeft decreases (content shifts right).
-    // If you drag to the left (dx negative), scrollLeft increases (content shifts left).
-    cardContainer.scrollLeft = startScrollLeft - dx * scrollSensitivity;
-    
-    // Calculate instantaneous velocity (pixels per ms)
-    const now = Date.now();
+    // Calculate velocity (in pixels per millisecond)
+    const now = performance.now();
     const dt = now - lastTime;
     if (dt > 0) {
-      velocity = ((currentX - lastPos) / dt) * scrollSensitivity;
+      velocity = (currentX - lastX) / dt;
     }
-    lastPos = currentX;
+    lastX = currentX;
     lastTime = now;
   }
 
+  // Pointer up: release and start inertia
   function onPointerUp(e) {
     isDragging = false;
     cardContainer.style.cursor = 'grab';
@@ -867,66 +862,25 @@ document.addEventListener('DOMContentLoaded', () => {
     startInertia();
   }
 
-  // --- Inertia and Snap ---
+  // Apply inertia after release until the velocity is minimal
   function startInertia() {
-    cancelAnimation();
-    let currentVelocity = velocity;
-    function animate() {
-      // If the velocity is very low, stop the animation and snap to the nearest card
-      if (Math.abs(currentVelocity) < minVelocity) {
-        snapToCard();
-        return;
-      }
-      // Here we assume roughly 16ms per frame (60fps)
-      cardContainer.scrollLeft -= currentVelocity * 16;
-      currentVelocity *= friction;
-      animationFrameId = requestAnimationFrame(animate);
+    function inertia() {
+      if (Math.abs(velocity) < minVelocity) return;
+      // Move the container based on velocity (assuming ~16ms per frame)
+      cardContainer.scrollLeft += velocity * 16;
+      velocity *= friction;
+      animationFrameId = requestAnimationFrame(inertia);
     }
-    animationFrameId = requestAnimationFrame(animate);
+    inertia();
   }
 
-  function cancelAnimation() {
-    if (animationFrameId) {
-      cancelAnimationFrame(animationFrameId);
-      animationFrameId = null;
-    }
-  }
-
-  // After inertia stops, snap to the card closest to the center of the container.
-  function snapToCard() {
-    const containerRect = cardContainer.getBoundingClientRect();
-    const containerCenter = containerRect.left + containerRect.width / 2;
-    const cards = Array.from(cardContainer.querySelectorAll('.card'));
-    let closestCard = null;
-    let closestDistance = Infinity;
-    cards.forEach(card => {
-      const cardRect = card.getBoundingClientRect();
-      const cardCenter = cardRect.left + cardRect.width / 2;
-      const distance = Math.abs(containerCenter - cardCenter);
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestCard = card;
-      }
-    });
-    if (closestCard) {
-      // Calculate how much we need to scroll so that the card is centered
-      const cardRect = closestCard.getBoundingClientRect();
-      const cardCenter = cardRect.left + cardRect.width / 2;
-      const diff = cardCenter - containerCenter;
-      // Use native smooth scrolling (make sure your CSS enables smooth scrolling, e.g., scroll-behavior: smooth)
-      cardContainer.scrollBy({
-        left: diff,
-        behavior: 'smooth'
-      });
-    }
-  }
-
-  // --- Event Listeners ---
+  // Attach pointer events (works for both mouse and touch)
   cardContainer.addEventListener('pointerdown', onPointerDown);
   cardContainer.addEventListener('pointermove', onPointerMove);
   cardContainer.addEventListener('pointerup', onPointerUp);
   cardContainer.addEventListener('pointercancel', onPointerUp);
 });
+
 
 
 
