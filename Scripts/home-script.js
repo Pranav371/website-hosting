@@ -259,6 +259,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+// Add this lazy loading logic for slider images
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.slide');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bgImage = entry.target.style.backgroundImage.match(/url\(['"]?([^'"]+)['"]?\)/)[1];
+          const img = new Image();
+          img.src = bgImage;
+          img.onload = () => {
+            entry.target.style.backgroundImage = `linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${bgImage})`;
+          };
+        }
+      });
+    }, { threshold: 0.1 });
+  
+    slides.forEach(slide => observer.observe(slide));
+  });
+
 //slider
 const track = document.querySelector('.slider-track');
 const slides = document.querySelectorAll('.slide');
