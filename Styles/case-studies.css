@@ -557,7 +557,7 @@
 /* solutions  */
 
   .image-1 {
-    background-image: url("../Assets/Case-Study-Images/D2C-2.jpg");
+    background-image: url("https://cdn.jsdelivr.net/gh/Pranav371/website-hosting@main/Assets/Case-Study-Images/D2C-2.webp");
     height: 70vh;
     width: 100%;
     background-size: cover;
@@ -566,7 +566,7 @@
   }
 
   .image-2 {
-    background-image: url("../Assets/Case-Study-Images/Neuro-2.jpg");
+    background-image: url("https://cdn.jsdelivr.net/gh/Pranav371/website-hosting@main/Assets/Case-Study-Images/Neuro-2.webp");
     height: 70vh;
     width: 100%;
     background-size: cover;
@@ -574,7 +574,7 @@
     box-shadow: inset 0px -55vh 50vh -19vh rgba(12, 13, 52, 1);
   }
   .image-3 {
-    background-image: url("../Assets/Case-Study-Images/Telecom-2.jpg");
+    background-image: url("https://cdn.jsdelivr.net/gh/Pranav371/website-hosting@main/Assets/Case-Study-Images/Telecom-2.webp");
     height: 70vh;
     width: 100%;
     background-size: cover;
@@ -583,7 +583,7 @@
   }
 
   .image-4 {
-    background-image: url("../Assets/Case-Study-Images/IT-2.jpg");
+    background-image: url("https://cdn.jsdelivr.net/gh/Pranav371/website-hosting@main/Assets/Case-Study-Images/IT-2.webp");
     height: 70vh;
     width: 100%;
     background-size: cover;
@@ -592,7 +592,7 @@
   }
 
   .image-5 {
-    background-image: url("../Assets/Case-Study-Images/Finance-2.jpg");
+    background-image: url("https://cdn.jsdelivr.net/gh/Pranav371/website-hosting@main/Assets/Case-Study-Images/Finance-2.webp");
     height: 70vh;
     width: 100%;
     background-size: cover;
@@ -600,7 +600,7 @@
     box-shadow: inset 0px -55vh 50vh -19vh rgba(12, 13, 52, 0.9);
   }
   .image-6 {
-    background-image: url("../Assets/Case-Study-Images/Manufacturing-2.jpg");
+    background-image: url("https://cdn.jsdelivr.net/gh/Pranav371/website-hosting@main/Assets/Case-Study-Images/Manufacturing-2.webp");
     height: 70vh;
     width: 100%;
     background-size: cover;
@@ -609,8 +609,8 @@
   }
 
 
-  .image-5 {
-    background-image: url("../Assets/Case-Study-Images/Healthcare-2.jpg");
+  .image-7 {
+    background-image: url("https://cdn.jsdelivr.net/gh/Pranav371/website-hosting@main/Assets/Case-Study-Images/Healthcare-2.webp");
     height: 70vh;
     width: 100%;
     background-size: cover;
